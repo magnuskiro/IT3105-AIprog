@@ -90,8 +90,8 @@ def partition(elems, prop_func = (lambda x:x), eq_func = (lambda x,y: x == y)):
     last_key = False
     counter = 0
     for elem in elems:
-    	new_key = apply(prop_func, [elem])
-    if not(subset) or not(apply(eq_func,[last_key,new_key])):
+    	new_key = prop_func(*[elem])
+    if not(subset) or not(eq_func(*[last_key,new_key])):
         if subset: partition.append(subset)
         subset = [elem]
         last_key = new_key
@@ -276,5 +276,5 @@ def power_test(hands, hand_size = 7):
         deck = card_deck()
     cards = deck.deal_n_cards(hand_size)
     print( "Hand: " , card_names(cards), '  Power: ', calc_cards_power(cards))
-    
+
  

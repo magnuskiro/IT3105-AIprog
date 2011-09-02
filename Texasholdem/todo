@@ -1,5 +1,8 @@
 Phase I
 The basic simulator for k-player Texas Hold 'Em. 25 points.
+Get to know cards.py
+Make a basic poker simulator; a dealer and 2-10 players that evaluates their hand strengths before and after the flop,
+turn and river and call, raise or fold accordingly
 
 
 Phase II

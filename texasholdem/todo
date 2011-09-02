@@ -1,0 +1,14 @@
+Phase I
+The basic simulator for k-player Texas Hold 'Em. 25 points.
+
+
+Phase II
+A pre-op rollout simulator used to generate the winning potential of all hole-card pairs, and a pro-
+cedure for calculating the hand-strength of the combination of hole cards and community cards. 45
+points.
+
+
+Phase III
+An opponent modeler that a) records associations between game situations, opponent actions and the
+strengths of their hands, and b) uses those associations to estimate an opponent's hand strength in
+the current game. 25 points.

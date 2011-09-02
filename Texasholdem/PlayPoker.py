@@ -11,7 +11,10 @@ def main():
     return 0
 
 def shuffleDeck():
-    deck = Cards.shuffle_cards
+    deck = Cards.shuffle_cards(deck)
 
 def doCardCheck():
     return 0
+
+deck = Cards.gen_52_shuffled_cards()
+print("test")

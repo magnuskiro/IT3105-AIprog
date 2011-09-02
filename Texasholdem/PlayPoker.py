@@ -13,4 +13,5 @@ def main():
 def shuffleDeck():
     deck = Cards.shuffle_cards
 
-
+def doCardCheck():
+    return 0

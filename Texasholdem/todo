@@ -7,11 +7,11 @@ Basic Poker simulation:
 	- limit the number of raises in a round
 	- set a betting limit
 	- allow players to go into debt
-	- set an initial amount of money for each player
+	[x]- set an initial amount of money for each player
 
  - The game
-	1. choose number of players
-	2. deal cards
+	[x]1. choose number of players
+	[x]2. deal cards
 	3. the game starts with small blind and big blind
 	4. all players stay in the game until the flop, calling or raising at random
 	5. after the flop, players evaluate the power of their hands; weak(1-3), mediocre(4-6), strong(7-9)

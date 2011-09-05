@@ -46,5 +46,5 @@ class Player:
 		self.hand.append(card)
 
 	def clear_hand(self):
-		self.hand = []
+		del self.hand[:]
 	

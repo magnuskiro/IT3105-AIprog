@@ -30,9 +30,9 @@ from table import Table
 
 no_players = int(input("How many players in the game?: "))
 start_sum = int(input("How much money do they start the game with?: "))
+debug = input("Show game info? y/n: ")
 players = []
 tablecards = []
-debug = input("Show game info? y/n: ")
 
 def find_hand(hand):
     if hand[0] == 1:
@@ -105,7 +105,7 @@ def play_debug():
         tablecards = table.get_cards()
         hand = player.get_hand() + tablecards
         hand_power = find_hand(cards.calc_cards_power(hand))
-        print (hand_power + str(hand))
+        print (hand_power + str(cards.calc_cards_power(hand)))
     print ("------------")
 
 def play_no_debug():
@@ -121,8 +121,10 @@ def play_no_debug():
         tablecards = table.get_cards()
         hand = player.get_hand() + tablecards
         hand_power = find_hand(cards.calc_cards_power(hand))
-        print (hand_power + str(hand))
+        print (hand_power + str(cards.calc_cards_power(hand)))
     print ("------------")
+    for player in players:
+        player.clear_hand()
 
 if debug == "n":
     play_no_debug()

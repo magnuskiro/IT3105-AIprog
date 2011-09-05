@@ -28,11 +28,21 @@ import cards
 from player import Player
 from table import Table
 
-no_players = int(input("How many players in the game?: "))
-start_sum = int(input("How much money do they start the game with?: "))
-debug = input("Show game info? y/n: ")
+no_players = int(raw_input("How many players in the game?: "))
+start_sum = int(raw_input("How much money do they start the game with?: "))
+debug = raw_input("Show game info? y/n: ")
+no_games = int(raw_input("Play how many games?: "))
 players = []
 tablecards = []
+table = Table()
+
+for i in range(no_players):
+    players.append(Player(start_sum))
+
+def deal_player_cards():
+    for i in range(2):
+        for player in players:
+            player.add_card(deck.deal_one_card())
 
 def find_hand(hand):
     if hand[0] == 1:
@@ -56,18 +66,14 @@ def find_hand(hand):
     elif hand[0] == 9 and hand[1] == 14:
         return "Royal Flush: "
 
-
-for i in range(no_players):
-    players.append(Player(start_sum))
-
-deck = cards.card_deck()
-table = Table()
-for i in range(2):
+def new_round():
     for player in players:
-        player.add_card(deck.deal_one_card())
+        player.clear_hand()
+    table.clear_table()
 
-def play_debug():
-
+def play_debug(deck):
+    new_round()
+    deal_player_cards()
     print ("------------ \nPlayers have these hands\n------------")
     for player in players:
         print (player.get_hand())
@@ -108,7 +114,9 @@ def play_debug():
         print (hand_power + str(cards.calc_cards_power(hand)))
     print ("------------")
 
-def play_no_debug():
+def play_no_debug(deck):
+    new_round()
+    deal_player_cards()
     table.add_cards(deck.deal_n_cards(3))
     for player in players:
         hand = player.get_hand() + table.get_cards()
@@ -123,10 +131,12 @@ def play_no_debug():
         hand_power = find_hand(cards.calc_cards_power(hand))
         print (hand_power + str(cards.calc_cards_power(hand)))
     print ("------------")
-    for player in players:
-        player.clear_hand()
 
 if debug == "n":
-    play_no_debug()
+    for i in range(no_games):
+        deck = cards.card_deck()
+        play_no_debug(deck)
 elif debug == "y":
-    play_debug()
+    for i in range(no_games):
+        deck = cards.card_deck()
+        play_debug(deck)

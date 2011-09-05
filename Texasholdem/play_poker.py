@@ -32,6 +32,7 @@ no_players = int(input("How many players in the game?: "))
 start_sum = int(input("How much money do they start the game with?: "))
 players = []
 tablecards = []
+debug = input("Show game info? y/n: ")
 
 def find_hand(hand):
     if hand[0] == 1:
@@ -57,52 +58,73 @@ def find_hand(hand):
 
 
 for i in range(no_players):
-	players.append(Player(start_sum))
+    players.append(Player(start_sum))
 
 deck = cards.card_deck()
-for i in range(2):
-	for player in players:
-		player.add_card(deck.deal_one_card())
-
-print ("------------ \nPlayers have these hands\n------------")
-for player in players:
-	print (player.get_hand())
-print ("\n")
-
-players[1].add_money(1000)
-
 table = Table()
-print ("------------\nThe Flop\n------------")
-table.add_cards(deck.deal_n_cards(3))
-print (table.get_cards())
-print ("------------")
+for i in range(2):
+    for player in players:
+        player.add_card(deck.deal_one_card())
 
-print ("------------ \nPower ratings after the flop\n------------")
-for player in players:
-	hand = player.get_hand() + table.get_cards()
-	print (cards.calc_cards_power(hand))
-print ("------------")
+def play_debug():
 
-print ("------------\nThe River\n------------")
-table.add_card(deck.deal_one_card())
-print (table.get_cards())
-print ("\n------------")
+    print ("------------ \nPlayers have these hands\n------------")
+    for player in players:
+        print (player.get_hand())
+    print ("\n")
 
-print ("------------ \nPower ratings after the river\n------------")
-for player in players:
-	hand = player.get_hand() + table.get_cards()
-	print (cards.calc_cards_power(hand))
-print ("------------")
+    print ("------------\nThe Flop\n------------")
+    table.add_cards(deck.deal_n_cards(3))
+    print (table.get_cards())
+    print ("------------")
 
-print ("------------\nThe Turn\n------------")
-table.add_card(deck.deal_one_card())
-print (table.get_cards())
-print ("\n------------")
+    print ("------------ \nPower ratings after the flop\n------------")
+    for player in players:
+        hand = player.get_hand() + table.get_cards()
+        print (cards.calc_cards_power(hand))
+    print ("------------")
 
-print ("------------ \nPower ratings after the turn\n------------")
-for player in players:
-	tablecards = table.get_cards()
-	hand = player.get_hand() + tablecards
-	hand_power = find_hand(cards.calc_cards_power(hand))
-print ("------------")
+    print ("------------\nThe River\n------------")
+    table.add_card(deck.deal_one_card())
+    print (table.get_cards())
+    print ("\n------------")
 
+    print ("------------ \nPower ratings after the river\n------------")
+    for player in players:
+        hand = player.get_hand() + table.get_cards()
+        print (cards.calc_cards_power(hand))
+    print ("------------")
+
+    print ("------------\nThe Turn\n------------")
+    table.add_card(deck.deal_one_card())
+    print (table.get_cards())
+    print ("\n------------")
+
+    print ("------------ \nPower ratings after the turn\n------------")
+    for player in players:
+        tablecards = table.get_cards()
+        hand = player.get_hand() + tablecards
+        hand_power = find_hand(cards.calc_cards_power(hand))
+        print (hand_power + str(hand))
+    print ("------------")
+
+def play_no_debug():
+    table.add_cards(deck.deal_n_cards(3))
+    for player in players:
+        hand = player.get_hand() + table.get_cards()
+    table.add_card(deck.deal_one_card())
+    for player in players:
+        hand = player.get_hand() + table.get_cards()
+    table.add_card(deck.deal_one_card())
+    print ("------------ \nPower ratings after the turn\n------------")
+    for player in players:
+        tablecards = table.get_cards()
+        hand = player.get_hand() + tablecards
+        hand_power = find_hand(cards.calc_cards_power(hand))
+        print (hand_power + str(hand))
+    print ("------------")
+
+if debug == "n":
+    play_no_debug()
+elif debug == "y":
+    play_debug()

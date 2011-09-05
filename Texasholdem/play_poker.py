@@ -33,6 +33,29 @@ start_sum = int(input("How much money do they start the game with?: "))
 players = []
 tablecards = []
 
+def find_hand(hand):
+    if hand[0] == 1:
+        return "High card: "
+    elif hand[0] == 2:
+        return "One pair: "
+    elif hand[0] == 3:
+        return "Two pair: "
+    elif hand[0] == 4:
+        return "Three of a kind: "
+    elif hand[0] == 5:
+        return "Straight: "
+    elif hand[0] == 6:
+        return "Flush: "
+    elif hand[0] == 7:
+        return "Full house: "
+    elif hand[0] == 8:
+        return "Four of a kind: "
+    elif hand[0] == 9 and hand[1] != 14:
+        return "Straight Flush: "
+    elif hand[0] == 9 and hand[1] == 14:
+        return "Royal Flush: "
+
+
 for i in range(no_players):
 	players.append(Player(start_sum))
 
@@ -80,9 +103,6 @@ print ("------------ \nPower ratings after the turn\n------------")
 for player in players:
 	tablecards = table.get_cards()
 	hand = player.get_hand() + tablecards
-	hand_power = cards.calc_cards_power(hand)
-	if (hand_power[0] == 3):
-		print ("three of a kind")
-	print (cards.calc_cards_power(hand))
+	hand_power = find_hand(cards.calc_cards_power(hand))
 print ("------------")
 

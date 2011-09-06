@@ -25,6 +25,7 @@
 #
 
 import cards
+import betting
 from player import Player
 from table import Table
 
@@ -129,6 +130,7 @@ def play_no_debug(deck):
         tablecards = table.get_cards()
         hand = player.get_hand() + tablecards
         hand_power = find_hand(cards.calc_cards_power(hand))
+        betting.evaluateHand(cards.calc_cards_power(hand))
         print (hand_power + str(cards.calc_cards_power(hand)))
     print ("------------")
 

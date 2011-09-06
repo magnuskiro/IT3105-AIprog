@@ -36,24 +36,44 @@ def doBet(player):
     player.loose_money(amount)
     print("betting complete")
 
-def weak(hand):
-    #prob = random.Random() * hand
-    print(hand)
-    return hand
+def weak(prob):
+    prob = random.randrange(0,6)    # 0-2 = fold, 3-4 = call, 5 = raise
+    if prob <= 3:
+        # fold
+        fold()
+    elif prob == 3 or 4:
+        # call
+        call()
+    elif prob == 5:
+        raise_bet()
+    print("weak hand: %s" % (hand))
+    #return hand
 
-def mediocre(hand):
-    #prob = random.Random() * hand
-    print(hand)
-    return hand
+def mediocre(prob):
+    prob = random.randrange(2,8)
+    if prob == 2 or 3:
+        fold()
+    elif prob == 4 or 5:
+        call()
+    elif prob == 6 or 7:
+        raise_bet()
+    print("mediocre hand: %s" % (hand))
+    #return hand
 
-def strong(hand):
-    #prob = random.Random() * hand
-    print(hand)
-    return hand
+def strong(prob):
+    prob = random.randrange(4,10)   # 4 = fold, 5-6 = call, 7-9 = raise
+    if prob == 4:
+        fold()
+    elif prob == 5 or 6:
+        call()
+    elif prob >= 7:
+        raise_bet()
+    print("strong hand: %s" % (hand))
+    #return hand
 
 def evaluateHand(hand):
     #find out it the hand is weak/mediocre/strong.
-    hand = cards.calc_cards_power(hand)
+    #hand = cards.calc_cards_power(hand)
     if hand[0] <=3 and hand[0] >=1:
         weak(hand)
     elif hand[0] >=4 and hand[0] <=6:
@@ -66,4 +86,6 @@ def evaluateHand(hand):
 def playerBet(players):
     for p in players:
         evaluateHand(p.get_hand())
+
+
 

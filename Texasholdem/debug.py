@@ -24,6 +24,32 @@
 #
 #
 
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+#       play_poker.py
+#
+#       Copyright 2011
+#       Jan Alexander Stormark Bremnes <alex@icarus>
+#       Magnus Kirø
+#
+#       This program is free software; you can redistribute it and/or modify
+#       it under the terms of the GNU General Public License as published by
+#       the Free Software Foundation; either version 2 of the License, or
+#       (at your option) any later version.
+#
+#       This program is distributed in the hope that it will be useful,
+#       but WITHOUT ANY WARRANTY; without even the implied warranty of
+#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#       GNU General Public License for more details.
+#
+#       You should have received a copy of the GNU General Public License
+#       along with this program; if not, write to the Free Software
+#       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#       MA 02110-1301, USA.
+#
+#
+
 import cards
 import betting
 from player import Player
@@ -72,7 +98,7 @@ def new_round():
         player.clear_hand()
     table.clear_table()
 
-def play_debug(deck):
+def play(deck):
     new_round()
     deal_player_cards(deck)
     print ("------------ \nPlayers have these hands\n------------")
@@ -115,38 +141,13 @@ def play_debug(deck):
         print (hand_power + str(cards.calc_cards_power(hand)))
     print ("------------")
 
-def play_no_debug(deck):
-    new_round()
-    deal_player_cards(deck)
-    table.add_cards(deck.deal_n_cards(3))
-    for player in players:
-        hand = player.get_hand() + table.get_cards()
-    table.add_card(deck.deal_one_card())
-    for player in players:
-        hand = player.get_hand() + table.get_cards()
-    table.add_card(deck.deal_one_card())
-    print ("------------ \nPower ratings after the turn\n------------")
-    for player in players:
-        tablecards = table.get_cards()
-        hand = player.get_hand() + tablecards
-        hand_power = find_hand(cards.calc_cards_power(hand))
-        betting.evaluateHand(cards.calc_cards_power(hand))
-        print (hand_power + str(cards.calc_cards_power(hand)))
-    print ("------------")
-
-
 def main():
     no_players = int(raw_input("How many players in the game?: "))
     start_sum = int(raw_input("How much money do they start the game with?: "))
-    debug = raw_input("Show game info? y/n: ")
     no_games = int(raw_input("Play how many games?: "))
     for i in range(no_players):
         players.append(Player(start_sum))
-    if debug == "n":
-        for i in range(no_games):
-            deck = cards.card_deck()
-            play_no_debug(deck)
-    elif debug == "y":
-        for i in range(no_games):
-            deck = cards.card_deck()
-            play_debug(deck)
+    deck = cards.card_deck()
+    play(deck)
+
+  

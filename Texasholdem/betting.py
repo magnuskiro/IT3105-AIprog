@@ -36,6 +36,15 @@ def doBet(player):
     player.loose_money(amount)
     print("betting complete")
 
+def fold():
+    i = 0
+
+def call():
+    i = 0
+
+def raise_bet():
+    i = 0
+    
 def weak(prob):
     prob = random.randrange(0,6)    # 0-2 = fold, 3-4 = call, 5 = raise
     if prob <= 3:
@@ -46,7 +55,7 @@ def weak(prob):
         call()
     elif prob == 5:
         raise_bet()
-    print("weak hand: %s" % (hand))
+    #print("weak hand: %s" % (hand))
     #return hand
 
 def mediocre(prob):
@@ -57,7 +66,7 @@ def mediocre(prob):
         call()
     elif prob == 6 or 7:
         raise_bet()
-    print("mediocre hand: %s" % (hand))
+    #print("mediocre hand: %s" % (hand))
     #return hand
 
 def strong(prob):
@@ -68,7 +77,7 @@ def strong(prob):
         call()
     elif prob >= 7:
         raise_bet()
-    print("strong hand: %s" % (hand))
+    #print("strong hand: %s" % (hand))
     #return hand
 
 def evaluateHand(hand):

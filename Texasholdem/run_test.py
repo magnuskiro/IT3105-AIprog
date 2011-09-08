@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#       table.py
+#       play_poker.py
 #
 #       Copyright 2011
 #       Jan Alexander Stormark Bremnes <alex@icarus>
@@ -24,27 +24,5 @@
 #
 #
 
-class Table:
-
-    def __init__ (self):
-        self.pot = 0
-        self.cards = []
-
-    def add_pot(self, amount):
-        self.pot += amount
-
-    def add_cards(self, cards):
-        for card in cards:
-            self.cards.append(card)
-
-    def add_card(self, card):
-        self.cards.append(card)
-
-    def get_cards(self):
-        return self.cards
-
-    def clear_table(self):
-        del self.cards[:]
-
-    def raise_bet(self, amount):
-        self.bet += amount
+print ("test run")
+  

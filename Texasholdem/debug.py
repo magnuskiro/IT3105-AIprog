@@ -98,8 +98,9 @@ def new_round():
         player.clear_hand()
     table.clear_table()
 
-def play(deck):
+def play():
     new_round()
+    deck = cards.card_deck()
     deal_player_cards(deck)
     print ("------------ \nPlayers have these hands\n------------")
     for player in players:
@@ -147,7 +148,7 @@ def main():
     no_games = int(raw_input("Play how many games?: "))
     for i in range(no_players):
         players.append(Player(start_sum))
-    deck = cards.card_deck()
-    play(deck)
+    for i in range(no_games):
+        play()
 
   

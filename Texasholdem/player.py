@@ -29,22 +29,20 @@ class Player:
 	def __init__(self, money):
 		self.money = money
 		self.hand = []
+		self.bet = 0
 
-	def add_money(self, amount):
-		self.money += amount
+	def add_money(self, amount): self.money += amount
 
-	def loose_money(self, amount):
-		self.money -= amount
+	def loose_money(self, amount): self.money -= amount
 
-	def get_money(self):
-		return self.money
+	def get_money(self): return self.money
 
-	def get_hand(self):
-		return self.hand
+	def get_hand(self): return self.hand
 
-	def add_card(self, card):
-		self.hand.append(card)
+	def add_card(self, card): self.hand.append(card)
 
-	def clear_hand(self):
-		del self.hand[:]
-	
+	def clear_hand(self): del self.hand[:]
+
+	def set_bet(self, amount): self.bet += amount
+
+	def get_bet(self): return self.bet

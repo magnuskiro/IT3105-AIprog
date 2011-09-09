@@ -29,22 +29,22 @@ class Table:
     def __init__ (self):
         self.pot = 0
         self.cards = []
+        self.bet = 0
 
-    def add_pot(self, amount):
-        self.pot += amount
+    def increase_pot(self, amount): self.pot += amount
 
     def add_cards(self, cards):
         for card in cards:
             self.cards.append(card)
 
-    def add_card(self, card):
-        self.cards.append(card)
+    def add_card(self, card): self.cards.append(card)
 
-    def get_cards(self):
-        return self.cards
+    def get_cards(self): return self.cards
 
-    def clear_table(self):
-        del self.cards[:]
+    def clear_table(self): del self.cards[:]
 
-    def raise_bet(self, amount):
-        self.bet += amount
+    def raise_bet(self, amount): self.bet += amount
+
+    def get_bet(self): return self.bet
+
+

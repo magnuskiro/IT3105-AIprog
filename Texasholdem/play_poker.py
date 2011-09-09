@@ -29,16 +29,9 @@ import betting
 from player import Player
 from table import Table
 
-#no_players = int(raw_input("How many players in the game?: "))
-#start_sum = int(raw_input("How much money do they start the game with?: "))
-#debug = raw_input("Show game info? y/n: ")
-#no_games = int(raw_input("Play how many games?: "))
 players = []
 tablecards = []
 table = Table()
-
-#for i in range(no_players):
-#    players.append(Player(start_sum))
 
 def deal_player_cards(deck):
     for i in range(2):
@@ -72,8 +65,13 @@ def new_round():
         player.clear_hand()
     table.clear_table()
 
-def play_debug(deck):
+def player_won(player, table):
+    player.add_money()
+
+def play_debug(no_players):
     new_round()
+    no_remaining_players = no_players
+    deck = cards.card_deck()
     deal_player_cards(deck)
     print ("------------ \nPlayers have these hands\n------------")
     for player in players:
@@ -115,23 +113,43 @@ def play_debug(deck):
         print (hand_power + str(cards.calc_cards_power(hand)))
     print ("------------")
 
-def play_no_debug(deck):
+def play_no_debug(no_players):
     new_round()
+    deck = cards.card_deck()
     deal_player_cards(deck)
+    no_remaining_players = no_players
+    print ("Players' hands\n------------")
+    for player in players:
+        print (player.get_hand())
+    # TODO: decide who gets small blind and big blind, place blinds and do a round of betting
+    # TODO: since there is no way of knowing the strength of a hand at this point, betting is totally random
     table.add_cards(deck.deal_n_cards(3))
+    # Betting after the flop
     for player in players:
         hand = player.get_hand() + table.get_cards()
+        if no_remaining_players > 1:
+            betting.evaluateHand(player, table, cards.calc_cards_power(hand))
+        else:
+            player_won(player)
     table.add_card(deck.deal_one_card())
+    # Betting after the river
     for player in players:
         hand = player.get_hand() + table.get_cards()
+        betting.evaluateHand(player, table, cards.calc_cards_power(hand))
     table.add_card(deck.deal_one_card())
+    # Betting after the turn
+    for player in players:
+        hand = player.get_hand() + table.get_cards()
+        betting.evaluateHand(player, table, cards.calc_cards_power(hand))
+    print ("Community cards\n------------")
+    print (table.get_cards())
     print ("------------ \nPower ratings after the turn\n------------")
     for player in players:
         tablecards = table.get_cards()
         hand = player.get_hand() + tablecards
         hand_power = find_hand(cards.calc_cards_power(hand))
-        betting.evaluateHand(cards.calc_cards_power(hand))
-        print (hand_power + str(cards.calc_cards_power(hand)))
+        betting.evaluateHand(player, table, cards.calc_cards_power(hand))
+        #print (hand_power + str(cards.calc_cards_power(hand)))
     print ("------------")
 
 
@@ -144,9 +162,9 @@ def main():
         players.append(Player(start_sum))
     if debug == "n":
         for i in range(no_games):
-            deck = cards.card_deck()
-            play_no_debug(deck)
+            play_no_debug(no_players)
     elif debug == "y":
         for i in range(no_games):
-            deck = cards.card_deck()
-            play_debug(deck)
+            play_debug(no_players)
+    for player in players:
+        print (player.get_money())

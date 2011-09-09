@@ -31,64 +31,86 @@ import random
 import cards
 
 
-def doBet(player):
+def doBet(player, table):
     amount = 10
     player.loose_money(amount)
+    table.increase_pot(amount)
     print("betting complete")
 
-def fold():
-    i = 0
+def small_blind(player):
+    blind = 5
+    player.loose_money(blind)
+    table.increase_pot(blind)
+    player.set_bet(blind)
 
-def call():
-    i = 0
+def big_blind(player):
+    blind = 10
+    player.loose_money(blind)
+    player.set_bet(blind)
+    table.increase_pot(blind)
+    table.raise_bet(blind)
 
-def raise_bet():
-    i = 0
+def fold(player):
+    print ("player folds")
+
+def call(player, table):
+    amount = table.get_bet() - player.get_bet()
+    player.loose_money(amount)
+    player.set_bet(amount)
+    print ("player calls")
+
+def raise_bet(player, table):
+    amount = 10
+    difference = table.get_bet() - player.get_bet()
+    player.loose_money(amount + difference)
+    table.increase_pot(amount + difference)
+    table.raise_bet(amount)
+    print ("player bets %d" %(amount))
     
-def weak(prob):
+def weak(player, table):
     prob = random.randrange(0,6)    # 0-2 = fold, 3-4 = call, 5 = raise
-    if prob <= 3:
-        # fold
-        fold()
-    elif prob == 3 or 4:
-        # call
-        call()
-    elif prob == 5:
-        raise_bet()
+    print ("random is %d" %(prob))
+    if prob < 3:
+        fold(player)
+    elif prob == 3 or prob == 4:
+        call(player, table)
+    else:
+        raise_bet(player, table)
     #print("weak hand: %s" % (hand))
     #return hand
 
-def mediocre(prob):
-    prob = random.randrange(2,8)
-    if prob == 2 or 3:
-        fold()
-    elif prob == 4 or 5:
-        call()
-    elif prob == 6 or 7:
-        raise_bet()
+def mediocre(player, table):
+    prob = random.randrange(0,8)    # 0-1 = fold, 2-3 = call, 4-7 = raise
+    print ("random is %d" %(prob))
+    if prob < 2:
+        fold(player)
+    elif prob == 2 or prob == 3:
+        call(player, table)
+    else:
+        raise_bet(player, table)
     #print("mediocre hand: %s" % (hand))
     #return hand
 
-def strong(prob):
-    prob = random.randrange(4,10)   # 4 = fold, 5-6 = call, 7-9 = raise
-    if prob == 4:
-        fold()
-    elif prob == 5 or 6:
-        call()
-    elif prob >= 7:
-        raise_bet()
+def strong(player, table):
+    prob = random.randrange(0,10)   # 0-1 = fold, 2-3 = call, 5-9 = raise
+    print ("random is %d" %(prob))
+    if prob < 2:
+        fold(player)
+    elif prob == 2 or prob == 3:
+        call(player, table)
+    else:
+        raise_bet(player, table)
     #print("strong hand: %s" % (hand))
     #return hand
 
-def evaluateHand(hand):
+def evaluateHand(player, table, hand):
     #find out it the hand is weak/mediocre/strong.
-    #hand = cards.calc_cards_power(hand)
     if hand[0] <=3 and hand[0] >=1:
-        weak(hand)
+        weak(player, table)
     elif hand[0] >=4 and hand[0] <=6:
-        mediocre(hand)
+        mediocre(player, table)
     elif hand[0] <=9 and hand[0] >=7:
-        strong(hand)
+        strong(player, table)
     else:
         print("something is wrong with the betting procedure.")
 

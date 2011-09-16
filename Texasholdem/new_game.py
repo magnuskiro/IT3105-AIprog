@@ -4,7 +4,7 @@
 #       play_poker.py
 #
 #       Copyright 2011
-#       Jan Alexander Stormark Bremnes <alex@icarus>
+#       Jan Alexander Stormark Bremnes <janbremnes@gmail.com>
 #       Magnus Kirø
 #
 #       This program is free software; you can redistribute it and/or modify
@@ -25,14 +25,19 @@
 #
 
 import play_poker
-import debug
-import run_test
 
-mode = int(raw_input("Play game(1), debug(2) or do a test run(3)?"))
+running = False
+while not running:
+    mode = int(raw_input("Play game(1), debug(2) or do a test run(3)?"))
 
-if mode == 1:
-    play_poker.main()
-elif mode == 2:
-    debug.main()
-else:
-    run_test()
+    if mode == 1:
+        running = True
+        play_poker.main()
+    elif mode == 2:
+        running = True
+        debug.main()
+    elif mode == 3:
+        running = True
+        run_test()
+    else:
+        print "Please answer 1, 2 or 3"

@@ -281,3 +281,4 @@ def power_test(hands, hand_size = 7):
 #deck = card_deck()
 #hand1 = deck.deal_n_cards(7)
 #print calc_cards_power(hand1)
+

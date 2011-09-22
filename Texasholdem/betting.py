@@ -133,6 +133,7 @@ def strong(player, table):
     #print("strong hand: %s" % (hand))
     #return hand
 
+"""
 def evaluateHand(player, table, hand):
     #find out it the hand is weak/mediocre/strong.
     if hand[0] <=3 and hand[0] >=1:
@@ -143,5 +144,47 @@ def evaluateHand(player, table, hand):
         strong(player, table)
     else:
         print("something is wrong with the betting procedure.")
-	
-	
+
+    #valid actions from getAction() is raise/call/fold
+def evaluateHandWithStrategy(player, table, hand):
+    if player.strategy.aggressive == False and player.strategy.coward == False:
+        evaluateHand(player, table, hand)
+    elif player.strategy.getAction() == "raise":
+        raise_bet(player, table, bet)
+    elif player.strategy.getAction() == "call":
+        call(player, table)
+    elif player.strategy.getAction() == "fold":
+        fold(player)
+    else:
+        print "Strategy do not work!"
+"""
+
+def evaluateHandNormal(player, table, hand):
+    #find out it the hand is weak/mediocre/strong.
+    if hand[0] <=3 and hand[0] >=1:
+        weak(player, table)
+    elif hand[0] >=4 and hand[0] <=6:
+        mediocre(player, table)
+    elif hand[0] <=9 and hand[0] >=7:
+        strong(player, table)
+    else:
+        print("something is wrong with the betting procedure.")
+
+    #valid actions from getAction() is raise/call/fold
+def evaluateHand(player, table, hand):
+    if player.strategy.aggressive == False and player.strategy.coward == False:
+        evaluateHandNormal(player, table, hand)
+    elif player.strategy.getAction(hand) == "raise":
+        print "###################\n RAISE \n#####################"
+        print player.strategy.aggressive
+        raise_bet(player, table, bet)
+    elif player.strategy.getAction(hand) == "call":
+        print "###################\n CALL \n#####################"
+        print player.strategy.aggressive
+        call(player, table)
+    elif player.strategy.getAction(hand) == "fold":
+        print "###################\n FOLD \n#####################"
+        print player.strategy.aggressive
+        fold(player)
+    else:
+        print "Strategy do not work!"        

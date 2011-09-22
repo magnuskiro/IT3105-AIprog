@@ -23,16 +23,18 @@
 #       MA 02110-1301, USA.
 #
 #
+from strategy import Strategy
 
 class Player:
 
-    def __init__(self, money, number):
+    def __init__(self, money, number, strat):
         self.money = money
         self.hand = []
         self.bet = 0
         self.in_game = True
         self.no = number
         self.blind = False
+        self.strategy = Strategy(strat)
 
     def add_money(self, amount): self.money += amount
 

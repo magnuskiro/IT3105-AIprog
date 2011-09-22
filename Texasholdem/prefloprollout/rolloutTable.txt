@@ -1,0 +1,234 @@
+[[2, 'H'], [2, 'S']]
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwddwdwwwwwwwwwwwwdwwww
+[[2, 'H'], [2, 'S']]
+lwllwlwllwwllllllwwlllwllllwwwwlwdwwwlwlwllwwwwlwllwllwwlllwwwwwlwwwlwlwwwwllwwlwwwwlllwlwwwwwwwwwll
+[[2, 'H'], [2, 'S']]
+lwlwllllllwlllllwlwlwlwlwwlllllllwllwlllllwlllllwwlllllwlwlllllwllwwlllwlwlwlllllllwwllwllllwllllwll
+[[2, 'H'], [2, 'S']]
+lllllwwllwlllllllwllllllwwlllllllwlwlllllllllwllwlwlllllllwllwlllllllllllwllldlllllllllllllllwlllllw
+[[2, 'H'], [2, 'S']]
+wlllllwwllllllwlllllllllllllllllwlllwldwlllllllllllwlwllllwlwlwlwwwwllllllllllwlwllllllllllllwllllll
+[[2, 'H'], [2, 'S']]
+lwllllwlllllwllllllllllllllllwllllwlllllllllwldlllllllllllllllllllllllllllwlllllllwlwllllllllllllwll
+[[2, 'H'], [2, 'S']]
+lllllllwlwllllllwlllllllwlwllllllllwllllllllllllllllwlllwllllllwllllllwllllwllllllwlllllwllwlwwlllll
+[[2, 'H'], [2, 'S']]
+wlllllllllllllwlllwllllllllllllwlllwlllllllwlllllllllllwwllllllwllllllllllllllllllldllllllwlwlllllll
+[[2, 'H'], [2, 'S']]
+lwwlwlllllwllllllllllllllllllwllllllllllllllllllllwlllllllwlllllllwwllllllllllllllllwlllwlllwlllllll
+[[3, 'H'], [3, 'S']]
+dwwwwwwwwwwwwdwwwwwwwwwwwwwwwwwwwwwwwwwdwwwwwwwwwwwwwwwwwwwwwwwdwwwwwwwwwdwwwwwwwwwwwwwwwwwwwdwwwwww
+[[3, 'H'], [3, 'S']]
+llwllllllwlwwwllwlwwlllwwwwwlllwwwwwwlwwwwlwwlwlwwdlwlwwlwllllwlwwwlwwwlwlllwllwwwwllllwwllwwwllllll
+[[3, 'H'], [3, 'S']]
+lwlwlllwwwlwlwlwllldlllwwwlwlwlwlwlwwllllwwlllllwwwlllllllwlwlwwllwlllwlllwlllllllwlwlwwlwllwlwlllll
+[[3, 'H'], [3, 'S']]
+llllllllllllwllllllllwllllwlllwlllllllwwllllwlllwlwlwlwwwlllllwllllllllllllwllwllllllllllwdwlwlllwll
+[[3, 'H'], [3, 'S']]
+lllllwlwllllwlllwwlwwlllllllllwllllllwllllllllwllwlwllllllllwlldwllwlwllllllwlllllllllllwwllllllwlll
+[[3, 'H'], [3, 'S']]
+llllllllllllwlllwllwllllldlllllllwlllllllllllwdllwlllllllllllwwlllwllllllllldwlwllldllllwllllllllwll
+[[3, 'H'], [3, 'S']]
+lllwlllllwllwllllllllwwllllllllwlllwlllllllllllllllllllllllllllllllllllllwwllwlllwllllllllllllwwlwlw
+[[3, 'H'], [3, 'S']]
+llllllllllllllwlwlllwlllllllllllllllllllllwllllllwlllwllllllllwllllllllllllwlwllllwlllllllllllllllll
+[[3, 'H'], [3, 'S']]
+llllwllllllllllwllllwllllllllwllllllllwlllllllllllllllllwllllllllllllllwlllllllllllwlwlllwwlllldllwl
+[[4, 'H'], [4, 'S']]
+wwwwwwwwwwwwwwwwwwwwwwwwwdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+[[4, 'H'], [4, 'S']]
+wwwlwlwllwwllwwwldlwwlwlwdwllwwlwwwwwwwlwwlwwlwwwwllwwlllwwlwllwlwlwwlwwwwwllwwwllwlwwwwwlwwwldwlwww
+[[4, 'H'], [4, 'S']]
+lwlldlllllllwwllllwllllwldwlllllllllllwlwlwllllwwllwlllwwwwllwlwlllllllwwllwdwllwlllllllwwwllwlllwww
+[[4, 'H'], [4, 'S']]
+llwllwwlwllwwlllwwwllllwlllwwwlwlllllllwllllwlllllllwwllllwwwwlllwllwlwlllllllllllwwlllwwlwllllllwll
+[[4, 'H'], [4, 'S']]
+lwlllwlllllllllllwlllllwllllllllwlllllllllwlwwlllllllllllllllllwlwwllllwllwlllllllllllllllllllwlllll
+[[4, 'H'], [4, 'S']]
+wllwwlllwllllwwwllllllldwllllllwlllllllwllllllllllllwllllllllllllllllllwlllllllwllllwlllwlllllllllll
+[[4, 'H'], [4, 'S']]
+llllllwlllllllllllllllllllllllllwlllllwlllllllllllwllwllwlllllwlllldwllllllllllwlllllllllldlllllllll
+[[4, 'H'], [4, 'S']]
+lllllllllwlwlllllwlllllllllllwwllwllwllllllllllwwlllllllllllllwlldllllllllllllllllwlllllllwlwlllllll
+[[4, 'H'], [4, 'S']]
+llwlllllllllwllllllwllllllllllllllllllllllllllwllwllllllllllllwllllwllllllllllllllllwdlllllllwllllwl
+[[5, 'H'], [5, 'S']]
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdwwwwwwwwwwwwwwwwwwwww
+[[5, 'H'], [5, 'S']]
+lwwlwwwwwdwwlllllwlwwwwwlwwwwwwlwwwlwwlllwllllwwlwwwwlwllwwwllwwlwwlwwlwwwlwwllwwlwllllwwwllwwwwlllw
+[[5, 'H'], [5, 'S']]
+wwlwwlwlwllwwllllwwwwwlllllllwlwwwwlwlllwllwllwwlwwlllwllwwwwdwwlwllllllllwllwlllllllwwlwwwwllwllllw
+[[5, 'H'], [5, 'S']]
+llwllwwlllllwlllwlllllwllwlwwwlllwwllwllwllwwlllwwllllllwlwwwwllllllwllllwwwllllwlllllllllwwwlwlwwll
+[[5, 'H'], [5, 'S']]
+wwlwllwlllllwwllllllwlwllllllwllwlllwlllwlwllllllllwwlllwlllllllllwllllllllwllllwwlwwwwllllllllwlllw
+[[5, 'H'], [5, 'S']]
+wwlllllllllllllwlllllwwlllwlllllllwwwlllllwlwwllllllwwwlwlllllllllllllwllllwlwllwllllllwlllwwwllwlll
+[[5, 'H'], [5, 'S']]
+llwlwwlllllllllldllllwwwlllllllllllllllldlllllllllllllllwlllwllllllllllwwlwwlllllllllllwlllllwllllll
+[[5, 'H'], [5, 'S']]
+lwlllllldwllllllwllllwlwllwllllllllllllllllllwlwwllwllllllllllllllllldllllllllllllllllwlllllllwlllll
+[[5, 'H'], [5, 'S']]
+lllllllwdllllllllllllwlllllllllllwlllllllllllllllwwwlllllwllllwwllwlllllllwwlllllllllllwllllllwlllll
+[[6, 'H'], [6, 'S']]
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+[[6, 'H'], [6, 'S']]
+wllllwlwlwlwlllwlwwwlwlwwwwwwlllwlwwwwwwwlwlwllwwwwllwwwlllllwlllwllwdwllwwlwlwwlllllllwlwlwlldwllwl
+[[6, 'H'], [6, 'S']]
+wllllwllwwlwllllwldwlwlwwlllwlwwllllllllllwlwlwlwlllllllwlllllwlwlwlllwwllwlwwllwwlllwlwllwwlwlwlwww
+[[6, 'H'], [6, 'S']]
+wlllllldwllwllllllldlwwlwlllllwwllwllwlwlwlwlwlllllwwwlllwwllllwllwllwllllllwlllllllwwlllllwlwlwlwww
+[[6, 'H'], [6, 'S']]
+wllllwwlwwllwllllwwlllllllllwlllwllwwlwllwlwwlwlwlwlwlwlllwwlwlwllwlwwlwllwwwldlldlllwwlllwllwlwllll
+[[6, 'H'], [6, 'S']]
+wwlwllllwlwlllllwllllllllllllllllllllllllllllwllllwllllwllllllwllllllllllwllwlwlllwlllllllwlwllllwll
+[[6, 'H'], [6, 'S']]
+llllllllllllllllllwlwlwlllllllldllllllwllllllllllllwlllllwldllwlllwlwlllwllllllllllwllllllllllllwwll
+[[6, 'H'], [6, 'S']]
+lllwllwllllllllllllllllwlllllllllllllwllllwlllwllllllllllwlllllwllwllllwllllllllllllwllllllllllllwll
+[[6, 'H'], [6, 'S']]
+llwlllwwlllwlldllllllllwwllwllllllllwlllllwlllwlllllwlwlllllwwllllwllllllllwllwllwwllllllllllllwllwl
+[[7, 'H'], [7, 'S']]
+wwdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+[[7, 'H'], [7, 'S']]
+wwlwlwwwlwlwwllllwlwwwwlwlwwwwlwlwwwwwlwdwwwlwwwwwwwwwwwwlwwwwwwllwwlwlwwdwlwllwllwllwwwwwlwdwlwlwwl
+[[7, 'H'], [7, 'S']]
+wllldllllllwwwwllwlwlllwwdlllwlwwwwwlwlwwwlwllwlwwlllldwwlwlllwllllwlwllllwlwlwwwwlwwllwwllwwwwlwwww
+[[7, 'H'], [7, 'S']]
+wwwwwlllllllwllwlllllllwwwllldllwwlllllwllllwlwwlwllllwlwwllwllwlwllwllllwllllllwwwwllllllwlllllllll
+[[7, 'H'], [7, 'S']]
+llllllwwllwwwllwllllwllwllllwlwlwllwwwwwllwwlwllllwlllllwwlllllllllwwwwllllllllllllllllllwwlllllwlll
+[[7, 'H'], [7, 'S']]
+lllllwllwlllllwllwllwlllllwwlllwwlwlwwlwllwwllllwlllllwlwllwwlwllllwlllllllwlwwwwlwlwwwlwllllwlwllwl
+[[7, 'H'], [7, 'S']]
+lldlllllllllwlllllwlllllwlllwllwllllllldlllllllllwlwlllllllwllllllwllwwllwlllwlwllllllwlllllwllwllll
+[[7, 'H'], [7, 'S']]
+wllllllllwllllwllwdwlllllllwlldlwlwlllllwlllllllllllllwllllllllwlllwwllllwlllllllllwlllllwllllllllll
+[[7, 'H'], [7, 'S']]
+llllllwlllllllllllllwllllllllllllllldlwlwlllwlllllllllllllwlllwwlllllllllllwwdllwllwllwlllllllllllll
+[[8, 'H'], [8, 'S']]
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+[[8, 'H'], [8, 'S']]
+wwwwwwwwwlwlwwwwlwwwwwwwwwwwdlwwwwwwlwllwwwllwlllwwlwwwwwllwwdwlwwwwwwwlwwwwwwlwlwwwwllwlwlwlwwlwwww
+[[8, 'H'], [8, 'S']]
+llllwwlwwlwwwlwwlwllllwwlwwllwwlwwwlllwllwwwlwwllwwllllwlllwwlwlwwllwllwlwllwlwwlwllllwwllllwllllwww
+[[8, 'H'], [8, 'S']]
+wlllllllllllllwwllwwlwwlwwllwlwlwllwwllllwlwllwwwwlllwwwllwwwwlwlwlllwlwlwwllwlwwwwlllllllwllllwwllw
+[[8, 'H'], [8, 'S']]
+lwlwwwlwwlwlwlllwllllwlwlwllllwlwllllwllwllllllllllwwlllllllwllllwlllllllwllwwllwllllwlllllwllwlllwl
+[[8, 'H'], [8, 'S']]
+llwwllwllllwwllwlllllllllwwlllllllwwwllllwddwllwlwlllwllllllllwllllllwwlllllllllwwllllllllllwllwlwlw
+[[8, 'H'], [8, 'S']]
+lllwwlllllwwlwwllldllllllllllllllwlllllwlwlllwllllwwwllwlllwlwwlwlllllllllwwlwlllllwllllllllllllllll
+[[8, 'H'], [8, 'S']]
+lllllllllllwwlllllllllllwllwlwlllllllllllllldllllllllwwllllllllllwllldlwwlllllllllllllllwwllllllllwl
+[[8, 'H'], [8, 'S']]
+lllwwlllllwwlllllwllwllwlllllwwlllllllllllllwwlwllllllllllllllwllllllwllllllllllllllwwllllllllllllwl
+[[9, 'H'], [9, 'S']]
+wwwwwwwwwwwwwwwwwwwwwwwwwwdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+[[9, 'H'], [9, 'S']]
+lwwwwwlwwwwlwwwlllwlwwllwwwwwlwwwllwlwwwwwwlwlwwwwwllllllwwwwllwlwlwwlwwwlwwwwlwwwwwwwwwwwwwwwlwwwww
+[[9, 'H'], [9, 'S']]
+lwwwlwlllllwwlwllwlwwwllllwwlwlwwwwwllwwwlwlwwwwwllwlwwwwwwlwllwwwwlwwllllwwlwwwwlwwwlwwwwlllwlwlllw
+[[9, 'H'], [9, 'S']]
+llwwwlwllllwllwlwlwlllllwwwwlwllllwwwwlwlllllwwlwwwlllwwwllllwwlllwlwwlwwwwlllllllllwlwllwllllwwwwll
+[[9, 'H'], [9, 'S']]
+wwlwwlwllwlwlwllwwlllllwllllllwwlwllwlwlwwlwlwlllllwlwlllllwwlllwllwllwwlwlllwwlwlwwwwlllwlllllllwll
+[[9, 'H'], [9, 'S']]
+llllllllllldlwlwllwlllwlllwlldllwllwwlllllwllllwlllllllllwllwllllwwlwllwlwlwlllwlwlllwllwwllwlllllwl
+[[9, 'H'], [9, 'S']]
+lwllllwlllllwllllllllwlllllllwlllwlllllwdllllwlwwlwllllwllllllllllwllllwlllllllllllllwwlllwllllwllwl
+[[9, 'H'], [9, 'S']]
+lllwlllwlwlllllllllllwllllllwwlllllwllllllwllllwllllllllllllwwwwlllllwllllllllllllllllllwlwldlllllwl
+[[9, 'H'], [9, 'S']]
+wlwllwllllllllllllwllllllllwlwlwllwllllwwwwllllwlwllllwlldllllllwllllwwlllllllllllllllllllllllllllll
+[[10, 'H'], [10, 'S']]
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+[[10, 'H'], [10, 'S']]
+wlwwwwwwwlwwwwllwwwwlwwlwlwwlwwwlwwwwwwlllwwwlwwllwwwwwwwlwwllwlwwwllwlwwwwwwwlwwllwlwwwwwwwwwwlwllw
+[[10, 'H'], [10, 'S']]
+wlwlwwllwlwwlllwlwwlwlllllwwlwwllwlwlwllwwwwlwlwlwwwwwdllwlwwlllwllwwwlllwdwlwlwwwlwlwwlwwwlwlwlldll
+[[10, 'H'], [10, 'S']]
+wlwllllwlwlwwlllllwwllwlwlllwwlwlwllllwlwwwlwllllllwlwlllwlwwwllwwllwlwwwwwlwwlwwwwwwwllwlwwlllwllww
+[[10, 'H'], [10, 'S']]
+wllwwllwwllwwllllwwlllwllwlllwlwwlllwwwwllllllllllwwlllllwlwwllllllwllllwllllwllwwlwllllllwwllllllwl
+[[10, 'H'], [10, 'S']]
+llllwlwwlllllllllllllllwllllwlllwllllwwllwlwwllwllllllwlwwlllllwwlllwwwwlwwwllllllllllllllwlllwllwwl
+[[10, 'H'], [10, 'S']]
+lllwwlwlwlllllwlllllllllwllllwwllllwlwllllllwllllllllllwwllwllwwllllwldwllllllwlwlllllllwllwllllllll
+[[10, 'H'], [10, 'S']]
+lllllllldwlwllllllllllwwlllwldllllllllwdlwlwwlwllllllllwwllllllllwlllllllllllllllllllllwllllldwlwllw
+[[10, 'H'], [10, 'S']]
+lwllllllllwllllllwllllwllllwlllllllllllllwlllllllllllllllwwwllwwllllllllwwlllllllwllllllwlllwlwllwll
+[[11, 'H'], [11, 'S']]
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdwwwwwwwwwwwwww
+[[11, 'H'], [11, 'S']]
+llllwwlwwwwlwwwwdwlwwwwwwwwwwwlwlwwwlwlwwwwwwlwwwwwwwlwwwwlwwwwwwlwwlwwwwwwwlwwwllwwwwwwwwwlwdwwwwww
+[[11, 'H'], [11, 'S']]
+lllwwwlwwwwlwllwllwlllwlwllwlwwwlwllwwwwllwwwwwwlldwwlwwwlllllwllwwwlllwwlwwwlwwwwwwwwwlwwwlwwwwwwlw
+[[11, 'H'], [11, 'S']]
+wwllwwllwlwlwlwwlwwwwwwllwwllwwllwlllllllllwwlwwwwwwlwllllwlwlwlwwllllllwlllllwwwlwllllwlwllwwwwllwl
+[[11, 'H'], [11, 'S']]
+wllllwwlwlwllwwwlwwlwwwllllwwwllwllwlwllwwlwwlllwllllwwllwllllllwllwlllwwlllwwwlwwwwwllllldlwllwllwl
+[[11, 'H'], [11, 'S']]
+wwllwllllllllwlwwllwwlllwlwlllllwlllwllwwwlllllllwllwllwllwlllwlwlllwllwlllwllwlwlwlwlwlllwlwwwllwll
+[[11, 'H'], [11, 'S']]
+llllwlllllllwllwlllwllwlllwlwllwlwlllwlwwllwllllllwllwllwlwwwlllwwwwllwwwwllllwwlllllwllllllwdwlwlll
+[[11, 'H'], [11, 'S']]
+lwlllwwwlwllwwlllwllwlwwwlllwlwllllllllllllwllllllwwwlllwlllllwwllwdlwwllwlwllwwlllwllllwlwlllllwlll
+[[11, 'H'], [11, 'S']]
+lwlllllllwwlllllllwlllllllllllllwlllwwlllwllwllllllllllllllllllwlllwlllllllllllwlllwlwwwllwlllllwwll
+[[12, 'H'], [12, 'S']]
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+[[12, 'H'], [12, 'S']]
+wwwwwllwwlwwwwlwlwllwwwwwwwwwllwwwwwwwwwwlwllwwlwlwwwwwwwwwwwwlwwwllwwlwwwwwwwllwlwwwwwwwllwwwwlwwww
+[[12, 'H'], [12, 'S']]
+wllwwwwwlwwwwllldwlwwwwwwwlwwwwlwwwwlwwwwwwlwlwlwwlllllwdlwwlwwlwwwwlwwlwlwlwlwwwwwwlwlwllwwlwwwwlwl
+[[12, 'H'], [12, 'S']]
+lwllwlllwlwwwwwlwwlwlwllwlwlllllllwwlwwlwlwwwlllwwlwlllwwlwllwlwllwwwwlwlwllwwwlwlwwwwlwwlwlwlwllwlw
+[[12, 'H'], [12, 'S']]
+wllwllwlwwllllllwwllllwlwwlwllwwwwlllllllllwllwwlwlwlwllwdlllllwwllwldllllwwwllwllwlwlwllwwllllwlwll
+[[12, 'H'], [12, 'S']]
+wllllwllwwlllwlwwlwwllllllwwlwwlllwlllwlllwwwllwwlwllwlllllllwlwwlwwllwlwllwwllwlwlwllwwllwllwllwwlw
+[[12, 'H'], [12, 'S']]
+lwllwlwlllllwlwlllllwllllwwllllwlllwwwllwlllllwllwllwlllwwllllllllwlllllwllllwllllwllllwwwlwllwlllll
+[[12, 'H'], [12, 'S']]
+lwllllwwlllllllwllllwlllwwlllllwwllwwllllwlllwllwllwlllwdlllllwllwwlllwlwlllllwllllwlllllwllwwlllllw
+[[12, 'H'], [12, 'S']]
+llllllllllwllllllwlllllllwlllllwllwllllwwllwllwllllllwlllllwllldlwlllwlllwlwlldwwlllwlllllwllllwllwl
+[[13, 'H'], [13, 'S']]
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+[[13, 'H'], [13, 'S']]
+wwwwwlwllwwwlwwwwwwwwwwwwllwwlwwwwlwwwwwwwllwwwwwwlwwwwwwwlwwwlwwwwwwlwwwlwwwwwwwwllwwwwwwwwllllwlww
+[[13, 'H'], [13, 'S']]
+wwwwlwwwwwlwwwwwlllwwwwlwwwwwwwwwwlllwwwwwwdwwwwlwwwwwlldwlwwwwwwwlwwwwllwwwlllwwwwwwwwlwlwlwwwwwdlw
+[[13, 'H'], [13, 'S']]
+wlwlwwlwlwwlwwwwwllwwwwwllwlwwwwwwwwwwwlwwlllwlwlwlwllwlwlwlwwwlwwwlwwwllwwwwllwwwlwwlwwlwlwwlllwwll
+[[13, 'H'], [13, 'S']]
+llllwwwlllllllwlwllllwllllldwllwwlwlwwwwwwwlwwlwwwllwdwwlwlwlllwlllwwlwwwwwlllwlwllwwwlwlwwlldwllllw
+[[13, 'H'], [13, 'S']]
+wwlllwllwlwllwwwlllwwllllwwwwllllllllwlwllllwllwwwwdlllwllllllwwlllwlllwllllwwllwllllwwlllllwwllllww
+[[13, 'H'], [13, 'S']]
+lllwwllwlwlllwwwlllwllllllllllllwllllwlwlwwllwwwwlllwwlwwlllllllwwlwlwlllllllwllwllwwlllwlllllwlllwl
+[[13, 'H'], [13, 'S']]
+lwwlllllllllllllllwwwwlwllwlwllwwwldllllllllwllllwwlwwwwwllllwlwwwwllwlwwwwwllwlwlllwlwlwlllwwlllwll
+[[13, 'H'], [13, 'S']]
+wwlwllwlllllwwllllwlllllllwllwwllwwllllwlllwllllllllwllwlllllllllllwwwlllwlwlwwlwlllwllllllwwlwlwlll
+[[14, 'H'], [14, 'S']]
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+[[14, 'H'], [14, 'S']]
+wwwwwwwwwwwwwwwlwwwwwwwwwwwwwwwwwlwwwlwwwwwwwwwwwwwwwwwwwwwwwwlwwwwwwwwwwwlwwwwlwwwwwwwwwwwwwwwwwlwl
+[[14, 'H'], [14, 'S']]
+wwwwwllwwlwwwlwlwwwllwwlwllwllwwwlwwwwwwwwlwwwlwwwwwwwlwwldwwwwlwwwlwlwwwwwwwlwwwlwwlwlllwwwwwwwwwlw
+[[14, 'H'], [14, 'S']]
+wlwwllwwwwwwwwllllwwwllwwwllwwlwlwwlllwllwwllwwwwlwwwwwwwlllwwwwwwlllwwwwwlllwlwwwlwwlwwwlwlwwwwlllw
+[[14, 'H'], [14, 'S']]
+wwwwwlwlwwlwlwlwlwlwllwlllllllwllwwwlwlwllwwlwwlllwwwwwwwlwlllwwwwlwwwlwwwwwllwlwllwlwwwwwwlllwlllww
+[[14, 'H'], [14, 'S']]
+llwwllwllllwwwllllwlllwwwlwlwwllwwwlllllwwlllllwwllllllllwwwlwwwllwlwwwlwwlwwlldwwllllwwwlwwwwlwlllw
+[[14, 'H'], [14, 'S']]
+wllwwlwllllllllwllllllwwllwwllwwllwlwwwlwwwwlwlwwwwllllwwwllllwlwlwllwwlwllwlwlwllwwlwlwlllwlllwwwll
+[[14, 'H'], [14, 'S']]
+llwlwlllllwllwllllllwlwwlwlwllllllllllwwwwllllwlwlwwwwllllwllllwlwwlwlllwllwlllllwlllwlwlllwlllwwwwl
+[[14, 'H'], [14, 'S']]
+llllwwlwlllwwlwwlwwwlwllllwlwdllwlllllwlwllwwwwlllllllwwwllllwllwllwllwlwlwlwlllwwlllwlwlwwlwlllllll

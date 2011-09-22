@@ -47,7 +47,7 @@ def print_players_final():
 def print_players():
 	for player in players:
 		if player.in_game:
-			print "Player", player.no, "has the hand", player.get_hand(), "has", player.get_money(), "dollars and have bet", player.get_bet()
+			print "Player", player.no, "has the hand", player.get_hand(), "has", player.get_money(), "dollars and have bet", player.get_bet(), player.strategy.aggressive, player.strategy.coward
 	
 def print_table():
 	print "Pot:", table.get_pot(), "Community cards:", table.get_cards()
@@ -122,7 +122,12 @@ def turn(): table.add_card(deck.deal_one_card())
 
 def create_players():
     for i in range(no_players):
-        players.append(Player(money, i))
+        if (i % 2) == 0 and i != 0:
+            players.append(Player(money, i, "aggressive"))
+        elif (i % 3) == 0 and i != 0:
+            players.append(Player(money, i, "coward"))
+        else:
+            players.append(Player(money, i, ""))
       
 def new_round():
 	global deck

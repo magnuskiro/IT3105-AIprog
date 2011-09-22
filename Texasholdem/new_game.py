@@ -25,6 +25,7 @@
 #
 
 import play_poker
+import run_test
 
 running = False
 while not running:
@@ -38,6 +39,6 @@ while not running:
         debug.main()
     elif mode == 3:
         running = True
-        run_test()
+        run_test.main()
     else:
         print "Please answer 1, 2 or 3"

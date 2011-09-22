@@ -181,8 +181,8 @@ def check_hand(players_power, remaining):
     if len(players_power[0]) == 0:
         print "hEIHEHIERHIERHIERHIHREI--------------"
         split_pot(remaining)
-        remaining = [0]
-        players_power = [0]
+        remaining = []
+        players_power = []
         return [players_power, remaining]
     try:
         for i in range(len(remaining)-1):
@@ -209,7 +209,7 @@ def showdown(game):
     players_power = []
     print "Showdown!\n-------------------"
     for player in remaining:
-        hand = player.get_hand()
+        hand = player.get_hand() + tablecards
         hand_power = cards.calc_cards_power(hand)
         print "hand power", hand_power
         players_power.append(hand_power)

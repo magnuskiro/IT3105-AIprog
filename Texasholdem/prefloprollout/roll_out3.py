@@ -1,10 +1,11 @@
 import cards
 from rollout_player import Player
+from os import sys
 
 deck = cards.gen_52_cards()
 players = []
 table = []
-no_rollouts = 10
+no_rollouts = 100
 
 def create_players(no_players):
     del players[:]
@@ -88,19 +89,6 @@ def showdown():
         return remaining2[0][0]
     return find_winners(remaining)
 
-# equivalence classes 1-78; pairs of cards with unequal suit and value
-eq_class1 = []
-for i in range(0, 12):
-	for j in range(i+14, i+26-i):
-		h = [deck[i], deck[j]]
-		eq_class1.append(h)
-		
-# equivalence classes 79-156; pairs of cards with equal suit
-eq_class2 = []
-for i in range(0,12):
-	for j in range(i+1, 13):
-		h = [deck[i], deck[j]]
-		eq_class2.append(h)
 		
 # equivalence classes 157-169; pairs of cards with equal value
 eq_class3 = []
@@ -109,45 +97,18 @@ for i in range(13):
 	eq_class3.append(h)
 
 #for hand in eq_class3:
-def eq_class3_rollout(hand, no_players):
+def eq_class_rollout(hand, no_players):
     for i in range(no_players):
         create_players(no_players)
-        #hand = eq_class3[i]
         deck = cards.card_deck()
         deck.remove(hand)
         players[0].hand = hand
-        #deck = cards.shuffle_cards(deck)
         for i in range(2):
             for j in range(1,no_players-1):
                players[j].hand.append(deck.deal_one_card())
         flop(deck)
         river(deck)
         turn(deck)
-        #for player in players:
-        #    print player.no, player.hand
-        #print table
-        try:
-            s = showdown()
-            #table_entry += s
-            del table[:]
-            #return table_entry
-            return s
-        except Exception as inst:
-            print inst
-            print s
-            
-def eq_class1_rollout(hand, no_players):
-    for i in range(no_players):
-        create_players(no_players)
-        deck = cards.card_deck()
-        deck.remove(hand)
-        players[0].hand = hand
-        for i in range(2):
-            for j in range(1, no_players-1):
-                players[j].hand.append(deck.deal_one_card())
-        flop(deck)
-        river(deck)
-        turn(deck)
         try:
             s = showdown()
             del table[:]
@@ -155,57 +116,19 @@ def eq_class1_rollout(hand, no_players):
         except Exception as inst:
             print inst
             print s
-            
-def eq_class2_rollout(hand, no_players):
-    for i in range(no_players):
-        create_players(no_players)
-        deck = cards.card_deck()
-        deck.remove(hand)
-        players[0].hand = hand
-        for i in range(2):
-            for j in range(1, no_players-1):
-                players[j].hand.append(deck.deal_one_card())
-        flop(deck)
-        river(deck)
-        turn(deck)
-        try:
-            s = showdown()
-            del table[:]
-            return s
-        except Exception as inst:
-            print inst
-            print s
-        
-            
-        
+
                       
-out = "rolloutTable.txt"
+out = "rolloutTable3.txt"
 file = open(out, 'wb')
 if file:
-    for hand in eq_class1:
-        print >> file, hand
-        for i in range(2,11):
-            #table_entry = ""
-            table_entry = []
-            for j in range(no_rollouts):
-                #table_entry += eq_class3_rollout(hand, i)
-                table_entry.append(eq_class3_rollout(hand, i))
-            print >> file, ''.join(table_entry)
-            
-    for hand in eq_class2:
-        print >> file, hand
-        for i in range(2,11):
-            table_entry = []
-            for j in range(no_rollouts):
-                table_entry.append(eq_class1_rollout(hand, i))
-            print >> file, ''.join(table_entry)
-            
     for hand in eq_class3:
         print >> file, hand
         for i in range(2,11):
+            sys.stdout.write(".")
+            sys.stdout.flush()
             table_entry = []
             for j in range(no_rollouts):
-                table_entry.append(eq_class3_rollout(hand, i))
+                table_entry.append(eq_class_rollout(hand, i))
             print >> file, ''.join(table_entry)
     file.close()
 else:

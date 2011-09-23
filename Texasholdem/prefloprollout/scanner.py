@@ -23,7 +23,6 @@
 #       MA 02110-1301, USA.
 #
 #
-import operator
 
 wins = 0
 losses = 0

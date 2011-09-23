@@ -23,51 +23,77 @@
 #       MA 02110-1301, USA.
 #
 #
-import operator
 
 wins = 0
 losses = 0
 draw = 0
+handChances = []
+out = "results.txt"
+file = open(out, 'wb')
 
 def read():
     global wins
     global losses
     global draw
     new = False
-    filename = "results.txt"
+    filename = "rolloutTable.txt"
     file = open(filename, "r")
     line = file.readline()
     if line[0] == "[":
         print "new hand", line
-        line = file.readline()
+        hand = line
     while len(line) != 0:
         if line[0] == "w" or line[0] == "d" or line[0] == "l":
-            for c in line:
-                if c == "d":
-                    draw+=1
-                elif c == "w":
-                    wins+=1
-                elif c == "l":
-                    losses+=1
+            #for the 9sets with 1-9 number of opponents.
+            for i in range(0,9):
+                countLine(line) # counts wins and losses on the give line.
+                evaluateLine() # calculate the winning chance.
+                resetCount() # reset counters
+                line = file.readline()
+            record(hand)
         elif line[0] == "[":
-            record()
-            print "new hand", line
-        line = file.readline()
+            hand = line.rstrip()
+            print "new hand", hand
+            line = file.readline()
 
-
-def record():
+def evaluateLine():
     global wins
     global losses
     global draw
-    
-    print wins
-    print losses
-    print draw
+    global handChances
+    chance = (wins*1.0)/((wins+losses+draw))
+    handChances.append(chance)
+    print "winChance: ", chance, " w:", wins, " l:", losses, " d:", draw
+
+def countLine(line):
+    global wins
+    global losses
+    global draw
+    for c in line:
+        if c == "d":
+            draw+=1
+        elif c == "w":
+            wins+=1
+        elif c == "l":
+            losses+=1
+
+def resetCount():
+    global wins
+    global losses
+    global draw
     wins = 0
     losses = 0
     draw = 0
 
-def writeResults():
-    return ""
+def record(hand):
+    global handChances
+    te = {hand: handChances}
+    #print hand, te[hand]
+    #print te[hand][5]
+    output = hand, handChances
+    print >> file, output
+    #print "recordOutput: ", output
+    handChances = []
 
 read()
+file.close()

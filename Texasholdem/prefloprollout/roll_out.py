@@ -4,7 +4,7 @@ from rollout_player import Player
 deck = cards.gen_52_cards()
 players = []
 table = []
-no_rollouts = 200
+no_rollouts = 30
 
 def create_players(no_players):
     del players[:]

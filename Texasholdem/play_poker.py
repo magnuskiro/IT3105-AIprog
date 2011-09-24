@@ -122,13 +122,16 @@ def turn(): table.add_card(deck.deal_one_card())
 
 def create_players():
     for i in range(no_players):
+        players.append(Player(money, i, ""))
+        """
         if (i % 2) == 0 and i != 0:
             players.append(Player(money, i, "aggressive"))
         elif (i % 3) == 0 and i != 0:
             players.append(Player(money, i, "coward"))
         else:
             players.append(Player(money, i, ""))
-      
+        """
+
 def new_round():
 	global deck
 	for player in players:
@@ -178,8 +181,9 @@ def bet(game):
 			player_won(player)
     remaining = find_remaining(players)
     for player in remaining:
-	    if player.bet != table.bet:
-	        bet(game)
+        if player.bet != table.bet:
+            if table.bet < 1200:
+                bet(game)
 
 def check_hand(players_power, remaining):
     print "Check_hand", len(players_power), len(remaining)

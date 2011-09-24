@@ -40,7 +40,7 @@ def read():
     file = open(filename, "r")
     line = file.readline()
     if line[0] == "[":
-        print "new hand", line
+        #print "new hand", line
         hand = line
     while len(line) != 0:
         if line[0] == "w" or line[0] == "d" or line[0] == "l":
@@ -53,7 +53,7 @@ def read():
             record(hand)
         elif line[0] == "[":
             hand = line.rstrip()
-            print "new hand", hand
+            #print "new hand", hand
             line = file.readline()
 
 def evaluateLine():
@@ -63,7 +63,7 @@ def evaluateLine():
     global handChances
     chance = (wins*1.0)/((wins+losses+draw))
     handChances.append(chance)
-    print "winChance: ", chance, " w:", wins, " l:", losses, " d:", draw
+    #print "winChance: ", chance, " w:", wins, " l:", losses, " d:", draw
 
 def countLine(line):
     global wins

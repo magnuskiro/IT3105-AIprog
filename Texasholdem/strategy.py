@@ -61,6 +61,7 @@ class Strategy:
         chr = self.checkRate * hand[0]
         fr = self.foldRate * hand[0]
         action = rr -fr + ((cr + chr) / 2) + random.randrange(0,20)*0.5
+        preFlopList[hand][numPlayers]
         print "ACTION"
         print action
         return action

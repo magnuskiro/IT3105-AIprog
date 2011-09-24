@@ -122,15 +122,15 @@ def turn(): table.add_card(deck.deal_one_card())
 
 def create_players():
     for i in range(no_players):
-        players.append(Player(money, i, ""))
-        """
+        #players.append(Player(money, i, ""))
+
         if (i % 2) == 0 and i != 0:
             players.append(Player(money, i, "aggressive"))
         elif (i % 3) == 0 and i != 0:
             players.append(Player(money, i, "coward"))
         else:
             players.append(Player(money, i, ""))
-        """
+        
 
 def new_round():
 	global deck
@@ -175,7 +175,7 @@ def bet(game):
 			hand = player.get_hand() + tablecards
 			hand_power = find_hand(cards.calc_cards_power(hand))
 			print "Player", player.no, "has", hand_power + str(cards.calc_cards_power(hand))
-			betting.evaluateHand(player, table, cards.calc_cards_power(hand))
+			betting.evaluateHand(player, table, cards.calc_cards_power(hand), no_players)
 		else:
 			game.finished = True
 			player_won(player)

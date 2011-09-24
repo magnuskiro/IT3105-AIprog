@@ -1,0 +1,48 @@
+\documentclass[12pt]{article}
+\title{Texas Hold'em Report}
+\author{Jan Alexander Bremnes and Magnus Kirø}
+\date{24 sep 2011}
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section*{Introduction}
+This is all about craeting Texas Hold'em bots and making them smart.
+
+\section*{Point distribution and teask completion}
+\begin{itemize}
+\item A well-functioning Phase I player that obeys all fundamental poker rules. (20 points)
+
+\item Five different 1000-hand runs of a game involving 4 or more Phase-I players, with the results of each 1000-game segment summarized in a table showing the final resource (e.g. money) of each player. (5 points)
+
+\item Modules for computing, storing (to file) and loading (for use in a poker game) the pre-flop rollout probabilities for k = 2 to 10 player games. Each rollout for each card equivalence class should involve at least 1000 rounds of simulated play. (20 points)
+
+\item Modules for estimating hand strength for a pair of hole cards plus 3, 4 or 5 community/shared cards. This will involve testing the given hand against hands made from all possible pairs of hole cards (using the remaining 47 to 45 cards), as described in ai-poker-players.pdf and diagramed in Figure 15 of that document. (15 points)
+
+\item Five different 1000-hand runs of a game involving 4 or more Phase-II players, with the results of each 1000-game segment summarized in a table, as above. (10 points)
+
+\item Modules for performing basic opponent modeling. (15 points)
+
+\item Five different 1000-hand runs of 4 or more players, at least of 2 of which use Phase-III techniques, while the others may use only Phase-II methods. Include the standard summary table of each 1000-game segment. (10 points)
+
+\item The general quality of the report, which must cover all of the 5 topics mentioned above. (5 points).
+\end{itemize}
+
+\section*{Report Requirements}
+\begin{itemize}
+\item The basic structure of your code for each project phase,
+
+\item The logic behind the betting decisions made by the players in each of the project phases that you complete,
+
+\item The opponent models used in phase III, in particular, the contexts used to differentiate game situations,
+
+\item The results of multi-hand (1000) runs for each of the project phases that you complete. These should not be screen dumps, but simple tables indicating each players total winnings. Five simple tables per project phase is all that is required (and desired) here.
+
+\item A brief discussion of why (you believe) certain strategies were more (or less) effective than others for
+each phase of the project
+\end{itemize}
+
+
+\end{document}

@@ -35,6 +35,7 @@ def read():
         evaluateLine(line)
         line = file.readline()
     #test()
+    file.close()
     return list
 
 def test():

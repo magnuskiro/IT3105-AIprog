@@ -1,14 +1,16 @@
-\documentclass[12pt]{article}
+\documentclass[titlepage]{article}
 \usepackage{amsmath}
 \usepackage[utf8]{inputenc}
-\title{Texas Hold'em Report}
-\author{Jan Alexander Bremnes and Magnus Kirø}
-\date{24 sep 2011}
+
+\author{Jan Alexander Bremnes\\Magnus Kirø}
+\title{IT3105 - Ex 1\\Texas Hold'em}
+\date{September 2011}
+
 \begin{document}
 
-\maketitle
+    \maketitle
 
-\tableofcontents
+    \tableofcontents
 
 \section*{TODO}
 \begin{itemize}
@@ -53,42 +55,72 @@ This is all about craeting Texas Hold'em bots and making them smart.
 each phase of the project
 \end{itemize}
 
-\section*{Player winnings tables}
-\subsection*{Phase-1 player winnings table}
-5-players, 1000-games, 100-start money \\
-\begin{matrix}
-		  \\
-		game set:    &     1  &     2  &     3 &     4 &     5 \\
-		Player 0 & -4600  &   850  & -2290 &  1970 &  3730 \\
-		Player 1 & -3430  &  2590  &  1690 &   280 &   580 \\
-		Player 2 &  1520  &  2980  &  1100 &  -390 &  4390 \\
-		Player 3 &  -120  & -1300  &  -350 & -1930 & -5390 \\
-		Player 4 &  7130  & -4620  &   350 &   570 & -2810 \\
-\end{matrix}
+\pagenumbering{arabic}
+\newpage
 
-\subsection*{Phase-2 player winnings table}
-5-players, 1000-games, 100-start money \\
-\begin{matrix}
-		  \\
-		game set:    &     1  &     2  &     3 &     4 &     5 \\
-		Player 0 & -4600  &   850  & -2290 &  1970 &  3730 \\
-		Player 1 & -3430  &  2590  &  1690 &   280 &   580 \\
-		Player 2 &  1520  &  2980  &  1100 &  -390 &  4390 \\
-		Player 3 &  -120  & -1300  &  -350 & -1930 & -5390 \\
-		Player 4 &  7130  & -4620  &   350 &   570 & -2810 \\
-\end{matrix}
-\subsection*{Phase-3 player winnings table}
-5-players, 1000-games, 100-start money \\
-\begin{matrix}
-		  \\
-		game set:    &     1  &     2  &     3 &     4 &     5 \\
-		Player 0 & -4600  &   850  & -2290 &  1970 &  3730 \\
-		Player 1 & -3430  &  2590  &  1690 &   280 &   580 \\
-		Player 2 &  1520  &  2980  &  1100 &  -390 &  4390 \\
-		Player 3 &  -120  & -1300  &  -350 & -1930 & -5390 \\
-		Player 4 &  7130  & -4620  &   350 &   570 & -2810 \\
-\end{matrix}
-\section*{Future Work}
-Allow players to vary the betting amount according to their estimated chance of winning
+\section{Introduction}
+	This report describes our work done in exercise 1 of IT1305, which were to program a poker bot. 
+	
+\section{Code Structure}
+	\subsection{Phase 1}
+		new-game.py starts the program, and let's the user choose between playing poker, do a test run, or debug. Debugging runs the program with the chosen number of players and rounds, and the game information is printed to screen. As we have not implemented support for human vs computer players, the choice between debugging and play game is a false one, both of them do the same thing. The only difference between play-poker.py and run-test.py, is that play-poker prints gameplay information, while run-test.py only prints the final results after having gone through the chosen number of rounds. Each game creates a list of player-objects, which are given a strategy, a player number, to keep track of who's who, and an initial amount of money. A table-object keeps track of the community cards, the amount of money in the pot, and the current bet. The game-state-object stores the players and table objects to allow easier passing of information between the different parts of the program. Every player has a strategy object, which it uses to decide on betting actions. The file strategy.py can be edited to change the existing strategies or add more. When a player is required to perform an action, the method evaluate-hand, in the module betting.py. is called and depending on the strength of the hand, and the players strategy, the player either folds, calls/checks or raises. The players uses the cards.py module to calculate the strength of their hands. In the pre-flop betting round, these are the only modules that are used. The moduels card.py is the helper code which was supplied to us, with a minor change added so that it's possible to remove cards from a card deck.
+		
+	\subsection{Phase 2}
+		For this phase of the project, we added readPreFlopRollouts.py to let the players decide which equivalence class their hand belongs to, and find the probability of it winning in the rollout-table. To calculate the probabilities after the flop, handstrength.py is used. This module calculates the probability of the players hand, when supplied with the hole cards, the community cards and the number of remaining players. It uses the formula described in ai-poker-players.pdf. The rollout-table is generated with the help of roll-out*.py where * = [1-3]. These modules simulate thousands of games for every possible combination of hole cards, and we use three different modules because we thought it easier to just let the three run simultaneously on a multi core computer, rather than rewriting the code to use threads. The resulting file is then read by scanner.py, which counts the numbers of wins, losses and draws for every equivalence class and calculates the winning probabilities, which are stored in results.txt
+
+\section{Where we explain the logic behind the betting decisions}
+	The poker players have different strategies for betting in each of the project phases. They differ from phase to phase, as the amount of information available to the players increase
+	
+	\subsection{Phase 1 - Primitive strategies}
+		WARNING! INFORMATION MAY NOT BE CORRECT! CONSULT THE STRATEGY.PY TO SEE HOW THE 	STRATEGIES WORK
+In this phase, as with the others, we have included three different player strategies. A 		conservative player, which usually folds when he has a weak hand, often calls on mediocre hands, 	but only raises on strong hands. Then there is the normal players, which does a little bit of 		everything. Sometimes it folds on mediocre hands, sometimes it raises on weak hands, and 		sometimes it only calls on strong hands. The aggressive player sometimes raise on weak hands, but always strong and often on mediocre. In phase 1 of the project, the player strategies are crude and random for the most part. Betting 	in the pre flop round, is based solely on randomness, as there is no information for the players to base their strategies on. 
+	
+	\subsection{Phase 2 - Strategies based on pre-flop roll-outs and hand strengths}
+		In this phase, we generated the pre-flop roll-out table and added a hand strength calculator to let the players make a better guess at how good a chance they have of winning. The roll-out table is used prior to the flop, and is calculated from a simulation of 50,000 games for all numbers of opponents, and all possible hands. The players look up their hand in the table, and use the probability of their hand winning the game, to influence their betting. Post-flop this table is of no more use, as it only based on the possibility of a given two card combination winning the game, so the hand strength calculator is used instead. 
+		
+	\subsection{Phase 3 - Strategies based on opponent modelling}
+		NOT YET IMPLEMENTED
+		
+\section{Future work}
+	Players strategies can be improved by letting them take more information about the game state into account. The current strategies only use the information about the players themselves. They do not take into consideration all the other information that is present, such as number of remaining players, how big the current pot is and how hight the current bet is. If a player has a mediocre hand, there's only two remaining opponents out of the original seven, and the current bet is a small fraction of the players current money, then it would make more sense to place a bet, or raise, then it would if there were seven opponents and a bet a quarter of the players money.
+
+\section{Player winnings tables}
+	\subsection{Phase-1 player winnings table}
+		5-players, 1000-games, 100-start money \\
+		\begin{matrix}
+		  	\\
+			game set:    &     1  &     2  &     3 &     4 &     5 \\
+			Player 0 & -4600  &   850  & -2290 &  1970 &  3730 \\
+			Player 1 & -3430  &  2590  &  1690 &   280 &   580 \\
+			Player 2 &  1520  &  2980  &  1100 &  -390 &  4390 \\
+			Player 3 &  -120  & -1300  &  -350 & -1930 & -5390 \\
+			Player 4 &  7130  & -4620  &   350 &   570 & -2810 \\
+		\end{matrix}
+
+	\subsection{Phase-2 player winnings table}
+		5-players, 1000-games, 100-start money \\
+		\begin{matrix}
+			\\
+			game set:    &     1  &     2  &     3 &     4 &     5 \\
+			Player 0 & -4600  &   850  & -2290 &  1970 &  3730 \\
+			Player 1 & -3430  &  2590  &  1690 &   280 &   580 \\
+			Player 2 &  1520  &  2980  &  1100 &  -390 &  4390 \\
+			Player 3 &  -120  & -1300  &  -350 & -1930 & -5390 \\
+			Player 4 &  7130  & -4620  &   350 &   570 & -2810 \\
+		\end{matrix}
+		
+	\subsection{Phase-3 player winnings table}
+		5-players, 1000-games, 100-start money \\
+		\begin{matrix}
+			\\
+			game set:    &     1  &     2  &     3 &     4 &     5 \\
+			Player 0 & -4600  &   850  & -2290 &  1970 &  3730 \\
+			Player 1 & -3430  &  2590  &  1690 &   280 &   580 \\
+			Player 2 &  1520  &  2980  &  1100 &  -390 &  4390 \\
+			Player 3 &  -120  & -1300  &  -350 & -1930 & -5390 \\
+			Player 4 &  7130  & -4620  &   350 &   570 & -2810 \\
+		\end{matrix}
+
+
 
 \end{document}

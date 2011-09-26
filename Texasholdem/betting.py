@@ -175,18 +175,18 @@ def evaluateHandNormal(player, table, hand):
         print("something is wrong with the betting procedure.")
 
     #valid actions from getAction() is raise/call/fold
-def evaluateHand(player, table, hand):
+def evaluateHand(player, table, hand, numPlayers):
     if player.strategy.aggressive == False and player.strategy.coward == False:
         evaluateHandNormal(player, table, hand)
-    elif player.strategy.getAction(hand) == "raise":
+    elif player.strategy.getAction(hand, numPlayers) == "raise":
         print "###################\n RAISE \n#####################"
         print player.strategy.aggressive
         raise_bet(player, table, bet)
-    elif player.strategy.getAction(hand) == "call":
+    elif player.strategy.getAction(hand, numPlayers) == "call":
         print "###################\n CALL \n#####################"
         print player.strategy.aggressive
         call(player, table)
-    elif player.strategy.getAction(hand) == "fold":
+    elif player.strategy.getAction(hand, numPlayers) == "fold":
         print "###################\n FOLD \n#####################"
         print player.strategy.aggressive
         fold(player)

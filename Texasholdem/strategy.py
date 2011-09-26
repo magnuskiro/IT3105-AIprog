@@ -24,10 +24,15 @@
 #
 #
 import random
+import readPreFlopRollouts
+preFlopList = {}
 
 class Strategy:
 
     def __init__(self, type):
+        global preFlopList
+        preFlopList = readPreFlopRollouts.read()
+        print preFlopList, "test"
         if type=="aggressive":
             self.aggressive = True
             self.coward = False
@@ -50,22 +55,27 @@ class Strategy:
             self.checkRate = 0
             self.foldRate = 0
 
-    def calculateAction(self, hand):
+    def calculateAction(self, hand, numPlayers):
         rr = self.raiseRate * hand[0]
         cr = self.callRate * hand[0]
         chr = self.checkRate * hand[0]
         fr = self.foldRate * hand[0]
         action = rr -fr + ((cr + chr) / 2) + random.randrange(0,20)*0.5
+        preFlopList[hand][numPlayers]
         print "ACTION"
         print action
         return action
 
     #returns the action of the player, call/raise/check.
-    def getAction(self, hand):
-        action = self.calculateAction(hand)
+    def getAction(self, hand, numPlayers):
+        action = self.calculateAction(hand, numPlayers)
         if action>60:
             return "raise"
         elif action<60 and action >25:
             return "call"
         else:
             return "fold"
+
+#for testing purposes.
+#preFlopList = readPreFlopRollouts.read()
+#print preFlopList["2H4S"]

@@ -28,7 +28,7 @@ list = {}
 
 def read():
     global list
-    filename = "results.txt"
+    filename = "prefloprollout/results.txt"
     file = open(filename, "r")
     line = file.readline()
     while len(line) != 0:
@@ -63,6 +63,5 @@ def evaluateLine(line):
     list[hand] = win
     #print list
     
-read()
 
 

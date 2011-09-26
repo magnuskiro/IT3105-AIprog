@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage{amsmath}
+\usepackage[utf8]{inputenc}
 \title{Texas Hold'em Report}
 \author{Jan Alexander Bremnes and Magnus Kirø}
 \date{24 sep 2011}
@@ -9,6 +10,13 @@
 
 \tableofcontents
 
+\section*{TODO}
+\begin{itemize}
+\item   Integrate modules for hand strength calculation, so that the players can use the information to influence betting behaviour
+\item   Change getAction in strategy to use the pre flop rollout-table
+\item   CODE ERROR!! in playpoker line #178 change to remainingplayers
+\item   Do 5 test runs of 1000 games to produce statistics and update this report
+\item   Start looking at opponent modelling!
 \section*{Introduction}
 This is all about craeting Texas Hold'em bots and making them smart.
 
@@ -80,6 +88,7 @@ each phase of the project
 		Player 3 &  -120  & -1300  &  -350 & -1930 & -5390 \\
 		Player 4 &  7130  & -4620  &   350 &   570 & -2810 \\
 \end{matrix}
-
+\section*{Future Work}
+Allow players to vary the betting amount according to their estimated chance of winning
 
 \end{document}

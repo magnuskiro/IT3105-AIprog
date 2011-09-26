@@ -29,6 +29,7 @@ import random
 
 bet = 20
 blind = 10
+max_bet = 400
 
 def small_blind(player, table):
 	print "Player", player.no, "places small blind"
@@ -91,14 +92,17 @@ def pre_flop_betting(player, table):
 		raise_bet(player, table, bet)
 		
 def raise_bet(player, table, amount):
-    difference = table.get_bet() - player.get_bet()
-    player.loose_money(amount + difference)
-    table.increase_pot(amount + difference)
-    table.raise_bet(amount)
-    player.set_bet(amount + difference)
-    print "Player", player.no, "raises", amount
-    print "Player", player.no, "has bet", player.bet, "and has", player.money, "dollars"
-    print "Table pot is now", table.pot, "and table bet is", table.bet
+	if table.bet >= max_bet:
+		print "max bet reached"
+		call(player, table)
+	difference = table.get_bet() - player.get_bet()
+	player.loose_money(amount + difference)
+	table.increase_pot(amount + difference)
+	table.raise_bet(amount)
+	player.set_bet(amount + difference)
+	print "Player", player.no, "raises", amount
+	print "Player", player.no, "has bet", player.bet, "and has", player.money, "dollars"
+	print "Table pot is now", table.pot, "and table bet is", table.bet
     
 def weak(player, table):
     prob = random.randrange(0,6)    # 0-2 = fold, 3-4 = call, 5 = raise

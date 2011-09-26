@@ -28,8 +28,9 @@ list = {}
 
 def read():
     global list
-    #filename = "prefloprollout/results.txt"
-    filename = "results.txt"
+    #first filename for working copy, second filename for testing.
+    filename = "prefloprollout/results.txt"
+    #filename = "results.txt"
     file = open(filename, "r")
     line = file.readline()
     while len(line) != 0:
@@ -58,7 +59,7 @@ def evaluateLine(line):
     win = win[2]
     win = win.replace(")\n", "")
     win = strToList(win)
-    print win[7]
+    #print win[7]
     list[hand] = win
     #print list
 
@@ -79,6 +80,6 @@ def strClean(line):
     line = line.replace(",","")
     return line
 
-read()
+#read()
 
 

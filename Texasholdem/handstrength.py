@@ -86,11 +86,11 @@ def tryit(player_hand, table, no_players):
 	global deck
 	global player_hand
 	global table
-	
+
 	deck = cards.card_deck()
 	player_hand = deck.deal_n_cards(2)
 	table = deck.deal_n_cards(3)
-	
+
 	print "Player:", player_hand
 	print "Table:", table
 
@@ -99,14 +99,14 @@ def tryit(player_hand, table, no_players):
 		deck.remove(card)
 	for card in table:
 		deck.remove(card)
-			
+
 	possible_hands = []
 
 	for i in range(len(deck)-1):
 		for j in range(i+1, len(deck)):
 			h = [deck[i], deck[j]]
 			possible_hands.append(h)
-			
+
 	#print len(possible_hands)
 
 	#for i in range(2):
@@ -121,7 +121,7 @@ def tryit(player_hand, table, no_players):
 		r.append(o)
 		s = showdown(r)
 		result.append(s)
-		
+
 	print len(result)
 	wins = 0
 	draws = 0

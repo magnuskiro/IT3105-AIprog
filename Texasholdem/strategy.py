@@ -25,51 +25,39 @@
 #
 import random
 import readPreFlopRollouts
+import handstrength
 
 class Strategy:
 
     #callRate, raiseRate, checkRate, foldRate, aggressive, coward
-    def setValues(self, raiseRate, callRate,  checkRate, foldRate, aggressive, coward):
+    def setValues(self, aggressive, coward, ap):
         self.aggressive = aggressive
         self.coward = coward
-        self.callRate = callRate
-        self.raiseRate = raiseRate
-        self.checkRate = checkRate
-        self.foldRate = foldRate
 
     def __init__(self, type):
         self.preFlopList = {}
         self.preFlopList = readPreFlopRollouts.read()
-        print self.preFlopList
+        #print self.preFlopList
         if type=="aggressive":
-            self.setValues(10, 5, 5, 1, True, False)
+            self.setValues(True, False, 9)
         elif type=="coward":
-            self.setValues(2, 5, 8, 6, False, True)
+            self.setValues(False, True, 1)
         else:
-            self.setValues(0, 0, 0, 0,False, False)
+            self.setValues(False, False, 5)
 
-    def calculateAction(self, hand, numPlayers, player):
-        rr = self.raiseRate * hand[0]
-        cr = self.callRate * hand[0]
-        chr = self.checkRate * hand[0]
-        fr = self.foldRate * hand[0]
-        action = rr -fr + ((cr + chr) / 2) + random.randrange(0,20)*0.5
-        print "ACTION: ", action
+    def calculateAction(self, table, player, numPlayers):
+        action = handstrength.tryit(player.hand, table.get_cards(), numPlayers)
+        #action = rr -fr + ((cr + chr) / 2) + random.randrange(0,20)*0.5
+        #print "ACTION: ", action
         return action
 
-    def calculateActionPreFlop(self, hand, numPlayers, player):
-        rr = self.raiseRate * hand[0]
-        cr = self.callRate * hand[0]
-        chr = self.checkRate * hand[0]
-        fr = self.foldRate * hand[0]
+    def calculateActionPreFlop(self, player, numPlayers):
         key = self.getPreFlopKey(player.hand)
-        print key, self.preFlopList[key]
-        print "players: ", numPlayers
-        chance = self.preFlopList[key][numPlayers-2]
-        print float(self.preFlopList[key][numPlayers-2]),"================", chance
-        action = rr -fr + ((cr + chr) / 2) + random.randrange(0,20)*0.5
-        print "ACtion: ", action, "chance: ", chance
-        #action = float(action) * float(chance)
+        #print key, self.preFlopList[key][1]
+        action = self.preFlopList[key][numPlayers-2]
+        action = float(action)
+        action *= 100
+        #print "Player ", player.no, "hand: ", hand, "ACTION: ", action, "chance: ", chance, "handPower1: ", hand[0]
         return action
 
     def getPreFlopKey(self, hand):
@@ -90,16 +78,17 @@ class Strategy:
         return hand
 
     #returns the action of the player, call/raise/check.
-    def getAction(self, hand, numPlayers, player, preFlop):
+    def getAction(self, table, player, numPlayers, preFlop):
         if preFlop:
-            action= self.calculateActionPreFlop(hand, numPlayers, player)
+            action= self.calculateActionPreFlop(player, numPlayers)
         else:
-            action = self.calculateAction(hand, numPlayers, player)
-        if action>60:
+            action = self.calculateAction(table, player, numPlayers)
+        #print "PLayer Action: ", action
+        if action>15:
             return "raise"
-        elif action<60 and action >35:
+        elif action<15 and action >8:
             return "call"
-        elif action<35 and action>17:
+        elif action<8 and action>1:
             return "check"
         else:
             return "fold"

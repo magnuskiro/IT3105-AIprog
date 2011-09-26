@@ -150,14 +150,14 @@ def pre_flop(game):
         if player.blind or not player.in_game:
             continue
         #betting.pre_flop_betting(player, table)
-        betting.evaluateHand(player, table, cards.calc_cards_power(player.get_hand()), len(remaining), True)
+        betting.evaluateHand(player, table, len(remaining), True)
     for player in players:
         if player.in_game == False:
             continue
         remaining = find_remaining(players)
         print "Players remaining:", len(remaining)
         if len(remaining) > 1:
-            betting.evaluateHand(player, table, cards.calc_cards_power(player.get_hand()), len(remaining), True)
+            betting.evaluateHand(player, table, len(remaining), True)
             #betting.pre_flop_betting(player, table)
         else:
             game.finished = True
@@ -177,7 +177,7 @@ def bet(game):
             hand = player.get_hand() + tablecards
             hand_power = find_hand(cards.calc_cards_power(hand))
             print "Player", player.no, "has", hand_power + str(cards.calc_cards_power(hand))
-            betting.evaluateHand(player, table, cards.calc_cards_power(hand), len(remaining), False)
+            betting.evaluateHand(player, table, len(remaining), False)
         else:
             game.finished = True
             player_won(player)
@@ -188,9 +188,9 @@ def bet(game):
                 bet(game)
 
 def check_hand(players_power, remaining):
-    print "Check_hand", len(players_power), len(remaining)
+    #print "Check_hand", len(players_power), len(remaining)
     if len(players_power[0]) == 0:
-        print "hEIHEHIERHIERHIERHIHREI--------------"
+        #print "hEIHEHIERHIERHIERHIHREI--------------"
         split_pot(remaining)
         remaining = []
         players_power = []
@@ -218,16 +218,16 @@ def showdown(game):
         return
     tablecards = table.get_cards()
     players_power = []
-    print "Showdown!\n-------------------"
+    print "-------------------Showdown!\n-------------------"
     for player in remaining:
         hand = player.get_hand() + tablecards
         hand_power = cards.calc_cards_power(hand)
-        print "hand power", hand_power
+        #print "hand power", hand_power
         players_power.append(hand_power)
     while len(remaining) > 1:
         remaining = check_hand(players_power, remaining)
         remaining = remaining[1]
-    print "After showdown,", len(remaining), "players remain"
+    #print "After showdown,", len(remaining), "players remain"
     game.finished = True
     if len(remaining) == 0:
         return

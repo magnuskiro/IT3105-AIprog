@@ -137,7 +137,7 @@ def evaluateHandNormal(player, table, hand):
     else:
         print("something is wrong with the betting procedure.")
 
-        """
+
 def pre_flop_betting(player, table):
 	rand = random.randrange(0,5)
 	if rand == 0:
@@ -148,25 +148,28 @@ def pre_flop_betting(player, table):
 		call(player, table)
 	else:
 		raise_bet(player, table, bet)
-		"""
+		
 
     #valid actions from getAction() is raise/call/fold
-def evaluateHand(player, table, hand, numPlayers, preFlop):
-    if player.strategy.aggressive == False and player.strategy.coward == False:
-        evaluateHandNormal(player, table, hand)
-    elif player.strategy.getAction(hand, numPlayers, player, preFlop) == "raise":
+def evaluateHand(player, table, numPlayers, preFlop):
+    checkValue = player.strategy.getAction(table, player, numPlayers, preFlop)
+    #if player.strategy.aggressive == False and player.strategy.coward == False:
+    #    evaluateHandNormal(player, table, hand)
+    #el
+    if checkValue == "raise":
         print "###################\n RAISE \n#####################"
         print player.strategy.aggressive
         raise_bet(player, table, bet)
-    elif player.strategy.getAction(hand, numPlayers, player, preFlop) == "call":
+    elif checkValue == "call":
         print "###################\n CALL \n#####################"
         print player.strategy.aggressive
         call(player, table)
-    elif player.strategy.getAction(hand, numPlayers, player, preFlop) == "fold":
+    elif checkValue == "fold":
         print "###################\n FOLD \n#####################"
         print player.strategy.aggressive
         fold(player)
-    elif player.strategy.getAction(hand, numPlayers, player, preFlop) == "check":
+    elif checkValue == "check":
+        print "###################\n CHECK \n#####################"
         check(player, table)
     else:
         print "Betting strategy do not work!"

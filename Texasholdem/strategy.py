@@ -29,31 +29,25 @@ preFlopList = {}
 
 class Strategy:
 
+    #callRate, raiseRate, checkRate, foldRate, aggressive, coward
+    def setValues(self, raiseRate, callRate,  checkRate, foldRate, aggressive, coward):
+        self.aggressive = aggressive
+        self.coward = coward
+        self.callRate = callRate
+        self.raiseRate = raiseRate
+        self.checkRate = checkRate
+        self.foldRate = foldRate
+
     def __init__(self, type):
         global preFlopList
         preFlopList = readPreFlopRollouts.read()
         print preFlopList, "test"
         if type=="aggressive":
-            self.aggressive = True
-            self.coward = False
-            self.raiseRate = 10
-            self.callRate = 5
-            self.checkRate = 5
-            self.foldRate = 0
+            self.setValues(10, 5, 5, 1, True, False)
         elif type=="coward":
-            self.aggressive = False
-            self.coward = True
-            self.raiseRate = 2
-            self.callRate = 5
-            self.checkRate = 8
-            self.foldRate = 6
+            self.setValues(2, 5, 8, 6, False, True)
         else:
-            self.aggressive = False
-            self.coward = False
-            self.callRate = 0
-            self.raiseRate = 0
-            self.checkRate = 0
-            self.foldRate = 0
+            self.setValues(0, 0, 0, 0,False, False)
 
     def calculateAction(self, hand, numPlayers):
         rr = self.raiseRate * hand[0]
@@ -79,3 +73,7 @@ class Strategy:
 #for testing purposes.
 #preFlopList = readPreFlopRollouts.read()
 #print preFlopList["2H4S"]
+
+#s  = Strategy("coward")
+#print s.callRate, s.raiseRate, s.checkRate, s.foldRate, s.aggressive, s.coward
+#print s.test()

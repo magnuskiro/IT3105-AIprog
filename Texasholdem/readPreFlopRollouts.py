@@ -28,7 +28,8 @@ list = {}
 
 def read():
     global list
-    filename = "prefloprollout/results.txt"
+    #filename = "prefloprollout/results.txt"
+    filename = "results.txt"
     file = open(filename, "r")
     line = file.readline()
     while len(line) != 0:
@@ -49,19 +50,35 @@ def evaluateLine(line):
     line = line.partition("\"")
     hand = line[2].partition("\"")
     hand = hand[0]
-    hand = hand.replace("[","")
-    hand = hand.replace("]","")
-    hand = hand.replace("'","")
-    hand = hand.replace(",","")
+    hand = strClean(hand)
     hand = hand.replace(" ","")
+    #print hand
     win = line[2].partition("\"")
     win = win[2].partition(" ")
     win = win[2]
     win = win.replace(")\n", "")
-    #print hand
-    #print hand," - ", win
+    win = strToList(win)
+    print win[7]
     list[hand] = win
     #print list
-    
+
+def strToList(line):
+    list = []
+    line = strClean(line)
+    line = line.partition(" ")
+    for i in range(0,9):
+        list.append(line[0])
+        line = line[2].partition(" ")
+    #print list
+    return list
+
+def strClean(line):
+    line = line.replace("[","")
+    line = line.replace("]","")
+    line = line.replace("'","")
+    line = line.replace(",","")
+    return line
+
+read()
 
 

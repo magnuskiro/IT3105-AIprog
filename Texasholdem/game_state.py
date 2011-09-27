@@ -12,8 +12,6 @@ class Game_State:
         self.state = "preFlop"
 
     def initGame(self):
-        global game
-        self.table = Table()
 
     def addPlayer(self, player):
         self.players.append(player)

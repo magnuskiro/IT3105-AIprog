@@ -129,11 +129,13 @@ def create_players():
     global game
     for i in range(no_players):
         #players.append(Player(money, i, ""))
-        if (i % 2) == 0 and i != 0:
+        if i==1 or i==5 or i==9:
             game.addPlayer(Player(money, i, "aggressive"))
-        elif (i % 3) == 0 and i != 0:
+        elif i==2 or i==6:
             game.addPlayer(Player(money, i, "coward"))
-        else:
+        elif i==3 or i==7:
+            game.addPlayer(Player(money, i, "bluffer"))
+        else: # 0 4 8
             game.addPlayer(Player(money, i, ""))
 
 def new_round():
@@ -143,6 +145,7 @@ def new_round():
         player.clear_hand()
         player.in_game = True
         player.bet = 0
+        player.strategy.setBluffing(False)
     game.getTable().clear_table()
     deck = cards.card_deck()
     return deck

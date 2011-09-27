@@ -26,11 +26,12 @@
 import random
 import readPreFlopRollouts
 import handstrength
+from copy import deepcopy
 
 class Strategy:
 
     #callRate, raiseRate, checkRate, foldRate, aggressive, coward
-    def setValues(self, aggressive, coward, ap):
+    def setValues(self, aggressive, coward):
         self.aggressive = aggressive
         self.coward = coward
 
@@ -39,28 +40,32 @@ class Strategy:
         self.preFlopList = readPreFlopRollouts.read()
         #print self.preFlopList
         if type=="aggressive":
-            self.setValues(True, False, 9)
+            self.setValues(True, False)
         elif type=="coward":
-            self.setValues(False, True, 1)
+            self.setValues(False, True)
         else:
-            self.setValues(False, False, 5)
+            self.setValues(False, False)
 
     def calculateAction(self, table, player, numPlayers):
+        #print "calcAct: ", "hand:", player.hand, "table:", table.get_cards()
         action = handstrength.tryit(player.hand, table.get_cards(), numPlayers)
         #action = rr -fr + ((cr + chr) / 2) + random.randrange(0,20)*0.5
         #print "ACTION: ", action
         return action
 
     def calculateActionPreFlop(self, player, numPlayers):
-        key = self.getPreFlopKey(player.hand)
+        key = self.getPreFlopKey(player.get_hand())
         #print key, self.preFlopList[key][1]
         action = self.preFlopList[key][numPlayers-2]
         action = float(action)
         action *= 100
         #print "Player ", player.no, "hand: ", hand, "ACTION: ", action, "chance: ", chance, "handPower1: ", hand[0]
+        #print "player HAND: ", player.get_hand()
         return action
 
-    def getPreFlopKey(self, hand):
+    def getPreFlopKey(self, playerHand):
+        hand = deepcopy(playerHand)
+        #print "preFlopKey: ", playerHand
         if hand[0][0] > hand[1][0]:
             hand = [hand[1], hand[0]]
         if hand[0][1] == hand[1][1]:
@@ -80,15 +85,16 @@ class Strategy:
     #returns the action of the player, call/raise/check.
     def getAction(self, table, player, numPlayers, preFlop):
         if preFlop:
-            action= self.calculateActionPreFlop(player, numPlayers)
+            action = self.calculateActionPreFlop(player, numPlayers)
         else:
             action = self.calculateAction(table, player, numPlayers)
-        #print "PLayer Action: ", action
+        #print "Player Action: ", action
+        # 15, 8, 1
         if action>15:
             return "raise"
         elif action<15 and action >8:
             return "call"
-        elif action<8 and action>1:
+        elif action<8 and action>=1:
             return "check"
         else:
             return "fold"
@@ -100,3 +106,4 @@ class Strategy:
 #s  = Strategy("coward")
 #print s.callRate, s.raiseRate, s.checkRate, s.foldRate, s.aggressive, s.coward
 #print s.test()
+

@@ -140,12 +140,13 @@ def new_round():
         player.bet = 0
     table.clear_table()
     deck = cards.card_deck()
+    return deck
 
 def pre_flop(game):
     remaining = find_remaining(players)
     if len(remaining) == 1:
         return
-    print "pre_flop"
+    #print "pre_flop"
     for player in players:
         if player.blind or not player.in_game:
             continue
@@ -155,7 +156,7 @@ def pre_flop(game):
         if player.in_game == False:
             continue
         remaining = find_remaining(players)
-        print "Players remaining:", len(remaining)
+        #print "Players remaining:", len(remaining)
         if len(remaining) > 1:
             betting.evaluateHand(player, table, len(remaining), True)
             #betting.pre_flop_betting(player, table)
@@ -169,18 +170,18 @@ def bet(game):
         return
     print "bet"
     for player in players:
-		if player.in_game == False:
-			continue
-		remaining = find_remaining(players)
-		if len(remaining) > 1:
-			tablecards = table.get_cards()
-			hand = player.get_hand() + tablecards
-			hand_power = find_hand(cards.calc_cards_power(hand))
-			print "Player", player.no, "has", hand_power + str(cards.calc_cards_power(hand))
-			betting.evaluateHand(player, table, cards.calc_cards_power(hand), len(remaining))
-		else:
-			game.finished = True
-			player_won(player)
+        if player.in_game == False:
+            continue
+        remaining = find_remaining(players)
+        if len(remaining) > 1:
+            tablecards = table.get_cards()
+            hand = player.get_hand() + tablecards
+            hand_power = find_hand(cards.calc_cards_power(hand))
+            print "Player", player.no, "has", hand_power + str(cards.calc_cards_power(hand))
+            betting.evaluateHand(player, table, len(remaining), False)
+        else:
+            game.finished = True
+            player_won(player)
     remaining = find_remaining(players)
     for player in remaining:
         if player.bet != table.bet:
@@ -217,7 +218,7 @@ def showdown(game):
         return
     tablecards = table.get_cards()
     players_power = []
-    print "-------------------Showdown!\n-------------------"
+    print "-------------------Showdown!-------------------"
     for player in remaining:
         hand = player.get_hand() + tablecards
         hand_power = cards.calc_cards_power(hand)
@@ -235,14 +236,14 @@ def showdown(game):
 
 def play():
     game_finished = False
-    new_round()
+    deck = new_round()
     deal_hole_cards()
     global table
     table = Table()
     # this object will store all relevant information about the game
     # still to be implemented
     game = Game_State(table, players, False)
-    global deck
+    #global deck
     # This while is just to keep the game going until there's only 1 player left, as proper betting is not implemented yet
     while not game.finished:
         print_players()
@@ -274,11 +275,12 @@ def play():
         print_table()
         print "Betting after river \n------------------------------"
         bet(game)
+        remaining = find_remaining(players)
         if len(remaining) > 1:
             showdown(game)
         random.shuffle(players)
-        table.clear_table()
-        deck = cards.card_deck()
+        #table.clear_table()
+        #deck = cards.card_deck()
 
 
 def main():

@@ -54,7 +54,7 @@ def check_hand(players_power, remaining):
         print inst
         print "try no 2", i, len(remaining), len(players_power), len(players_power[i])
     return [players_power, remaining] 
-    
+
 def showdown(remaining, players_power):
     while len(remaining) > 1:
         remaining2 = check_hand(players_power, remaining)
@@ -63,7 +63,7 @@ def showdown(remaining, players_power):
     if len(remaining) == 0:
         return remaining2[0][0]
     return find_winners(remaining)
-    
+
 def showdown(remaining):
     #remaining = list(players)
     players_power = []
@@ -80,63 +80,73 @@ def showdown(remaining):
     if len(remaining) == 0:
         return remaining2[0][0]
     return find_winners(remaining)
- 
 
-def tryit(player_hand, table, no_players):
-	global deck
-	global player_hand
-	global table
+#player_hand, table, no_players
+def tryit(p, t, no):
+    global deck
+    global player_hand
+    global table
 
-	deck = cards.card_deck()
-	player_hand = deck.deal_n_cards(2)
-	table = deck.deal_n_cards(3)
+    #deck = cards.card_deck()
+    #player_hand = deck.deal_n_cards(2)
+    #table = deck.deal_n_cards(3)
 
-	print "Player:", player_hand
-	print "Table:", table
+    deck = cards.card_deck()
+    player_hand = p
+    table = t
+    no_players = no
 
-	deck = cards.gen_52_cards()
-	for card in player_hand:
-		deck.remove(card)
-	for card in table:
-		deck.remove(card)
 
-	possible_hands = []
+    #print "Player:", player_hand
+    #print "Table:", table
 
-	for i in range(len(deck)-1):
-		for j in range(i+1, len(deck)):
-			h = [deck[i], deck[j]]
-			possible_hands.append(h)
+    deck = cards.gen_52_cards()
+    for card in player_hand:
+        #print "player:HAND: ", player_hand
+        deck.remove(card)
+    for card in table:
+        #print "**********************"
+        #print card
+        #print deck
+        #print "**********************"
+        deck.remove(card)
+            			
+    possible_hands = []
 
-	#print len(possible_hands)
+    for i in range(len(deck)-1):
+        for j in range(i+1, len(deck)):
+            h = [deck[i], deck[j]]
+            possible_hands.append(h)
 
-	#for i in range(2):
-	#	print "Opponent:", possible_hands[i]
+    #print len(possible_hands)
 
-	result = []
-	for o in possible_hands:
-		players_power = []
-		#o = possible_hands[i]
-		r = []
-		r.append(player_hand)
-		r.append(o)
-		s = showdown(r)
-		result.append(s)
+    #for i in range(2):
+    #	print "Opponent:", possible_hands[i]
 
-	print len(result)
-	wins = 0
-	draws = 0
-	losses = 0
-	for e in result:
-		if e == "w":
-			wins += 1
-		elif e == "d":
-			draws += 1
-		elif e == "l":
-			losses += 1
+    result = []
+    for o in possible_hands:
+        players_power = []
+        #o = possible_hands[i]
+        r = []
+        r.append(player_hand)
+        r.append(o)
+        s = showdown(r)
+        result.append(s)
 
-	print wins, draws, losses
+    #print len(result)
+    wins = 0
+    draws = 0
+    losses = 0
+    for e in result:
+        if e == "w":
+            wins += 1
+        elif e == "d":
+            draws += 1
+        elif e == "l":
+            losses += 1
 
-	strength = (((wins+draws/2.0)/(wins+draws+losses))**no_players)*100
-	print strength
-	
+    #print wins, draws, losses
+
+    strength = (((wins+draws/2.0)/(wins+draws+losses))**no_players)*100
+    return strength
 

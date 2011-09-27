@@ -152,25 +152,25 @@ def pre_flop_betting(player, table):
 
 
 	#valid actions from getAction() is raise/call/fold
-def evaluateHand(player, table, numPlayers, preFlop):
-	checkValue = player.strategy.getAction(table, player, numPlayers, preFlop)
+def evaluateHand(game, player):
+	checkValue = player.strategy.getAction(game, player)
 	#if player.strategy.aggressive == False and player.strategy.coward == False:
 	#    evaluateHandNormal(player, table, hand)
 	#el
 	if checkValue == "raise":
 		#print "###################\n RAISE \n#####################"
 		#print player.strategy.aggressive
-		raise_bet(player, table, bet)
+		raise_bet(player, game.getTable(), bet)
 	elif checkValue == "call":
 		#print "###################\n CALL \n#####################"
 		#print player.strategy.aggressive
-		call(player, table)
+		call(player, game.getTable())
 	elif checkValue == "fold":
 		#print "###################\n FOLD \n#####################"
 		#print player.strategy.aggressive
 		fold(player)
 	elif checkValue == "check":
 		#print "###################\n CHECK \n#####################"
-		check(player, table)
+		check(player, game.getTable())
 	else:
 		print "Betting strategy do not work!"

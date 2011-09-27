@@ -28,36 +28,31 @@ import random
 import cards
 import betting
 from table import Table
-from player import Player
 from game_state import Game_State
+from player import Player
 
+game = Game_State() # the game object containing all the game info.
 no_players = 0
 remaining = 0
 no_games = 0
 money = 0
-players = []
 deck = cards.card_deck()
-table = Table()
 no_bets = 3
 
 def print_players_final():
-    for player in players:
+    global game
+    for player in game.getPlayers():
         print "Player", player.no, " - ", player.get_money()
 
 def print_players():
-    for player in players:
+    global game
+    for player in game.getRemaining():
         if player.in_game:
-            print "Player", player.no, "has the hand", player.get_hand(), "has", player.get_money(), "dollars and have bet", player.get_bet(), player.strategy.aggressive, player.strategy.coward
+            print "Player", player.no, "has the hand", player.get_hand(), "has", player.get_money(), "dollars and have bet", player.get_bet()
 
 def print_table():
-    print "Pot:", table.get_pot(), "Community cards:", table.get_cards()
-
-def find_remaining(players):
-    remaining = []
-    for player in players:
-        if player.in_game:
-            remaining.append(player)
-    return remaining
+    global game
+    print "Pot:", game.getTable().get_pot(), "Community cards:", game.getTable().get_cards()
 
 def find_hand(hand):
     if hand[0] == 1:
@@ -82,7 +77,8 @@ def find_hand(hand):
         return "Royal Flush: "
 
 def player_won(player):
-    amount = table.get_pot()
+    global game
+    amount = game.getTable().get_pot()
     player.add_money(amount)
     print "Player", player.no,"won", amount, "dollars"
     #for player in players:
@@ -90,20 +86,23 @@ def player_won(player):
     #	player.in_game = True
     #exit ("Game finished")
 
-def split_pot(remaining):
-    amount = table.get_pot()
-    for player in remaining:
-        player.add_money(amount/len(remaining))
+def split_pot():
+    global game
+    amount = game.getTable().get_pot()
+    for player in game.getRemaining():
+        player.add_money(amount/game.getLenRemaining())
         print "Player", player.no, "won", amount, "dollars"
 
 def deal_hole_cards():
+    global game
     for i in range(2):
-        for player in players:
+        for player in game.getRemaining():
             player.add_card(deck.deal_one_card())
 
 # Probably not needed, but keep it for now, just in case			
 def rotate_blinds():
-    remaining = find_remaining(players)
+    global game
+    remaining = game.getRemaining()
     global small_blind
     global big_blind
     if small_blind >= remaining-1:
@@ -114,173 +113,197 @@ def rotate_blinds():
     if big_blind > (remaining - 1):
         big_blind = 0
 
-def flop(): table.add_cards(deck.deal_n_cards(3))
+def flop():
+    global game
+    game.getTable().add_cards(deck.deal_n_cards(3))
 
-def river(): table.add_card(deck.deal_one_card())
+def river():
+    global game
+    game.getTable().add_card(deck.deal_one_card())
 
-def turn(): table.add_card(deck.deal_one_card())
+def turn():
+    global game
+    game.getTable().add_card(deck.deal_one_card())
 
 def create_players():
+    global game
     for i in range(no_players):
         #players.append(Player(money, i, ""))
-
         if (i % 2) == 0 and i != 0:
-            players.append(Player(money, i, "aggressive"))
+            game.addPlayer(Player(money, i, "aggressive"))
         elif (i % 3) == 0 and i != 0:
-            players.append(Player(money, i, "coward"))
+            game.addPlayer(Player(money, i, "coward"))
         else:
-            players.append(Player(money, i, ""))
-
+            game.addPlayer(Player(money, i, ""))
 
 def new_round():
     global deck
-    for player in players:
+    global game
+    for player in game.getPlayers():
         player.clear_hand()
         player.in_game = True
         player.bet = 0
-    table.clear_table()
+    game.getTable().clear_table()
     deck = cards.card_deck()
     return deck
 
-def pre_flop(game):
-    remaining = find_remaining(players)
+def pre_flop():
+    global game
+    remaining = game.getRemaining()
     if len(remaining) == 1:
         return
     #print "pre_flop"
-    for player in players:
+    for player in game.getPlayers():
         if player.blind or not player.in_game:
             continue
         #betting.pre_flop_betting(player, table)
-        betting.evaluateHand(player, table, len(remaining), True)
-    for player in players:
-        if player.in_game == False:
+        betting.evaluateHand(game, player)
+    for player in game.getPlayers():
+        if not player.in_game:
             continue
-        remaining = find_remaining(players)
+        remaining = game.getRemaining()
         #print "Players remaining:", len(remaining)
         if len(remaining) > 1:
-            betting.evaluateHand(player, table, len(remaining), True)
+            betting.evaluateHand(game, player)
             #betting.pre_flop_betting(player, table)
         else:
-            game.finished = True
+            game.setFinished(True)
             player_won(player)
             break
+    for player in remaining:
+        if player.bet != game.getTable().get_bet():
+                bet()
 
-def bet(game):
-    if len(find_remaining(players)) == 1:
+def bet():
+    global game
+    if game.getLenRemaining() == 1:
         return
     print "bet"
-    for player in players:
-        if player.in_game == False:
+    for player in game.getPlayers():
+        if not player.in_game:
             continue
-        remaining = find_remaining(players)
+        remaining = game.getRemaining()
         if len(remaining) > 1:
-            tablecards = table.get_cards()
+            tablecards = game.getTable().get_cards()
             hand = player.get_hand() + tablecards
             hand_power = find_hand(cards.calc_cards_power(hand))
             print "Player", player.no, "has", hand_power + str(cards.calc_cards_power(hand))
-            betting.evaluateHand(player, table, len(remaining), False)
+            betting.evaluateHand(game, player)
         else:
             game.finished = True
             player_won(player)
-    remaining = find_remaining(players)
+    remaining = game.getRemaining()
     for player in remaining:
-        if player.bet != table.bet:
-                bet(game)
+        if player.bet != game.getTable().get_bet():
+                bet()
 
 def check_hand(players_power, remaining):
     #print "Check_hand", len(players_power), len(remaining)
+    powers_to_be_deleted = []
+    remaining_to_be_deleted = []
     if len(players_power[0]) == 0:
-        #print "hEIHEHIERHIERHIERHIHREI--------------"
-        split_pot(remaining)
+        split_pot()
         remaining = []
         players_power = []
         return [players_power, remaining]
     try:
         for i in range(len(remaining)-1):
-            if players_power[i][0] < players_power[i+1][0]:
-                del players_power[i]
-                del remaining[i]
-            elif players_power[i][0] > players_power[i+1][0]:
-                del players_power[i+1]
-                del remaining[i+1]
-    except:
+            for j in range(i+1, len(remaining)):
+                if players_power[i][0] < players_power[j][0]:
+                    powers_to_be_deleted.append(players_power[i])
+                    remaining_to_be_deleted.append(remaining[i])
+                elif players_power[i][0] > players_power[j][0]:
+                    remaining_to_be_deleted.append(remaining[j])
+                    powers_to_be_deleted.append(players_power[j])
+        for p in powers_to_be_deleted:
+            if p in players_power:
+                players_power.remove(p)
+        for p in remaining_to_be_deleted:
+            if p in remaining:
+                remaining.remove(p)
+    except Exception as inst:
+        print inst
         print "try no 1", i, len(remaining), len(players_power)
     try:
         for i in range(len(remaining)):
             del players_power[i][0]
-    except:
+    except Exception as inst:
+        print inst
         print "try no 2", i, len(remaining), len(players_power), len(players_power[i])
-    return [players_power, remaining] 
+    return [players_power, remaining]
 
-def showdown(game):
-    remaining = find_remaining(players)
+def showdown():
+    global game
+    remaining = game.getRemaining()
     if len(remaining) == 1:
         return
-    tablecards = table.get_cards()
+    tableCards = game.getTable().get_cards()
     players_power = []
     print "-------------------Showdown!-------------------"
     for player in remaining:
-        hand = player.get_hand() + tablecards
+        hand = player.get_hand() + tableCards
         hand_power = cards.calc_cards_power(hand)
         #print "hand power", hand_power
         players_power.append(hand_power)
     while len(remaining) > 1:
-        remaining = check_hand(players_power, remaining)
-        remaining = remaining[1]
+        remaining2 = check_hand(players_power, remaining)
+        remaining = remaining2[1]
     #print "After showdown,", len(remaining), "players remain"
     game.finished = True
     if len(remaining) == 0:
         return
     player_won(remaining[0])
 
-
 def play():
-    game_finished = False
+    global game
+    global deck
+    # this object will store all relevant information about the game
     deck = new_round()
     deal_hole_cards()
-    global table
-    table = Table()
-    # this object will store all relevant information about the game
-    # still to be implemented
-    game = Game_State(table, players, False)
-    #global deck
+    game.initGame()
     # This while is just to keep the game going until there's only 1 player left, as proper betting is not implemented yet
-    while not game.finished:
-        print_players()
-        print_table()
-        remaining = find_remaining(players)
-        print len(remaining)
-        if len(remaining) < 2:
-            game.finished = True
-            player_won(remaining[0])
-            break
-        small_blind = remaining[0]
-        big_blind = remaining[1]
-        print "Player", small_blind.no, "is small blind, and player", big_blind.no, "is big blind"
-        betting.small_blind(small_blind, table)
-        betting.big_blind(big_blind, table)
-        print "Betting before flop \n------------------------------"
-        pre_flop(game)
-        flop()
-        print_table()
-        print "Betting before turn \n------------------------------"
-        bet(game)
-        small_blind.blind = False
-        big_blind.blind = False
-        turn()
-        print_table()
-        print "Betting before river \n------------------------------"
-        bet(game)
-        river()
-        print_table()
-        print "Betting after river \n------------------------------"
-        bet(game)
-        remaining = find_remaining(players)
-        if len(remaining) > 1:
-            showdown(game)
-        random.shuffle(players)
-        #table.clear_table()
-        #deck = cards.card_deck()
+    #while not game.getFinished():
+    print "GAME START!"
+    print_players()
+    print_table()
+    remaining = game.getRemaining()
+    #print len(remaining)
+    if len(remaining) < 2:
+        game.setFinished(True)
+        player_won(remaining[0])
+    small_blind = remaining[0]
+    big_blind = remaining[1]
+    print "Player", small_blind.no, "is small blind, and player", big_blind.no, "is big blind"
+    betting.small_blind(small_blind, game.getTable())
+    betting.big_blind(big_blind, game.getTable())
+    print "Betting before flop \n------------------------------"
+    game.setState("preFlop")
+    pre_flop()
+    flop()
+    print_table()
+    print "Betting before turn \n------------------------------"
+    game.setState("postFlop")
+    bet()
+    small_blind.blind = False
+    big_blind.blind = False
+    turn()
+    print_table()
+    print "Betting before river \n------------------------------"
+    game.setState("postTurn")
+    bet()
+    river()
+    print_table()
+    print "Betting after river \n------------------------------"
+    game.setState("postTurn")
+    bet()
+    remaining = game.getRemaining()
+    if len(remaining) > 1:
+        showdown()
+    else:
+        player_won(remaining[0])
+    random.shuffle(game.getPlayers())
+    #game.getTable().clear_table()
+    #deck = cards.card_deck()
 
 
 def main():

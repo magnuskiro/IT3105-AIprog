@@ -31,30 +31,31 @@ from copy import deepcopy
 class Strategy:
 
     #callRate, raiseRate, checkRate, foldRate, aggressive, coward
-    def setValues(self, aggressive, coward):
-        self.aggressive = aggressive
-        self.coward = coward
+    def setValues(self, aggressivePoints):
+        self.aggressionPoints = aggressivePoints
 
     def __init__(self, type):
         self.preFlopList = {}
         self.preFlopList = readPreFlopRollouts.read()
         #print self.preFlopList
         if type=="aggressive":
-            self.setValues(True, False)
+            self.setValues(5)
         elif type=="coward":
-            self.setValues(False, True)
+            self.setValues(-5)
+        elif type=="bluffer":
+            self.setValues(0)
         else:
-            self.setValues(False, False)
+            self.setValues(0)
 
     def calculateAction(self, table, player, numPlayers):
         #print "calcAct: ", "hand:", player.hand, "table:", table.get_cards()
-        action = handstrength.tryit(player.hand, table.get_cards(), numPlayers)
+        action = handstrength.tryit(player.get_hand(), table.get_cards(), numPlayers)
         #action = rr -fr + ((cr + chr) / 2) + random.randrange(0,20)*0.5
         #print "ACTION: ", action
         return action
 
-    def calculateActionPreFlop(self, player, numPlayers):
-        key = self.getPreFlopKey(player.get_hand())
+    def calculateActionPreFlop(self, hand, numPlayers):
+        key = self.getPreFlopKey(hand)
         #print key, self.preFlopList[key][1]
         action = self.preFlopList[key][numPlayers-2]
         action = float(action)
@@ -62,6 +63,11 @@ class Strategy:
         #print "Player ", player.no, "hand: ", hand, "ACTION: ", action, "chance: ", chance, "handPower1: ", hand[0]
         #print "player HAND: ", player.get_hand()
         return action
+
+    def pot_odds(self, table, player):
+        call_amount = table.bet - player.bet
+        odds = call_amount*1.0/(table.pot + call_amount)*1.0
+        return odds
 
     def getPreFlopKey(self, playerHand):
         hand = deepcopy(playerHand)
@@ -83,21 +89,27 @@ class Strategy:
         return hand
 
     #returns the action of the player, call/raise/check.
-    def getAction(self, table, player, numPlayers, preFlop):
-        if preFlop:
-            action = self.calculateActionPreFlop(player, numPlayers)
+    def getAction(self, game, player):
+        if game.getState()=="preFlop":
+            handStrength = self.calculateActionPreFlop(player.get_hand(), game.getLenRemaining())
         else:
-            action = self.calculateAction(table, player, numPlayers)
+            handStrength = self.calculateAction(game.getTable(), player, game.getLenRemaining())
         #print "Player Action: ", action
-        # 15, 8, 1
-        if action>15:
+        p = 200/(game.getLenRemaining())
+        potOds = self.pot_odds(game.getTable(), player)*10
+        strategyVariation = self.aggressionPoints + potOds
+        handStrength+=strategyVariation
+        #print "HS: ", handStrength, "PO: ", potOds, "aggression: ", self.aggressionPoints, "p: ", p
+        if handStrength>p:
             return "raise"
-        elif action<15 and action >8:
+        elif handStrength<p and handStrength>=(p/1.5):
             return "call"
-        elif action<8 and action>=1:
+        elif handStrength<(p/1.5) and handStrength>=(p/2):
             return "check"
-        else:
+        elif handStrength<(p/2):
             return "fold"
+        else:
+            "Never gonna give you up, Never gonna let you down!"
 
 #for testing purposes.
 #preFlopList = readPreFlopRollouts.read()

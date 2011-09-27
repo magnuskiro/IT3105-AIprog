@@ -175,14 +175,13 @@ def bet(game):
 			hand = player.get_hand() + tablecards
 			hand_power = find_hand(cards.calc_cards_power(hand))
 			print "Player", player.no, "has", hand_power + str(cards.calc_cards_power(hand))
-			betting.evaluateHand(player, table, cards.calc_cards_power(hand), no_players)
+			betting.evaluateHand(player, table, cards.calc_cards_power(hand), len(remaining))
 		else:
 			game.finished = True
 			player_won(player)
     remaining = find_remaining(players)
     for player in remaining:
         if player.bet != table.bet:
-            if table.bet < 1200:
                 bet(game)
 
 def check_hand(players_power, remaining):

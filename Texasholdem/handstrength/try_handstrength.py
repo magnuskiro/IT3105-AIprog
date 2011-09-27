@@ -1,3 +1,3 @@
 import handstrength
 
-print handstrength.tryit([[4, 'D'], [8, 'C']], [[6, 'S'], [5, 'D'], [9, 'S']], 6)
+print handstrength.tryit([[5, 'C'], [11, 'D']], [[6, 'S'], [5, 'D'], [9, 'S']], 9)

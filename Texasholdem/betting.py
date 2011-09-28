@@ -29,148 +29,160 @@ import random
 
 bet = 20
 blind = 10
-max_bet = 400
+maxRaises = 3
 
 def small_blind(player, table):
-	print "Player", player.no, "places small blind"
-	player.blind = True
-	player.loose_money(blind)
-	player.set_bet(blind)
-	table.increase_pot(blind)
-	table.raise_bet(blind)
-	print "Table pot is now", table.get_pot(), "and table bet is", table.get_bet()
+    print "Player", player.no, "places small blind"
+    player.blind = True
+    player.loose_money(blind)
+    player.set_bet(blind)
+    table.increase_pot(blind)
+    table.raise_bet(blind)
+    print "Table pot is now", table.get_pot(), "and table bet is", table.get_bet()
 
 def big_blind(player, table):
-	print "Player", player.no, "places big blind"
-	player.blind = True
-	player.loose_money(blind*2)
-	player.set_bet(blind*2)
-	table.increase_pot(blind*2)
-	table.raise_bet(blind)
-	print "Table pot is now", table.get_pot(), "and table bet is", table.get_bet()
+    print "Player", player.no, "places big blind"
+    player.blind = True
+    player.loose_money(blind*2)
+    player.set_bet(blind*2)
+    table.increase_pot(blind*2)
+    table.raise_bet(blind)
+    print "Table pot is now", table.get_pot(), "and table bet is", table.get_bet()
 
 def fold(player):
-	print "Player", player.no, "folds"
-	player.in_game = False
+    print "Player", player.no, "folds"
+    player.in_game = False
 
 def call(player, table):
-	print "Player", player.no, "calls"
-	current_bet = player.get_bet()
-	table_bet = table.get_bet()
-	if (current_bet < table_bet):
-		place_bet(player, table, (table_bet - current_bet))
-	else:
-		check(player, table)
-	print "Player", player.no, "has bet", player.bet, "and has", player.money, "dollars"
-	print "Table pot is now", table.get_pot(), "and table bet is", table.get_bet()
+    print "Player", player.no, "calls"
+    current_bet = player.get_bet()
+    table_bet = table.get_bet()
+    if current_bet < table_bet:
+        place_bet(player, table, (table_bet - current_bet))
+    else:
+        check(player, table)
+    print "Player", player.no, "has bet", player.bet, "and has", player.money, "dollars"
+    print "Table pot is now", table.get_pot(), "and table bet is", table.get_bet()
 
 def check(player, table):
-	if player.get_bet() == table.get_bet():
-		print "Player", player.no, "checks"
-	else:
-		rand = random.randrange(0,2)
-		if rand == 1:
-			call(player, table)
-		else:
-			fold(player)
+    if player.get_bet() == table.get_bet():
+        print "Player", player.no, "checks"
+        return
+    else:
+        rand = random.randrange(0,2)
+        if rand == 1:
+            call(player, table)
+        else:
+            fold(player)
 
 def place_bet(player, table, amount):
-	print "Player", player.no, "places a bet of", amount
-	player.loose_money(amount)
-	player.set_bet(amount)
-	table.increase_pot(amount)
+    print "Player", player.no, "places a bet of", amount
+    player.loose_money(amount)
+    player.set_bet(amount)
+    table.increase_pot(amount)
 
 def raise_bet(player, table, amount):
-	if table.bet >= max_bet:
-		print "max bet reached"
-		call(player, table)
-	else:
-		difference = table.get_bet() - player.get_bet()
-		player.loose_money(amount + difference)
-		table.increase_pot(amount + difference)
-		table.raise_bet(amount)
-		player.set_bet(amount + difference)
-		print "Player", player.no, "raises", amount
-		print "Player", player.no, "has bet", player.bet, "and has", player.money, "dollars"
-		print "Table pot is now", table.pot, "and table bet is", table.bet
+    if player.getRoundRaises() >= maxRaises:
+        print "max bet reached"
+        call(player, table)
+    else:
+        player.raises+=1
+        difference = table.get_bet() - player.get_bet()
+        player.loose_money(amount + difference)
+        table.increase_pot(amount + difference)
+        table.raise_bet(amount)
+        player.set_bet(amount + difference)
+        print "Player", player.no, "raises", amount
+        print "Player", player.no, "has bet", player.bet, "and has", player.money, "dollars"
+        print "Table pot is now", table.pot, "and table bet is", table.bet
 
 def weak(player, table):
-	prob = random.randrange(0,6)    # 0-2 = fold, 3-4 = call, 5 = raise
-	if prob < 3:
-		fold(player)
-	elif prob == 3 or prob == 4:
-		call(player, table)
-	else:
-		raise_bet(player, table, bet)
-	#print("weak hand: %s" % (hand))
-	#return hand
+    prob = random.randrange(0,6)    # 0-2 = fold, 3-4 = call, 5 = raise
+    if prob < 3:
+        fold(player)
+    elif prob == 3 or prob == 4:
+        call(player, table)
+    else:
+        raise_bet(player, table, bet)
+    #print("weak hand: %s" % (hand))
+    #return hand
 
 def mediocre(player, table):
-	prob = random.randrange(0,8)    # 0-1 = fold, 2-3 = call, 4-7 = raise
-	if prob < 2:
-		fold(player)
-	elif prob == 2 or prob == 3:
-		call(player, table)
-	else:
-		raise_bet(player, table, bet)
-	#print("mediocre hand: %s" % (hand))
-	#return hand
+    prob = random.randrange(0,8)    # 0-1 = fold, 2-3 = call, 4-7 = raise
+    if prob < 2:
+        fold(player)
+    elif prob == 2 or prob == 3:
+        call(player, table)
+    else:
+        raise_bet(player, table, bet)
+    #print("mediocre hand: %s" % (hand))
+    #return hand
 
 def strong(player, table):
-	prob = random.randrange(0,10)   # 0-1 = fold, 2-3 = call, 5-9 = raise
-	if prob < 2:
-		fold(player)
-	elif prob == 2 or prob == 3:
-		call(player, table)
-	else:
-		raise_bet(player, table, bet)
-	#print("strong hand: %s" % (hand))
-	#return hand
+    prob = random.randrange(0,10)   # 0-1 = fold, 2-3 = call, 5-9 = raise
+    if prob < 2:
+        fold(player)
+    elif prob == 2 or prob == 3:
+        call(player, table)
+    else:
+        raise_bet(player, table, bet)
+    #print("strong hand: %s" % (hand))
+    #return hand
 
 def evaluateHandNormal(player, table, hand):
-	#find out it the hand is weak/mediocre/strong.
-	if hand[0] <=3 and hand[0] >=1:
-		weak(player, table)
-	elif hand[0] >=4 and hand[0] <=6:
-		mediocre(player, table)
-	elif hand[0] <=9 and hand[0] >=7:
-		strong(player, table)
-	else:
-		print("something is wrong with the betting procedure.")
+    #find out it the hand is weak/mediocre/strong.
+    if hand[0] <=3 and hand[0] >=1:
+        weak(player, table)
+    elif hand[0] >=4 and hand[0] <=6:
+        mediocre(player, table)
+    elif hand[0] <=9 and hand[0] >=7:
+        strong(player, table)
+    else:
+        print("something is wrong with the betting procedure.")
 
 
 def pre_flop_betting(player, table):
-	rand = random.randrange(0,5)
-	if rand == 0:
-		fold(player)
-	elif rand == 1:
-		check(player, table)
-	elif rand == 2 or rand == 3:
-		call(player, table)
-	else:
-		raise_bet(player, table, bet)
+    rand = random.randrange(0,5)
+    if rand == 0:
+        fold(player)
+    elif rand == 1:
+        check(player, table)
+    elif rand == 2 or rand == 3:
+        call(player, table)
+    else:
+        raise_bet(player, table, bet)
 
+def test(game):
+    t = 1000
+    pot = 0
+    for p in game.getPlayers():
+        pot+=p.money
+    pot+=game.getTable().get_pot()
+    if pot != t:
+        print "AVVIK!!!: ", pot, " - ", t
 
-	#valid actions from getAction() is raise/call/fold
+    #valid actions from getAction() is raise/call/fold
 def evaluateHand(game, player):
-	checkValue = player.strategy.getAction(game, player)
-	#if player.strategy.aggressive == False and player.strategy.coward == False:
-	#    evaluateHandNormal(player, table, hand)
-	#el
-	if checkValue == "raise":
-		#print "###################\n RAISE \n#####################"
-		#print player.strategy.aggressive
-		raise_bet(player, game.getTable(), bet)
-	elif checkValue == "call":
-		#print "###################\n CALL \n#####################"
-		#print player.strategy.aggressive
-		call(player, game.getTable())
-	elif checkValue == "fold":
-		#print "###################\n FOLD \n#####################"
-		#print player.strategy.aggressive
-		fold(player)
-	elif checkValue == "check":
-		#print "###################\n CHECK \n#####################"
-		check(player, game.getTable())
-	else:
-		print "Betting strategy do not work!"
+    test(game)
+    checkValue = player.strategy.getAction(game, player)
+    print checkValue
+    #if player.strategy.aggressive == False and player.strategy.coward == False:
+    #    evaluateHandNormal(player, table, hand)
+    #el
+    if checkValue == "raise":
+        #print "###################\n RAISE \n#####################"
+        #print player.strategy.aggressive
+        raise_bet(player, game.getTable(), bet)
+    elif checkValue == "call":
+        #print "###################\n CALL \n#####################"
+        #print player.strategy.aggressive
+        call(player, game.getTable())
+    elif checkValue == "fold":
+        #print "###################\n FOLD \n#####################"
+        #print player.strategy.aggressive
+        fold(player)
+    elif checkValue == "check":
+        #print "###################\n CHECK \n#####################"
+        check(player, game.getTable())
+    else:
+        print "Betting strategy do not work!"

@@ -11,8 +11,6 @@ class Game_State:
         self.big_blind = 0
         self.state = "preFlop"
 
-    def initGame(self):
-
     def addPlayer(self, player):
         self.players.append(player)
 

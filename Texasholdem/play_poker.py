@@ -257,13 +257,17 @@ def showdown():
         return
     player_won(remaining[0])
 
+def clearNumRaises():
+    global game
+    for p in game.getPlayers():
+        p.raises = 0
+
 def play():
     global game
     global deck
     # this object will store all relevant information about the game
     deck = new_round()
     deal_hole_cards()
-    game.initGame()
     # This while is just to keep the game going until there's only 1 player left, as proper betting is not implemented yet
     #while not game.getFinished():
     print "GAME START!"
@@ -281,11 +285,13 @@ def play():
     betting.big_blind(big_blind, game.getTable())
     print "Betting before flop \n------------------------------"
     game.setState("preFlop")
+    clearNumRaises()
     pre_flop()
     flop()
     print_table()
     print "Betting before turn \n------------------------------"
     game.setState("postFlop")
+    clearNumRaises()
     bet()
     small_blind.blind = False
     big_blind.blind = False
@@ -293,11 +299,13 @@ def play():
     print_table()
     print "Betting before river \n------------------------------"
     game.setState("postTurn")
+    clearNumRaises()
     bet()
     river()
     print_table()
     print "Betting after river \n------------------------------"
     game.setState("postTurn")
+    clearNumRaises()
     bet()
     remaining = game.getRemaining()
     if len(remaining) > 1:

@@ -35,6 +35,10 @@ class Player:
         self.no = number
         self.blind = False
         self.strategy = Strategy(strat)
+        self.raises = 0
+
+    def getRoundRaises(self):
+        return self.raises
 
     def add_money(self, amount): self.money += amount
 

@@ -30,7 +30,7 @@ class Table:
         self.pot = 0
         self.cards = []
         self.bet = 0
-        
+
     def increase_pot(self, amount): self.pot += amount
 
     def add_cards(self, cards):
@@ -42,12 +42,12 @@ class Table:
     def get_cards(self): return self.cards
 
     def clear_table(self): 
-		del self.cards[:]
-		#self.pot = 0
-		#self.bet = 0
+        del self.cards[:]
+        self.pot = 0
+        self.bet = 0
 
     def raise_bet(self, amount): self.bet += amount
 
     def get_bet(self): return self.bet
-    
+
     def get_pot(self): return self.pot

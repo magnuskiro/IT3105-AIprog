@@ -128,7 +128,7 @@ def turn():
 
 
     #pahse one
-
+"""
 def create_players():
     global game
     for i in range(no_players):
@@ -165,7 +165,7 @@ def create_players():
             p = Player(money, i, "")
             p.phase = num
             game.addPlayer(p)
-"""
+
 
 def new_round():
     global deck

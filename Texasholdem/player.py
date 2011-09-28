@@ -36,6 +36,7 @@ class Player:
         self.blind = False
         self.strategy = Strategy(strat)
         self.raises = 0
+        self.phase = 0
 
     def getRoundRaises(self):
         return self.raises

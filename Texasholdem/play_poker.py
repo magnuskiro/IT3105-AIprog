@@ -137,7 +137,9 @@ def create_players():
         elif i==3 or i==7:
             game.addPlayer(Player(money, i, "bluffer"))
         else: # 0 4 8
-            game.addPlayer(Player(money, i, ""))
+            p = Player(money, i, "")
+            p.phase = 1
+            game.addPlayer(p)
 
 def new_round():
     global deck
@@ -172,7 +174,7 @@ def pre_flop():
             betting.evaluateHand(game, player)
             #betting.pre_flop_betting(player, table)
         else:
-            game.setFinished(True)
+            game.finished=True
             player_won(player)
             break
     for player in remaining:
@@ -278,7 +280,7 @@ def play():
     remaining = game.getRemaining()
     #print len(remaining)
     if len(remaining) < 2:
-        game.setFinished(True)
+        game.finished = True
         player_won(remaining[0])
     small_blind = remaining[0]
     big_blind = remaining[1]

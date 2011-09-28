@@ -153,11 +153,11 @@ def create_players():
     for i in range(no_players):
         if i == 3: num = 2
         #players.append(Player(money, i, ""))
-        if i==1 or i==2:
+        if i==1 or i==3:
             p = Player(money, i, "aggressive")
             p.phase = num
             game.addPlayer(p)
-        elif i==3 or i==4:
+        elif i==2 or i==4:
             p = Player(money, i, "coward")
             p.phase = num
             game.addPlayer(p)

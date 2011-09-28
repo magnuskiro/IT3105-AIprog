@@ -145,7 +145,7 @@ def create_players():
             p = Player(money, i, "")
             p.phase = 1
             game.addPlayer(p)
-"""
+
     #phase two
 def create_players():
     global game
@@ -159,6 +159,23 @@ def create_players():
             game.addPlayer(p)
         elif i==3 or i==4:
             p = Player(money, i, "coward")
+            p.phase = num
+            game.addPlayer(p)
+        else:
+            p = Player(money, i, "")
+            p.phase = num
+            game.addPlayer(p)
+"""
+    #phase three
+def create_players():
+    global game
+    num = 1
+    for i in range(no_players):
+        if i == 2: num = 2
+        if i == 4: num = 3
+        #players.append(Player(money, i, ""))
+        if i==3 or i==1 or i==5:
+            p = Player(money, i, "aggressive")
             p.phase = num
             game.addPlayer(p)
         else:

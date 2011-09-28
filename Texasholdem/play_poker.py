@@ -137,7 +137,9 @@ def create_players():
         elif i==3 or i==7:
             game.addPlayer(Player(money, i, "bluffer"))
         else: # 0 4 8
-            game.addPlayer(Player(money, i, ""))
+            p = Player(money, i, "")
+            p.phase = 1
+            game.addPlayer(p)
 
 def new_round():
     global deck
@@ -172,7 +174,7 @@ def pre_flop():
             betting.evaluateHand(game, player)
             #betting.pre_flop_betting(player, table)
         else:
-            game.setFinished(True)
+            game.finished=True
             player_won(player)
             break
     for player in remaining:
@@ -278,20 +280,20 @@ def play():
     remaining = game.getRemaining()
     #print len(remaining)
     if len(remaining) < 2:
-        game.setFinished(True)
+        game.finished = True
         player_won(remaining[0])
     small_blind = remaining[0]
     big_blind = remaining[1]
     print "Player", small_blind.no, "is small blind, and player", big_blind.no, "is big blind"
     betting.small_blind(small_blind, game.getTable())
     betting.big_blind(big_blind, game.getTable())
-    print "Betting before flop \n------------------------------"
+    print "Betting before flop \n------------------------------", game.getLenRemaining()
     game.setState("preFlop")
     clearNumRaises()
     pre_flop()
     flop()
     print_table()
-    print "Betting before turn \n------------------------------"
+    print "Betting before turn \n------------------------------", game.getLenRemaining()
     game.setState("postFlop")
     clearNumRaises()
     bet()
@@ -299,13 +301,13 @@ def play():
     big_blind.blind = False
     turn()
     print_table()
-    print "Betting before river \n------------------------------"
+    print "Betting before river \n------------------------------", game.getLenRemaining()
     game.setState("postTurn")
     clearNumRaises()
     bet()
     river()
     print_table()
-    print "Betting after river \n------------------------------"
+    print "Betting after river \n------------------------------", game.getLenRemaining()
     game.setState("postTurn")
     clearNumRaises()
     bet()

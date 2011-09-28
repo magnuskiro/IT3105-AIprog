@@ -131,14 +131,38 @@ def strong(player, table):
 
 def evaluateHandNormal(player, table, hand):
     #find out it the hand is weak/mediocre/strong.
-    if hand[0] <=3 and hand[0] >=1:
-        weak(player, table)
-    elif hand[0] >=4 and hand[0] <=6:
-        mediocre(player, table)
-    elif hand[0] <=9 and hand[0] >=7:
-        strong(player, table)
+    # aggressive 1-2 fold, 3-4 call over raise.
+    # coward 1-4 fold 4-6 call 7 or more rasie.
+    # normal 1-3 fold, 4-5 call, 6 or more raise.
+    if player.strategy.aggressionPoints == 5: # sggressive
+        if hand[0]==1:
+            fold(player)
+        elif hand[0] >=2 and hand[0] <=3:
+            call(player, table)
+        elif hand[0]>=4:
+            raise_bet(player, table, bet)
+        else:
+            print("something is wrong with the betting procedure.")
+    elif player.strategy.aggressionPoints == 0: # normal
+        if hand[0] <=3 and hand[0] >=1:
+            fold(player)
+        elif hand[0] >=4 and hand[0] <=5:
+            call(player, table)
+        elif hand[0]>=6:
+            raise_bet(player, table, bet)
+        else:
+            print("something is wrong with the betting procedure.")
+    elif player.strategy.aggressionPoints == -5: # coward
+        if hand[0] <=4 and hand[0] >=1:
+            fold(player)
+        elif hand[0] >=5 and hand[0] <=6:
+            call(player, table)
+        elif hand[0] >=7:
+            raise_bet(player, table, bet)
+        else:
+            print("something is wrong with the betting procedure.")
     else:
-        print("something is wrong with the betting procedure.")
+        print "You fucked up!"
 
 
 def pre_flop_betting(player, table):
@@ -161,8 +185,19 @@ def test(game):
     if pot != t:
         print "AVVIK!!!: ", pot, " - ", t
 
+def evaluateHandLastPhase(game, player):
+    return 1
+
     #valid actions from getAction() is raise/call/fold
 def evaluateHand(game, player):
+    if player.phase == 1:
+        gameHand = player.hand + game.getTable().get_cards()
+        hand = cards.calc_cards_power(gameHand, len(gameHand))
+        #print "PHASE1: ", hand
+        evaluateHandNormal(player, game.getTable(), hand)
+    elif player.strategy == 3:
+        print "PHASE2: "
+        evaluateHandLastPhase(game, player)
     #test(game)
     checkValue = player.strategy.getAction(game, player)
     print checkValue

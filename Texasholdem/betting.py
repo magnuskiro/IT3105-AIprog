@@ -135,11 +135,11 @@ def evaluateHandNormal(player, table, hand):
     # coward 1-4 fold 4-6 call 7 or more rasie.
     # normal 1-3 fold, 4-5 call, 6 or more raise.
     if player.strategy.aggressionPoints == 5: # sggressive
-        if hand[0] <=2 and hand[0] >=1:
+        if hand[0]==1:
             fold(player)
-        elif hand[0] >=3 and hand[0] <=4:
+        elif hand[0] >=2 and hand[0] <=3:
             call(player, table)
-        elif hand[0]>=5:
+        elif hand[0]>=4:
             raise_bet(player, table, bet)
         else:
             print("something is wrong with the betting procedure.")

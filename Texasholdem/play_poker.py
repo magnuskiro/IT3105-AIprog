@@ -287,13 +287,13 @@ def play():
     print "Player", small_blind.no, "is small blind, and player", big_blind.no, "is big blind"
     betting.small_blind(small_blind, game.getTable())
     betting.big_blind(big_blind, game.getTable())
-    print "Betting before flop \n------------------------------"
+    print "Betting before flop \n------------------------------", game.getLenRemaining()
     game.setState("preFlop")
     clearNumRaises()
     pre_flop()
     flop()
     print_table()
-    print "Betting before turn \n------------------------------"
+    print "Betting before turn \n------------------------------", game.getLenRemaining()
     game.setState("postFlop")
     clearNumRaises()
     bet()
@@ -301,13 +301,13 @@ def play():
     big_blind.blind = False
     turn()
     print_table()
-    print "Betting before river \n------------------------------"
+    print "Betting before river \n------------------------------", game.getLenRemaining()
     game.setState("postTurn")
     clearNumRaises()
     bet()
     river()
     print_table()
-    print "Betting after river \n------------------------------"
+    print "Betting after river \n------------------------------", game.getLenRemaining()
     game.setState("postTurn")
     clearNumRaises()
     bet()

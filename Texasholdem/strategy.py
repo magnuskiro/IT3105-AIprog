@@ -112,7 +112,7 @@ class Strategy:
             handStrength = self.calculateAction(game.getTable(), player, game.getLenRemaining())
         #print "Player Action: ", action
         if game.getState() == "perFlop":
-            p = 200/(game.getLenRemaining())
+            p = 150/(game.getLenRemaining())
         else:
             p = 100/(game.getLenRemaining())
         potOds = self.pot_odds(game.getTable(), player)*10

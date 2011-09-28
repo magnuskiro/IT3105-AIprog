@@ -51,46 +51,37 @@ Unfortunately, within the time frame given, we were not able to implement Phase 
 	Players strategies can be improved by letting them take more information about the game state into account. The current strategies only use the information about the players themselves. They do not take into consideration all the other information that is present, such as number of remaining players, how big the current pot is and how hight the current bet is. If a player has a mediocre hand, there's only two remaining opponents out of the original seven, and the current bet is a small fraction of the players current money, then it would make more sense to place a bet, or raise, then it would if there were seven opponents and a bet a quarter of the players money.
 	
 \section{Discussion of strategies}
-    As can be seen from the tables containing the results from five 1000-hand runs from each project phase, some strategies were more successful than others.
+    As can be seen from the tables containing the results from five 1000-hand runs from each completed project phase, some strategies were more successful than others. In phase 1, we can see that the aggressive players performed the best in all five 1000-hand games. In fact, only in one of the games did a conservative player win any money, but he was still beaten by the aggressive players. The normal players always ended up with great losses. \\ In phase 2, we see that the phase 1 players were easily beaten by the phase 2 players, which was to be expected since they have access to more information about the game, and change their behaviour accordingly. Among the Phase 2 players, there are some variations from game to game in regard to which player strategy performed the best, but overall the conservative and normal player beats the aggressive one. If we sum up the Phase 2 players winnings, we get that the normal player won a total of 287171, the conservative won 269858 and the aggressive 220910. They're quite close, but wee see that the normal player strategy was the best one in the long run. Aggressive players will sometimes loose large amounts of money, as they take bigger risks while playing, but they will also win large amounts. Conservative players take few risks, and will only stay in the game until the end if they're confident that they will win. This will keep them from loosing too much, but will also only award them 
 
 \section{Player winnings tables}
+    A = Aggressive player, C = Conservative player, N = normal player
 	\subsection{Phase-1 player winnings table}
 		5-players, 1000-games, 100-start money \\
 		\begin{matrix}
 		  	\\
 			game set:&      1  &      2  &      3 &      4 &      5 \\
-			Player 0 & -15610  & -15560  & -25060 & -16880 & -24190 \\
-			Player 1 &  44410  &  36660  &  44530 &  41630 &  40960 \\
-			Player 2 &  24550  &  32180  &  31260 &  44960 &  39510 \\
-			Player 3 & -15760  & -17220  & -18240 & -24920 &  17210 \\
-			Player 4 & -22560  & -16220  & -10380 & -24140 & -19120 \\
-            Player 5 & -14430  & -19240  & -21510 & -20050 & -19350 \\
+			Player 0 (N) & -15610  & -15560  & -25060 & -16880 & -24190 \\
+			Player 1 (A) &  44410  &  36660  &  44530 &  41630 &  40960 \\
+			Player 2 (A) &  24550  &  32180  &  31260 &  44960 &  39510 \\
+			Player 3 (C) & -15760  & -17220  & -18240 & -24920 &  17210 \\
+			Player 4 (C) & -22560  & -16220  & -10380 & -24140 & -19120 \\
+            Player 5 (N) & -14430  & -19240  & -21510 & -20050 & -19350 \\
 		\end{matrix}
 
 	\subsection{Phase-2 player winnings table}
 		5-players, 1000-games, 100-start money \\
+		Player 0,1 and 3 are Phase 1 players \\
 		\begin{matrix}
 			\\
 			game set:    &     1  &     2  &     3 &     4 &     5 \\
-			Player 0 &  -76470  &  -78260  & -2290 &  -79980 & -75100 \\
-			Player 1 &  -31084  &  -34787  &  1690 &  -37710 & -34414 \\
-			Player 2 &  -40166  &  -38621  &  1100 &  -20341 & -34820 \\
-			Player 3 &  41059   &  40706   &  -350 &   35916 & 39409 \\
-			Player 4 &  54729   &  42213   &   350 &   53413 & 45553 \\
-            Player 5 &  52527   &  69346   &       &   49299 & 59969 \\
+			Player 0 (N) &  -76470  &  -78260  & -76080  &  -79980 & -75100 \\
+			Player 1 (A) &  -31084  &  -34787  & -34630  &  -37710 & -34414 \\
+			Player 2 (C) &  -40166  &  -38621  & -82490  &  -20341 & -34820 \\
+			Player 3 (A) &  41059   &  40706   & 63820   &   35916 & 39409 \\
+			Player 4 (C) &  54729   &  42213   & 73950   &   53413 & 45553 \\
+            Player 5 (N) &  52527   &  69346   & 56030   &   49299 & 59969 \\
 		\end{matrix}
 		
-	\subsection{Phase-3 player winnings table}
-		5-players, 1000-games, 100-start money \\
-		\begin{matrix}
-			\\
-			game set:    &     1  &     2  &     3 &     4 &     5 \\
-			Player 0 & -4600  &   850  & -2290 &  1970 &  3730 \\
-			Player 1 & -3430  &  2590  &  1690 &   280 &   580 \\
-			Player 2 &  1520  &  2980  &  1100 &  -390 &  4390 \\
-			Player 3 &  -120  & -1300  &  -350 & -1930 & -5390 \\
-			Player 4 &  7130  & -4620  &   350 &   570 & -2810 \\
-		\end{matrix}
 
 
 

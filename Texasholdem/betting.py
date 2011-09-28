@@ -83,7 +83,7 @@ def place_bet(player, table, amount):
 
 def raise_bet(player, table, amount):
     if player.getRoundRaises() >= maxRaises:
-        print "max bet reached"
+        #print "max bet reached"
         call(player, table)
     else:
         player.raises+=1
@@ -200,7 +200,7 @@ def evaluateHand(game, player):
         evaluateHandLastPhase(game, player)
     #test(game)
     checkValue = player.strategy.getAction(game, player)
-    print checkValue
+    #print checkValue
     #if player.strategy.aggressive == False and player.strategy.coward == False:
     #    evaluateHandNormal(player, table, hand)
     #el

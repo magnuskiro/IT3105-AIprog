@@ -108,7 +108,7 @@ class Strategy:
         else:
             if self.bluffer and not bluffing:
                 bluffing = self.checkBluff(game, player)
-                print "bluff check"
+                #print "bluff check"
             handStrength = self.calculateAction(game.getTable(), player, game.getLenRemaining())
         #print "Player Action: ", action
         if game.getState() == "perFlop":
@@ -119,14 +119,14 @@ class Strategy:
         strategyVariation = self.aggressionPoints + potOds
         handStrength+=strategyVariation
         if bluffing and self.bluffer:
-            print "bluffing= ", bluffing
+            #print "bluffing= ", bluffing
             rnd = random.randrange(0,3)
             if rnd == 1 or rnd == 2:
                 return "raise"
             else:
                 return "call"
         #print "HS: ", handStrength, "PO: ", potOds, "aggression: ", self.aggressionPoints, "p: ", p
-        if handStrength>p:
+        if handStrength>=p:
             return "raise"
         elif handStrength<p and handStrength>=(p/1.5):
             return "call"

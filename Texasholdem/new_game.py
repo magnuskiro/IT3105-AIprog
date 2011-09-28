@@ -25,20 +25,8 @@
 #
 
 import play_poker
-import run_test
 
 running = False
 while not running:
-    mode = int(raw_input("Play game(1), debug(2) or do a test run(3)?"))
-
-    if mode == 1:
         running = True
         play_poker.main()
-    elif mode == 2:
-        running = True
-        debug.main()
-    elif mode == 3:
-        running = True
-        run_test.main()
-    else:
-        print "Please answer 1, 2 or 3"

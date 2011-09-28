@@ -39,6 +39,7 @@ new-game.py starts the program, and let's the user choose the number of players,
 		
 	\subsection{Phase 3 - Strategies that include opponent modelling}
 		Phase 3 players use the same rules as Phase 2 players, but they also take into account the estimated hand strenghts of their opponents. These estimations are retrieved from the player models, which are stored as a text file that is loaded into memory when the program starts. The player models were generated from the context/action-pairs gathered over a 1000-hand, 10-players game. See BLBLALA.txt and LEOIAKL.txt
+Unfortunately, within the time frame given, we were not able to implement Phase 3 players that used the player models to affect betting behaviour, but we will give a short description of how we planned to do it.
 		
 \section{The Opponent Modeling}
     In phase 3 we implemented functionality for basic opponent modeling. Every player object has a dictionary used to store context/action-pairs in. For every action a player performs, a new context/action pair is stored in that players dictionary. When the hand is finished, the context/action-pairs of players that have folded are discarded, and those who made it to showdown are analyzed. For every context/action-pair of the current hand, the players hand strength, at the time of play when the context was recorded, is calculated and stored in a second dictionary in the respective player object. The use of dictionaries ensures that only unique context/action-pairs are stored; the context/action pairs are used as the key, and the list of hand strengths as the value. The player models are stored in a text file, and is loaded into memory when the game starts. The player models were generated from the context/action-pairs gathered over a 200-hand, 10-players game, in which all the players were given a Phase 2 strategy. Too late in the project, we decided to create models from a 1000-hand game, but our system crashed (a lovely example of kernel panic) halfway through, and left us with no usable data, and not enough time to do a re-run. The code for the context/action gathering is not optimized in any way, so it is a bit slow running. When used in Phase 3 to compare strategies from all three phases, no models for Phase 1 players are used, as they do not exist. The game information used to define a context is the betting round (pre-flop = 1, post-flop = 2 ... ), how many players remain, and the pot odds. This is the only information used by the players to decide their behaviour, so using more information to define the context, such as number of raises, will create more contexts, and less useful player models. 
@@ -71,12 +72,12 @@ new-game.py starts the program, and let's the user choose the number of players,
 		\begin{matrix}
 			\\
 			game set:    &     1  &     2  &     3 &     4 &     5 \\
-			Player 0 & -4600  &   850  & -2290 &  -79980 & -75100 \\
-			Player 1 & -3430  &  2590  &  1690 &  -37710 & -34414 \\
-			Player 2 &  1520  &  2980  &  1100 &  -20341 & -34820 \\
-			Player 3 &  -120  & -1300  &  -350 & 35916 & 39409 \\
-			Player 4 &  7130  & -4620  &   350 &   53413 & 45553 \\
-            Player 5 & & & & 49299 & 59969 \\
+			Player 0 &  -76470  &  -78260  & -2290 &  -79980 & -75100 \\
+			Player 1 &  -31084  &  -34787  &  1690 &  -37710 & -34414 \\
+			Player 2 &  -40166  &  -38621  &  1100 &  -20341 & -34820 \\
+			Player 3 &  41059   &  40706   &  -350 &   35916 & 39409 \\
+			Player 4 &  54729   &  42213   &   350 &   53413 & 45553 \\
+            Player 5 &  52527   &  69346   &       &   49299 & 59969 \\
 		\end{matrix}
 		
 	\subsection{Phase-3 player winnings table}

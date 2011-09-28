@@ -145,7 +145,7 @@ def create_players():
             p = Player(money, i, "")
             p.phase = 1
             game.addPlayer(p)
-
+"""
     #phase two
 def create_players():
     global game
@@ -182,7 +182,7 @@ def create_players():
             p = Player(money, i, "")
             p.phase = num
             game.addPlayer(p)
-
+"""
 
 def new_round():
     global deck

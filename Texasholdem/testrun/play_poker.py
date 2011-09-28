@@ -183,6 +183,7 @@ def create_players():
             p.phase = num
             game.addPlayer(p)
 
+
 def new_round():
     global deck
     global game

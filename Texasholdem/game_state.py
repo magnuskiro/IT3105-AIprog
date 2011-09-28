@@ -10,6 +10,7 @@ class Game_State:
         self.small_blind = 0
         self.big_blind = 0
         self.state = "preFlop"
+        self.finished = False
 
     def addPlayer(self, player):
         self.players.append(player)

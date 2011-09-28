@@ -81,6 +81,7 @@ def player_won(player):
     amount = game.getTable().get_pot()
     player.add_money(amount)
     print "Player", player.no,"won", amount, "dollars"
+    game.finished = True
     #for player in players:
     #	player.clear_hand()
     #	player.in_game = True
@@ -147,6 +148,7 @@ def new_round():
         player.bet = 0
         player.strategy.setBluffing(False)
     game.getTable().clear_table()
+    game.finished = False
     deck = cards.card_deck()
     return deck
 
@@ -310,7 +312,7 @@ def play():
     remaining = game.getRemaining()
     if len(remaining) > 1:
         showdown()
-    else:
+    elif not game.finished :
         player_won(remaining[0])
     random.shuffle(game.getPlayers())
     #game.getTable().clear_table()

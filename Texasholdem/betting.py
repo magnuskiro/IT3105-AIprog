@@ -163,7 +163,7 @@ def test(game):
 
     #valid actions from getAction() is raise/call/fold
 def evaluateHand(game, player):
-    test(game)
+    #test(game)
     checkValue = player.strategy.getAction(game, player)
     print checkValue
     #if player.strategy.aggressive == False and player.strategy.coward == False:

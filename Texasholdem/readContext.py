@@ -106,5 +106,9 @@ def strClean(line):
     line = line.replace("}","")
     line = line.replace("\n","")
     return line
-
-#read()
+"""
+l = read()
+for i in range(0,9):
+    #print l[i]
+    print l[i]["284raise"]
+"""

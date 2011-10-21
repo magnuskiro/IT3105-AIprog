@@ -29,44 +29,44 @@ import random
 
 bet = 20
 blind = 10
-maxRaises = 3
+maxRaises = 1
 
 def small_blind(player, table):
-    print "Player", player.no, "places small blind"
+    #print "Player", player.no, "places small blind"
     player.blind = True
     player.loose_money(blind)
     player.set_bet(blind)
     table.increase_pot(blind)
     table.raise_bet(blind)
-    print "Table pot is now", table.get_pot(), "and table bet is", table.get_bet()
+    #print "Table pot is now", table.get_pot(), "and table bet is", table.get_bet()
 
 def big_blind(player, table):
-    print "Player", player.no, "places big blind"
+    #print "Player", player.no, "places big blind"
     player.blind = True
     player.loose_money(blind*2)
     player.set_bet(blind*2)
     table.increase_pot(blind*2)
     table.raise_bet(blind)
-    print "Table pot is now", table.get_pot(), "and table bet is", table.get_bet()
+    #print "Table pot is now", table.get_pot(), "and table bet is", table.get_bet()
 
 def fold(player):
-    print "Player", player.no, "folds"
+    #print "Player", player.no, "folds"
     player.in_game = False
 
 def call(player, table):
-    print "Player", player.no, "calls"
+    #print "Player", player.no, "calls"
     current_bet = player.get_bet()
     table_bet = table.get_bet()
     if current_bet < table_bet:
         place_bet(player, table, (table_bet - current_bet))
     else:
         check(player, table)
-    print "Player", player.no, "has bet", player.bet, "and has", player.money, "dollars"
-    print "Table pot is now", table.get_pot(), "and table bet is", table.get_bet()
+    #print "Player", player.no, "has bet", player.bet, "and has", player.money, "dollars"
+    #print "Table pot is now", table.get_pot(), "and table bet is", table.get_bet()
 
 def check(player, table):
     if player.get_bet() == table.get_bet():
-        print "Player", player.no, "checks"
+        #print "Player", player.no, "checks"
         return
     else:
         rand = random.randrange(0,2)
@@ -76,7 +76,7 @@ def check(player, table):
             fold(player)
 
 def place_bet(player, table, amount):
-    print "Player", player.no, "places a bet of", amount
+    #print "Player", player.no, "places a bet of", amount
     player.loose_money(amount)
     player.set_bet(amount)
     table.increase_pot(amount)
@@ -92,9 +92,9 @@ def raise_bet(player, table, amount):
         table.increase_pot(amount + difference)
         table.raise_bet(amount)
         player.set_bet(amount + difference)
-        print "Player", player.no, "raises", amount
-        print "Player", player.no, "has bet", player.bet, "and has", player.money, "dollars"
-        print "Table pot is now", table.pot, "and table bet is", table.bet
+        #print "Player", player.no, "raises", amount
+        #print "Player", player.no, "has bet", player.bet, "and has", player.money, "dollars"
+        #print "Table pot is now", table.pot, "and table bet is", table.bet
 
 def weak(player, table):
     prob = random.randrange(0,6)    # 0-2 = fold, 3-4 = call, 5 = raise

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#       play_poker.py
+#       player.py
 #
 #       Copyright 2011
 #       Jan Alexander Stormark Bremnes <janbremnes@gmail.com>
@@ -23,10 +23,36 @@
 #       MA 02110-1301, USA.
 #
 #
+from strategy import Strategy
 
-import play_poker
+class Player:
 
-running = False
-while not running:
-        running = True
-        play_poker.main()
+    def __init__(self, money, number, strat):
+        self.money = money
+        self.hand = []
+        self.bet = 0
+        self.in_game = True
+        self.no = number
+        self.blind = False
+        self.strategy = Strategy(strat)
+        self.raises = 0
+        self.phase = 0
+
+    def getRoundRaises(self):
+        return self.raises
+
+    def add_money(self, amount): self.money += amount
+
+    def loose_money(self, amount): self.money -= amount
+
+    def get_money(self): return self.money
+
+    def get_hand(self): return self.hand
+
+    def add_card(self, card): self.hand.append(card)
+
+    def clear_hand(self): del self.hand[:]
+
+    def set_bet(self, amount): self.bet += amount
+
+    def get_bet(self): return self.bet

@@ -39,6 +39,7 @@ def small_blind(player, table):
     table.increase_pot(blind)
     table.raise_bet(blind)
     print "Table pot is now", table.get_pot(), "and table bet is", table.get_bet()
+    return ""
 
 def big_blind(player, table):
     print "Player", player.no, "places big blind"
@@ -48,10 +49,12 @@ def big_blind(player, table):
     table.increase_pot(blind*2)
     table.raise_bet(blind)
     print "Table pot is now", table.get_pot(), "and table bet is", table.get_bet()
+    return ""
 
 def fold(player):
     print "Player", player.no, "folds"
     player.in_game = False
+    return "fold"
 
 def call(player, table):
     print "Player", player.no, "calls"
@@ -63,17 +66,20 @@ def call(player, table):
         check(player, table)
     print "Player", player.no, "has bet", player.bet, "and has", player.money, "dollars"
     print "Table pot is now", table.get_pot(), "and table bet is", table.get_bet()
+    return "call"
 
 def check(player, table):
     if player.get_bet() == table.get_bet():
         print "Player", player.no, "checks"
-        return
+        return "check"
     else:
         rand = random.randrange(0,2)
         if rand == 1:
             call(player, table)
+            return "call"
         else:
             fold(player)
+            return "fold"
 
 def place_bet(player, table, amount):
     print "Player", player.no, "places a bet of", amount
@@ -85,6 +91,7 @@ def raise_bet(player, table, amount):
     if player.getRoundRaises() >= maxRaises:
         #print "max bet reached"
         call(player, table)
+        return "call"
     else:
         player.raises+=1
         difference = table.get_bet() - player.get_bet()
@@ -92,6 +99,7 @@ def raise_bet(player, table, amount):
         table.increase_pot(amount + difference)
         table.raise_bet(amount)
         player.set_bet(amount + difference)
+        return "raise"
         print "Player", player.no, "raises", amount
         print "Player", player.no, "has bet", player.bet, "and has", player.money, "dollars"
         print "Table pot is now", table.pot, "and table bet is", table.bet
@@ -207,17 +215,17 @@ def evaluateHand(game, player):
     if checkValue == "raise":
         #print "###################\n RAISE \n#####################"
         #print player.strategy.aggressive
-        raise_bet(player, game.getTable(), bet)
+        return raise_bet(player, game.getTable(), bet)
     elif checkValue == "call":
         #print "###################\n CALL \n#####################"
         #print player.strategy.aggressive
-        call(player, game.getTable())
+        return call(player, game.getTable())
     elif checkValue == "fold":
         #print "###################\n FOLD \n#####################"
         #print player.strategy.aggressive
-        fold(player)
+        return fold(player)
     elif checkValue == "check":
         #print "###################\n CHECK \n#####################"
-        check(player, game.getTable())
+        return check(player, game.getTable())
     else:
         print "Betting strategy do not work!"

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#       play_poker.py
+#       table.py
 #
 #       Copyright 2011
 #       Jan Alexander Stormark Bremnes <janbremnes@gmail.com>
@@ -24,9 +24,30 @@
 #
 #
 
-import play_poker
+class Table:
 
-running = False
-while not running:
-        running = True
-        play_poker.main()
+    def __init__ (self):
+        self.pot = 0
+        self.cards = []
+        self.bet = 0
+
+    def increase_pot(self, amount): self.pot += amount
+
+    def add_cards(self, cards):
+        for card in cards:
+            self.cards.append(card)
+
+    def add_card(self, card): self.cards.append(card)
+
+    def get_cards(self): return self.cards
+
+    def clear_table(self): 
+        del self.cards[:]
+        self.pot = 0
+        self.bet = 0
+
+    def raise_bet(self, amount): self.bet += amount
+
+    def get_bet(self): return self.bet
+
+    def get_pot(self): return self.pot

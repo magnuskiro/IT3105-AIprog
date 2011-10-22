@@ -7,4 +7,4 @@
 %                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+% The class that holds the word and corresponding data to each word. 

@@ -7,4 +7,6 @@
 %                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+% prepeares the data and creates the datastructure we use in the rest of the system. 
+    % calculates some variables first
+    % runs a loop to find peaks in graph. We use the peaks to compare later. 

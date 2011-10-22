@@ -7,4 +7,6 @@
 %                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% 
+% checks the input data agains the pre recorded data and returns the word the input most likely is.
+    % check input prob vs all word probs, save index.
+    % return the words[index] => the word that it most likely is. 

@@ -7,4 +7,5 @@
 %                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+% contains the forward and backward hmm. and a function to calculate probability. 
+    %

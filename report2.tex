@@ -1,6 +1,7 @@
 \documentclass[titlepage]{article}
 \usepackage{amsmath}
 \usepackage[utf8]{inputenc}
+\usepackage{graphicx}
 
 \author{Jan Alexander Bremnes\\Magnus Kirø}
 \title{IT3105 - Ex 2\\Voice Recognition}
@@ -11,6 +12,7 @@
     \maketitle
     \tableofcontents
     \pagenumbering{arabic}
+    \graphicspath{{SRS/img/}}
     \newpage
 
 \section{Introduction}
@@ -28,50 +30,19 @@ Part four, testing and polishing. The part where we find out if we have done som
 
 \subsection{Overall Description}
 
-\subsection{Project Parts}
-	\subsubsection{Part 1 - Input and Data Structure}
+\subsection{Code Files and what they do}
 \begin{itemize}
-\item[Main.m] Main contains the code for reading the test file. The file that is to be classified later. And to call the preparation of data. On completing part one this file only has three lines of code. Set the filename, read the sound file, prepare the data. 
-\item[Data.m] Data contains the code to manipulate the .wav data to something useful. Fist we find the length of the window we want to use and normalize the input sound data before we create the matrix of frames with 80 samples per fram and 50percent overlap. Then we fourier transform the framed signal. While doing the fourier transform we also smooth it out with the hamming window. Then we use findpeaks to get points in our data to identify the specific word. We do this for each frame.  
+\subsubsection{Main} \item[main.m] Main contains the code for reading the test file. The file that is to be classified later. And to call the preparation of data. On completing part one this file only has three lines of code. Set the filename, read the sound file, prepare the data.
+\subsubsection{Data} \item[data.m] Data contains the code to manipulate the .wav data to something useful. Fist we find the length of the window we want to use and normalize the input sound data before we create the matrix of frames with 80 samples per fram and 50percent overlap. Then we fourier transform the framed signal. While doing the fourier transform we also smooth it out with the hamming window. Then we use findpeaks to get points in our data to identify the specific word. We do this for each frame.  
+\subsubsection{Classifier}\item[classifier.m] compares input towards the word base. 
+\subsubsection{HMM}\item[HMM.m] The model in which we store data.
+\subsubsection{forwardHMM}\item[forwardhmm.m] Forward and Backward HMMs and calcProb all to get probabilities of one samples equality to another.
+\subsubsection{backwardHMM}\item[backwardhmm.m] df
+\subsubsection{CalcProb}\item[calcProb.m] df
+\subsubsection{Learn}\item[learn.m] The trainig code. Reads the word files we start with and updates the HMM model to be more precise.  
+
 \end{itemize}
 
-\begin{itemize}
-\item Read .wav-ﬁles (Matlab-command: wavread) and play the sound (Matlabcommand: sound).
-\item Partition time-series data into partly overlapping frames (Matlab-command: buffer), and windowing (Matlab-command: hamming).
-\item Extract the spectral density of the signal for each frame (Matlab-command: fft, see also spectrogram). If required: Extract the complex cepstral parameters from the signal inside each frame (Matlab-command: cceps).
-\end{itemize}
-
-	\subsubsection{Part 2 - Classification and Framework}
-\begin{itemize}
-\item[Classifier.m] compares input towards the word base. 
-\item[HMM.m] The model in which we store data.
-\item[fbHMM.m] Forward and Backward HMMs and calcProb all to get probabilities of one samples equality to another.
-\end{itemize}
-
-\begin{itemize}
-\item The hmm class, which implements the Hidden Markov models with assorted inference mechanism.
-\item The classifier class, which implements the wrapping of the instances of the hmm class, takes care of the data ﬂow, and the top-level calculations
-\end{itemize}	
-
-    \subsubsection{Part 3 - Learning}
-\begin{itemize}
-\item[Learn.m] The trainig code. Reads the word files we start with and updates the HMM model to be more precise.  
-\end{itemize}
-
-Learning one HMM per word. 
-\begin{itemize}
-\item 1. Concatenate all the speech signals representing utterances of a particular word into a “huge” ﬁle.
-\item 2. Generate feature description of the “huge” ﬁle (called the feature-ﬁle).
-\item 3. Choose parameters in the HMM to maximize the probability of observing exactly the observations in the feature-ﬁle. The maximization can be done using the EM-algorithm, see the lecture notes.
-\end{itemize}
-
-    \subsubsection{Part 4 - Testing and Tweaking. }
-
-\begin{itemize}
-\item Learn one HMM per word in the vocabulary. You should use all the ﬁles of the type <word> <number>.* for learning each model.
-\item Test your system by classifying all the examples query <number>.* and report classiﬁcation accuracy.
-\item To obtain as good results as possible, you can tune the number of states in the hidden variable and also re-investigate how to represent sounds (Part I). It is expected that your system classiﬁes at least 50percent of unseen examples correctly.
-\end{itemize}
 
 \section{Data Representation}
 % How we represent the sound as data and why. 
@@ -80,9 +51,46 @@ Learning one HMM per word.
     % picture from part 2
     % picture from part 3
     % picture from part 4
+    \subsection{Sound files .wav} 
+When the .wav files are read in Matlab they are represented in a one dimensional array with doubles. e.g: [-0.0131; -0.0073; 0.0010; 0.0125]
+    \subsection{prepared Data}
+The prepared data has a complex structure. The matrix becomes a <5x2xno.frames double>. We have lots of frames with a list of peaks and a list of locations. Peaks and locations have five entries each. Thus we get <peak entries, peaks and locations, for all the frames>.
+\begin{figure}[]
+  \centering
+    \includegraphics[height=60mm\textwidth]{data_part1}
+  \caption{Fram 1, 2 and part of 3. From the returned data of the data preparation procedure.}
+\end{figure}
+
+    \subsection{HMM}
+
   
 \section{Test data classification and results}
 % picture or table of the classification results. 
+
+
+\section{Project Parts}
+	\subsection{Part 1 - Input and Data Structure}
+
+	\subsection{Part 2 - Classification and Framework}
+\begin{itemize}
+\item The hmm class, which implements the Hidden Markov models with assorted inference mechanism.
+\item The classifier class, which implements the wrapping of the instances of the hmm class, takes care of the data ﬂow, and the top-level calculations
+\end{itemize}	
+
+    \subsection{Part 3 - Learning}
+Learning one HMM per word. 
+\begin{itemize}
+\item 1. Concatenate all the speech signals representing utterances of a particular word into a “huge” ﬁle.
+\item 2. Generate feature description of the “huge” ﬁle (called the feature-ﬁle).
+\item 3. Choose parameters in the HMM to maximize the probability of observing exactly the observations in the feature-ﬁle. The maximization can be done using the EM-algorithm, see the lecture notes.
+\end{itemize}
+
+    \subsection{Part 4 - Testing and Tweaking. }
+\begin{itemize}
+\item Learn one HMM per word in the vocabulary. You should use all the ﬁles of the type <word> <number>.* for learning each model.
+\item Test your system by classifying all the examples query <number>.* and report classiﬁcation accuracy.
+\item To obtain as good results as possible, you can tune the number of states in the hidden variable and also re-investigate how to represent sounds (Part I). It is expected that your system classiﬁes at least 50percent of unseen examples correctly.
+\end{itemize}
 
 
 

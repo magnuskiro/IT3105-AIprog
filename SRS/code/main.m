@@ -18,4 +18,6 @@ dir = 'sound' ;
 fname = [dir, '/go_0.wav'];
 [file, Fs] = wavread(fname);
 data(file, Fs);
+
+
 m = hmm('right', 4);

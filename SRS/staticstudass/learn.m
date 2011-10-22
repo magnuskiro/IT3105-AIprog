@@ -54,17 +54,14 @@ hmm.dynModel = hmm.dynModel ./ repmat( sum(hmm.dynModel,2), 1, N );
 % part E
 %
 
-% update mu
+% update mu and sigma
 for i = 1:N
         mu = sum(gamma(i,:));
         mu = sum(gamma(i,:) .* B(i,1:totalTime-1)) / mu;
         hmm.obsModel{i}.mu = mu;
 
-        % TODO
-        %sigma = 0;
-        %for t = 1:totalTime
-        %       sigma = sigma + gamma(i,t) * (B(i,t)-mu)*(B(i,t)-mu)'
-        %end
+        sigma = 0;
+        sigma = sum(gamma(i,:) .* (B(i,1:totalTime-1)-mu)*(B(i,1:totalTime-1)-mu)') / mu;
 
-        hmm.obsModel{i}.sigma = eye(2);
+        hmm.obsModel{i}.sigma = sigma;
 end

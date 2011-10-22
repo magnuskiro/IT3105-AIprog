@@ -7,4 +7,38 @@
 %                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% The class that holds the word and corresponding data to each word. 
+% The class that represents the hidden markov model for a word 
+
+classdef hmm < handle 
+    properties
+        myWord
+        noHidden
+        priorHidden
+        dynModel
+        obsModel
+    end
+    
+    methods
+        % HMM Constructor function
+        function model = hmm(name, n)
+            model.myWord = name;
+            model.noHidden = n;
+            
+            % initialize with random values for probabilities
+            model.priorHidden = rand(n,1);
+            model.priorHidden = model.priorHidden ./ sum(model.priorHidden);
+            model.dynModel = rand(n);
+            model.obsModel = cell(n,1);
+            sums = sum(model.dynModel,2);
+            
+            % normalization of every row so that no sum of probabilities exceed 1
+            for i=1:n
+                model.dynModel(i,:) = model.dynModel(i,:) ./ sums(i);
+                model.obsModel{i} = struct('mu',0,'sigma',eye(2));
+            end
+        end
+    end
+end
+    
+
+

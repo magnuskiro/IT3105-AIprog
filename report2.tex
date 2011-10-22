@@ -31,8 +31,8 @@ Part four, testing and polishing. The part where we find out if we have done som
 \subsection{Project Parts}
 	\subsubsection{Part 1 - Input and Data Structure}
 \begin{itemize}
-\item[Main.m] Main file, input sound file and get the most fitting word returned
-\item[Data.m] The data manipulation code. Prepeares the input data to be compared.
+\item[Main.m] Main contains the code for reading the test file. The file that is to be classified later. And to call the preparation of data. On completing part one this file only has three lines of code. Set the filename, read the sound file, prepare the data. 
+\item[Data.m] Data contains the code to manipulate the .wav data to something useful. Fist we find the length of the window we want to use and normalize the input sound data before we create the matrix of frames with 80 samples per fram and 50percent overlap. Then we fourier transform the framed signal. While doing the fourier transform we also smooth it out with the hamming window. Then we use findpeaks to get points in our data to identify the specific word. We do this for each frame.  
 \end{itemize}
 
 \begin{itemize}

@@ -14,18 +14,25 @@
     \newpage
 
 \section{Introduction}
+In this report we will discuss the process of speech recognition, a project in the course IT3105 - AI programming. We start out with four words in our vocabulary (start, stop, left, right) and a set of testing words. The goal of this exercise is to classify the input as one of the words in our vocabulary. To achieve this we use hidden Markov models(HMM) as a key component in our calculations. HMMs are common in spech recognition, and quite usefull in many other cases. 
 
-\section{files}
+In the first part we read the sound files(.wav), devide the datastructure for the sound data and finds characteristics about the specific sound file with basic operations for sound files. 
+
+Part two is basicly the classification of sound. Checking if the input matches some of the words in our vocabulary. To achieve this we have to define the HMM and implement the classifier, that works as an umbrella for the different HMM models. 
+
+Part three is the part of learning. Here we use the starting set of sound files to optimize the HMM precision. Thus learning through the iterations of starting set of data. 
+
+Part four, testing and polishing. The part where we find out if we have done something right. We are to run the test data and classify the sounds there as words. And tweaking the our parameters for calculation in order to improve our classification rate.  
+
+
+\section{Code Files}
 \begin{itemize}
-\item[recognize] This is the code file that 
-\item[train] This is the code file that 
-\item[dataPrep] This is the code file that 
-\item[calcLiklihood] This is the code file that 
-\item[forwardHMM] This is the code file that 
-\item[backwardHMM] This is the code file that 
-\item[learn] This is the code file that 
-\item[classifier] This is the code file that 
-\item[hmm] This is the code file that 
+\item[Main] Main file, input sound file and get the most fitting word returned
+\item[Classifier] compares input towards the word base. 
+\item[HMM] The model in which we store data.
+\item[Data] The data manipulation code. Prepeares the input data to be compared.
+\item[fbHMM] Forward and Backward HMMs and calcProb all to get probabilities of one samples equality to another.
+\item[Learn] The trainig code. Reads the word files we start with and updates the HMM model to be more precise.  
 \end{itemize}
 
 	

@@ -13,6 +13,9 @@
     % instantiate the hmms (words)
     % call classify and find out which word the sound represents.
     
-[file, Fs] = wavread('/home/alex/Dropbox/NTNU/IT3105/SRS/soundfile-wav/right_0.wav');
+dir = 'sound' ;
+%fname= [dir, '/', model.myWord, '_', num2str(i), '.wav'];
+fname = [dir, '/go_0.wav'];
+[file, Fs] = wavread(fname);
 data(file, Fs);
 m = hmm('right', 4);

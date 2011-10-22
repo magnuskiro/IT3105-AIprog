@@ -24,50 +24,65 @@ Part three is the part of learning. Here we use the starting set of sound files 
 
 Part four, testing and polishing. The part where we find out if we have done something right. We are to run the test data and classify the sounds there as words. And tweaking the our parameters for calculation in order to improve our classification rate.  
 
+\section{System Description}
 
-\section{Code Files}
+\subsection{Overall Description}
+
+\subsection{Project Parts}
+	\subsubsection{Part 1 - Input and Data Structure}
 \begin{itemize}
-\item[Main] Main file, input sound file and get the most fitting word returned
-\item[Classifier] compares input towards the word base. 
-\item[HMM] The model in which we store data.
-\item[Data] The data manipulation code. Prepeares the input data to be compared.
-\item[fbHMM] Forward and Backward HMMs and calcProb all to get probabilities of one samples equality to another.
-\item[Learn] The trainig code. Reads the word files we start with and updates the HMM model to be more precise.  
+\item[Main.m] Main file, input sound file and get the most fitting word returned
+\item[Data.m] The data manipulation code. Prepeares the input data to be compared.
 \end{itemize}
 
-	
-\section{Overall}
-	\subsection{Part 1}
 \begin{itemize}
 \item Read .wav-ﬁles (Matlab-command: wavread) and play the sound (Matlabcommand: sound).
 \item Partition time-series data into partly overlapping frames (Matlab-command: buffer), and windowing (Matlab-command: hamming).
 \item Extract the spectral density of the signal for each frame (Matlab-command: fft, see also spectrogram). If required: Extract the complex cepstral parameters from the signal inside each frame (Matlab-command: cceps).
 \end{itemize}
 
-	\subsection{Part 2}
+	\subsubsection{Part 2 - Classification and Framework}
+\begin{itemize}
+\item[Classifier.m] compares input towards the word base. 
+\item[HMM.m] The model in which we store data.
+\item[fbHMM.m] Forward and Backward HMMs and calcProb all to get probabilities of one samples equality to another.
+\end{itemize}
+
 \begin{itemize}
 \item The hmm class, which implements the Hidden Markov models with assorted inference mechanism.
 \item The classifier class, which implements the wrapping of the instances of the hmm class, takes care of the data ﬂow, and the top-level calculations
 \end{itemize}	
 
-    \subsection{Part 3}
-In the third programming part of the project you will need to implement the
-parameter learning for the hmm class. We will learn one HMM per word in the
-vocabulary, and to learn an HMM we will proceed as follows:
+    \subsubsection{Part 3 - Learning}
+\begin{itemize}
+\item[Learn.m] The trainig code. Reads the word files we start with and updates the HMM model to be more precise.  
+\end{itemize}
+
+Learning one HMM per word. 
 \begin{itemize}
 \item 1. Concatenate all the speech signals representing utterances of a particular word into a “huge” ﬁle.
 \item 2. Generate feature description of the “huge” ﬁle (called the feature-ﬁle).
 \item 3. Choose parameters in the HMM to maximize the probability of observing exactly the observations in the feature-ﬁle. The maximization can be done using the EM-algorithm, see the lecture notes.
 \end{itemize}
 
-    \subsection{Part 4}
+    \subsubsection{Part 4 - Testing and Tweaking. }
+
 \begin{itemize}
 \item Learn one HMM per word in the vocabulary. You should use all the ﬁles of the type <word> <number>.* for learning each model.
 \item Test your system by classifying all the examples query <number>.* and report classiﬁcation accuracy.
 \item To obtain as good results as possible, you can tune the number of states in the hidden variable and also re-investigate how to represent sounds (Part I). It is expected that your system classiﬁes at least 50percent of unseen examples correctly.
 \end{itemize}
 
-
+\section{Data Representation}
+% How we represent the sound as data and why. 
+% Results from the different parts si required. 
+    % picture from part 1
+    % picture from part 2
+    % picture from part 3
+    % picture from part 4
+  
+\section{Test data classification and results}
+% picture or table of the classification results. 
 
 
 

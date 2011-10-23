@@ -32,14 +32,15 @@ Part four, testing and polishing. The part where we find out if we have done som
 
 \subsection{Code Files and what they do}
 \begin{itemize}
-\subsubsection{Main} \item[main.m] Main contains the code for reading the test file. The file that is to be classified later. And to call the preparation of data. On completing part one this file only has three lines of code. Set the filename, read the sound file, prepare the data.
-\subsubsection{Data} \item[data.m] Data contains the code to manipulate the .wav data to something useful. Fist we find the length of the window we want to use and normalize the input sound data before we create the matrix of frames with 80 samples per fram and 50percent overlap. Then we fourier transform the framed signal. While doing the fourier transform we also smooth it out with the hamming window. Then we use findpeaks to get points in our data to identify the specific word. We do this for each frame.  
-\subsubsection{Classifier}\item[classifier.m] compares input towards the word base. 
+\subsubsection{Main} \item[main.m] Main contains two functions. the createSRS function and the recognize function. The recognize function contains the code for reading the test files, the file that is to be classified later. Recognize simply reads input data and asks classify to return the word that is most likely to be the input word. The createSRS function trains the model, the HMM, to be more specific. This in turn increases the chance of recognizing a word. This is done 
+\subsubsection{Data} \item[data.m] Data contains the code to manipulate the data from the .wav files to a more useful representation. Fist we find the length of the window we want to use and normalize the input sound data before we create the matrix of frames with 80 samples per fram and 50percent overlap. Then we fourier transform the framed signal. While doing the fourier transform we also smooth it out with the hamming window. Then we use findpeaks to specify points of data to identify the specific word. We use findpeaks for each frame.  
+\subsubsection{Classifier}\item[classifier.m] The constructor of this class takes the vocabulary we have and stores it in the class. The classify function in the classifier class gets called with the data to be compared to the vocabulary. Classify calls the forwardHMM with the data to be classified and the model it is being compared to. FOrwardHMM then returns the probability of likelihood. Classify finds the highest probability and returns the corresponding word.  
 \subsubsection{HMM}\item[HMM.m] The model in which we store data.
-\subsubsection{forwardHMM}\item[forwardhmm.m] Forward and Backward HMMs and calcProb all to get probabilities of one samples equality to another.
+
+\subsubsection{forwardHMM}\item[forwardhmm.m] ForwardHMM 
 \subsubsection{backwardHMM}\item[backwardhmm.m] df
-\subsubsection{CalcProb}\item[calcProb.m] df
-\subsubsection{Learn}\item[learn.m] The trainig code. Reads the word files we start with and updates the HMM model to be more precise.  
+\subsubsection{calcLikelihood}\item[calcLikelihood.m] Calculates the proability of one 
+\subsubsection{Learn}\item[learn.m] The training code.   
 
 \end{itemize}
 
@@ -53,12 +54,20 @@ Part four, testing and polishing. The part where we find out if we have done som
     % picture from part 4
     \subsection{Sound files .wav} 
 When the .wav files are read in Matlab they are represented in a one dimensional array with doubles. e.g: [-0.0131; -0.0073; 0.0010; 0.0125]
-    \subsection{prepared Data}
-The prepared data has a complex structure. The matrix becomes a <5x2xno.frames double>. We have lots of frames with a list of peaks and a list of locations. Peaks and locations have five entries each. Thus we get <peak entries, peaks and locations, for all the frames>.
-\begin{figure}[]
+    \subsection{Data Structure}
+The prepared data has a complex structure. The matrix becomes a <5x2xno.frames double>. We have lots of frames with a list of peaks and a list of locations. Peaks and locations have five entries each. Thus we get <peak entries in, peaks and locations, for all the frames>. 
+
+We split our data in to chunks, frames, to get precision and enugh data to make comparisons. for each frame we find peaks in the data. This is after the fourier transformation is done, so we have a smooth graph with data points. All the individual frames can be combined to make one graph representing all the data. 
+%img og the a graph representing the data.
+
+We find datapoints, peaks, to represent the data from each frame. We considered to use peakdet, but decided to use findpeaks. Findpeaks finds all points where the closest two points to itself is lower then itself. Then we store the five highest peaks in our datastructure, in peaks and locations(x and y of the peak) in our datastructure. The five stored peaks are the most significant peaks for the given frame. 
+
+We chose this structure for our data to be able to have all the data in one matrix. This makes operations on our structure easy with the matrix operations in Matlab. We thought of using spectrograms early in the poject, but rejected them because we didn't find an easy way to use them. 
+
+\begin{figure}[Data Structure]
   \centering
     \includegraphics[height=60mm\textwidth]{data_part1}
-  \caption{Fram 1, 2 and part of 3. From the returned data of the data preparation procedure.}
+  \caption{Frame 1, 2 and part of 3. From the returned data of the data preparation procedure. W can see that we have five values in each column. The columns area peaks and locations.}
 \end{figure}
 
     \subsection{HMM}
@@ -70,6 +79,13 @@ The prepared data has a complex structure. The matrix becomes a <5x2xno.frames d
 
 \section{Project Parts}
 	\subsection{Part 1 - Input and Data Structure}
+\begin{itemize}
+\item Read .wav-ﬁles (Matlab-command: wavread) and play the sound (Matlabcommand: sound).
+\item Partition time-series data into partly overlapping frames (Matlab-command:
+buffer), and windowing (Matlab-command: hamming).
+\item Extract the spectral density of the signal for each frame (Matlab-command:
+fft, see also spectrogram). If required: Extract the complex cepstral parameters from the signal inside each frame (Matlab-command: cceps).
+\end{itemize}
 
 	\subsection{Part 2 - Classification and Framework}
 \begin{itemize}

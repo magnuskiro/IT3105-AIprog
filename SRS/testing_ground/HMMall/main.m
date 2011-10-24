@@ -22,6 +22,7 @@
             thresh = 1e-3;
             models = [hmm('go',5), hmm('stop', 4), hmm('left', 4), hmm('right',3)];
             noWords = textread('test.txt', '%d');
+
             for i=1:length(models)
                 depth = 1;
                 cData = 0;
@@ -35,7 +36,7 @@
                     cData(1:dSize(1), 1:dSize(2), depth:dSize(3)+depth-1) = pData;
                     depth = depth + dSize(3);
                 end
-                [ll] = forward(model, cData);
+                [ll] = mhmm_em_demo(model, cData);
                 for j=1:iter
                     learn(model, cData);
                     [l] = forward(model, cData);

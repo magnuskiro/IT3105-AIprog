@@ -20,15 +20,16 @@
             dir = 'sound';
             iter = 5;
             thresh = 1e-3;
-            Q = 2; % no.states
             M = 1; % no.mixtures
             O = 2; % no coefficients pr vector
             T = 248; % no of vectors in a sequence
-            models = [hmm('go',5), hmm('stop', 4), hmm('left', 4), hmm('right',3)];
+            models = [hmm('go',5), hmm('stop', 5), hmm('left', 5), hmm('right',5)];
             noWords = textread('test.txt', '%d');
-            prior0 = normalise(rand(Q,1));
-            transmat0 = mk_stochastic(rand(Q,Q));
             for i=1:length(models)
+                Q = models(i).noHidden;
+                Q
+                prior0 = normalise(rand(Q,1));
+                transmat0 = mk_stochastic(rand(Q,Q));
                 depth = 1;
                 cData = 0;
                 model = models(i);
@@ -49,7 +50,8 @@
                 Sigma0 = repmat(eye(O), [1 1 Q M]);
                 %Sigma0 = eye(2);
                 % Initialize each mean to a random data point
-                indices = randperm(T*nex);
+                indices = randperm(T*nex/10);
+                indices(1:(Q*M))
                 mu0 = reshape(data(:,indices(1:(Q*M))), [O Q M]);
                 %mu0 = 1;
                 mixmat0 = mk_stochastic(rand(Q,M));
@@ -58,6 +60,12 @@
                             mhmm_em(data, prior0, transmat0, mu0, Sigma0, mixmat0, 'max_iter', 5);
                 
                 loglik = mhmm_logprob(data, prior1, transmat1, mu1, Sigma1, mixmat1);   
+                
+                eval(['transmat_0',num2str(i),'=transmat1;']);
+                eval(['mu_0',num2str(i),'=mu1;']);
+                eval(['Sigma_0',num2str(i),'=Sigma1;']);
+                eval(['mixmat_0',num2str(i),'=mixmat1;']);
+                
                 
                 %size(cData)
                 %[ll] = forward(model, cData);
@@ -70,3 +78,5 @@
 %                    j, l
 %                end
             end
+            
+save('models.mat','mu*','transmat*','mixmat*','Sigma*');

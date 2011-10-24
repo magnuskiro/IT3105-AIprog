@@ -54,7 +54,7 @@ Part four, testing and polishing. The part where we find out if we have done som
     % picture from part 4
     \subsection{Sound files .wav} 
 When the .wav files are read in Matlab they are represented in a one dimensional array with doubles. e.g: [-0.0131; -0.0073; 0.0010; 0.0125]
-    \subsection{Data Structure}
+    \subsection{Data Structure} % needs to be updated, with the new data structure. 
 The prepared data has a complex structure. The matrix becomes a <5x2xno.frames double>. We have lots of frames with a list of peaks and a list of locations. Peaks and locations have five entries each. Thus we get <peak entries in, peaks and locations, for all the frames>. 
 
 We split our data in to chunks, frames, to get precision and enugh data to make comparisons. for each frame we find peaks in the data. This is after the fourier transformation is done, so we have a smooth graph with data points. All the individual frames can be combined to make one graph representing all the data. 
@@ -72,12 +72,16 @@ We chose this structure for our data to be able to have all the data in one matr
 
     \subsection{HMM}
 The HMM consists fo three main models, the prior, dynamic and observation models. 
+% fill inn what the hmm does and how it works. 
 
 prior model
+% describe the priModel and its properties and usage.
 
 dynamic model 
+% describe the dynModel and its properties and usage. 
   
-We set the observation model as one multivariate Gaussian over the features per state of the hidden variable. This is the simple observation model. We could have chosen the observation model to be a mixture of Gaussians. We chose not to do this because of the more difficult implementation and due to time limitations.
+We set the observation model as one multivariate Gaussian over the features per state of the hidden variable. This is the simple observation model. We could have chosen the observation model to be a mixture of Gaussians. We chose not to do this because of the more difficult implementation and due to time limitations. 
+%write about how our observation model looks like. and how it is used. 
 
 \section{Test data classification and results}
 % picture or table of the classification results. 

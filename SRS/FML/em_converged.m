@@ -12,7 +12,7 @@ function [converged, decrease] = em_converged(loglik, previous_loglik, threshold
 % If we are doing MAP estimation (using priors), the likelihood can decrase,
 % even though the mode of the posterior is increasing.
 
-if nargin < 3, threshold = 1e-4; end
+if nargin < 3, threshold = 1e-6; end
 if nargin < 4, check_increased = 1; end
 
 converged = 0;

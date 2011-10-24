@@ -37,7 +37,9 @@ NFFT = NFFT/2;
 FT = 2*abs(FT(1:NFFT,:)) ./(2*pi);
 plot(FT);
 
-noFeatures = 2;
+noFeatures = 3;
+
+% TODO: IF NOT ENOUGH PEAKS, ADD FLUFF INSTEAD
 
 % go through all frames, find the peaks and sort them in descending order
 % the five largest peaks, and their locations, will be used to identify the sound

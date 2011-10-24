@@ -31,7 +31,7 @@ classdef hmm < handle
             model.obsModel = cell(n,1);
             sums = sum(model.dynModel,2);
             
-            % normalization of every row so that no sum of probabilities exceed 1
+            % ensure that no sum of probabilities exceed 1
             for i=1:n
                 model.dynModel(i,:) = model.dynModel(i,:) ./ sums(i);
                 model.obsModel{i} = struct('mu',0,'sigma',eye(2));

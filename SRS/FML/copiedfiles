@@ -1,0 +1,22 @@
+consist.m		#   Data sanity check 	#
+gmm.m			# READ and UNDERSTAND 	#	
+gmminit.m		# 	JME 		#
+kmeansNetlab.m		# For mixed models, removed due to M=1 #
+mhmm_em_demo.m
+mixgauss_init.m 	# Only needed for kmeans-algorithm, which we don't use #
+mk_stochastic.m 	# makes vectors, arrays etc stochastic #
+normalise.m		# normalization of input #
+dist2.m			# not in use, probably doing something similar to sqdist #
+mhmm_em.m		# VIMF #
+process_options.m 	# SIMF #
+mixgauss_prob.m		# VIMF is called from mhmm_em, l.148. The result is used in forwardbackward #
+gaussian_prob.m		# not in use, perhaps related to mixgauss and kmeans #
+fwdback.m		# VIMF #
+mixgauss_Mstep.m	# VIMF, part of the learning process (the M of EM) #
+em_converged.m		# checks to see if the estimates have converged #
+mhmm_logprob.m
+
+# needed for mixgaussprob when M=1 #
+isposdef.m	
+sqdist.m
+logdet.m

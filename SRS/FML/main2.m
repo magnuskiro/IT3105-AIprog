@@ -21,7 +21,7 @@
             iter = 5;
             thresh = 1e-3;
             M = 1; % no.mixtures
-            O = 5; % no coefficients pr vector
+            O = 13; % no coefficients pr vector
             T = 248; % no of vectors in a sequence      % MIGHT NEED TO BE ADJUSTED IF WE USE MFCC
             models = [hmm('go',5), hmm('stop', 4), hmm('left', 4), hmm('right',3)];
             noWords = textread('test.txt', '%d');
@@ -42,8 +42,8 @@
                     % to get equally sized representations of sound files, we add some fluff at the end
                     y=10+zeros(1,10000-length(pData));
                     pData=[pData y];
-                    pData = prepareSignal(pData, Fs);
-                    %pData = mfcc(pData, Fs);
+                    %pData = prepareSignal(pData, Fs);
+                    pData = mfcc(pData, Fs);
                     data(:,:,j)=pData;
                     nex = nex+1;
                 end

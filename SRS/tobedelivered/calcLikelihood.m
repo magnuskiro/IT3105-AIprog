@@ -16,13 +16,14 @@
 function[p] = calcLikelihood(data,model)
 
 n = size(data,1);
-%model.mu, model.sigma, size(data)
 p = mvnpdf(data, model.mu, model.sigma);
 c = logspace(0,1,n);
 c = c ./ sum(c);
 c = fliplr(c);
 res = 0;
 for i = 1:n
-    res = res + (p(i)*c(i));
+    if length(p)>=2
+        res = res + (p(i)*c(i));
+    end
 end
 p = res;

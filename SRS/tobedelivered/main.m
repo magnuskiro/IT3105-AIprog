@@ -6,56 +6,41 @@
 %   Oct - 2011                                      %
 %                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% running the main program. 
-    % read the test file (input sound)
-    % call data prep on the input.
-    % instantiate the hmms (words)
-    % train the hmm representing the word
-    % call classify and find out which word the sound represents.
-
-classdef main
-
-    methods
-        function srs = createSRS(obj)  
-            % p_data is the soundfile prepared for recognition
-            % c_data is the concatination of all the prepared instances of that word
-            cData = 0; 
-            depth = 1;
-            dir = 'sound';
-            iter = 5;
-            thresh = 1e-3;
-            models = [hmm('go',5), hmm('stop', 4), hmm('left', 4), hmm('right',3)];
-            noWords = textread('test.txt', '%d');
-            for i=1:length(models)
-                model = models(i);
-                for j=1:noWords
-                    fname= [dir, '/', model.myWord, '_', num2str(j), '.wav'];
-                    fname
-                    [pData Fs] = wavread(fname);
-                    pData = prepareSignal(pData, Fs);
-                    dSize = size(pData);
-                    cData(1:dSize(1), 1:dSize(2), depth:dSize(3)+depth-1) = pData;
-                    depth = depth + dSize(3);
-                end
-                [ll] = forward(model, cData);
-%                for j=1:iter
-%                    learn(model, cData);
-%                    [l] = forward(model, cData);
-%                    if (abs(ll-l) < thresh), break, end;
-%                    ll = l;
-%                    j, l
-%                end
-            end
-        end
+ 
+dir = 'sound';
+iter = 2;
+thresh = 1e-3;
+models = [hmm('go',5), hmm('stop', 4), hmm('left', 4), hmm('right',3)];
+noWords = textread('test.txt', '%d');
+for i=1:length(models)
+    depth = 1;
+    cData = 0;
+    model = models(i);
+    for j=1:noWords
+        fname= [dir, '/', model.myWord, '_', num2str(j), '.wav'];
+        [pData Fs] = wavread(fname);
+        pData=reshape(pData,1,length(pData));
+        % to get equally sized representations of sound files, we add some fluff at the end
+        y=10+zeros(1,10000-length(pData));
+        pData=[pData y];
+        pData = prepareSignal(pData, Fs);
+        data(:,:,j)=pData;
     end
-end
-
-%        function r = recognize(obj, name)
-%            no_words = textread('files.txt', '%d');
-%            dir = 'test';
-%            fname = [dir, '/', name, '_', num2str(i), '.wav'];
-%            [file, Fs] = wavread(fname);
-%            p_data = data(file, Fs);
-%            classifier(p_data);           
-%        end
+    loglik = 0;
+    dataLength = size(data, 3);
+    for counter=1:dataLength
+        page = data(:,:,counter);
+        [ ll ] = forward(model, page);
+        loglik = loglik + ll; 
+    end 
+    for counter=1:iter
+        model = learn(model, data);
+        ll = 0;
+        for counter=1:dataLength
+            page = data(:,:,counter);
+            [ l ] = forward(model, page);
+            ll = ll + l;
+        end 
+    end
+%Writing the model to file.                 
+save('models.mat','models');            

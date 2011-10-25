@@ -20,20 +20,20 @@
             dir = 'sound';
             iter = 5;
             thresh = 1e-3;
-            M = 1; % no.mixtures
-            O = 13; % no coefficients pr vector
-            T = 248; % no of vectors in a sequence      % MIGHT NEED TO BE ADJUSTED IF WE USE MFCC
+       %     M = 1; % no.mixtures
+       %     O = 13; % no coefficients pr vector
+       %     T = 248; % no of vectors in a sequence      % MIGHT NEED TO BE ADJUSTED IF WE USE MFCC
             models = [hmm('go',5), hmm('stop', 4), hmm('left', 4), hmm('right',3)];
             noWords = textread('test.txt', '%d');
             for i=1:length(models)
-                Q = models(i).noHidden;
-                Q
-                prior0 = normalise(rand(Q,1));
-                transmat0 = mk_stochastic(rand(Q,Q));
+         %       Q = models(i).noHidden;
+        %        Q
+          %      prior0 = normalise(rand(Q,1));
+           %     transmat0 = mk_stochastic(rand(Q,Q));
                 depth = 1;
                 cData = 0;
                 model = models(i);
-                nex = 1;
+           %     nex = 1;
                 for j=1:noWords
                     fname= [dir, '/', model.myWord, '_', num2str(j), '.wav'];
                     %fname
@@ -45,23 +45,39 @@
                     %pData = prepareSignal(pData, Fs);
                     pData = mfcc(pData, Fs);
                     data(:,:,j)=pData;
-                    nex = nex+1;
+            %        nex = nex+1;
                 end
                 %size(data)
                 %data
-                Sigma0 = repmat(eye(O), [1 1 Q M]);
+             %   Sigma0 = repmat(eye(O), [1 1 Q M]);
                 %Sigma0 = eye(2);
                 % Initialize each mean to a random data point
-                indices = randperm(T*nex/10);
-                indices(1:(Q*M))
-                mu0 = reshape(data(:,indices(1:(Q*M))), [O Q M]);
+          %      indices = randperm(T*nex/10);
+          %      indices(1:(Q*M))
+          %      mu0 = reshape(data(:,indices(1:(Q*M))), [O Q M]);
                 %mu0 = 1;
-                mixmat0 = mk_stochastic(rand(Q,M));
+          %      mixmat0 = mk_stochastic(rand(Q,M));
                 
-                [LL, prior1, transmat1, mu1, Sigma1, mixmat1] = ...
-                            mhmm_em(data, prior0, transmat0, mu0, Sigma0, mixmat0, 'max_iter', 100);
-                
-                loglik = mhmm_logprob(data, prior1, transmat1, mu1, Sigma1, mixmat1);   
+          %      [LL, prior1, transmat1, mu1, Sigma1, mixmat1] = ...
+          %                  mhmm_em(data, prior0, transmat0, mu0, Sigma0, mixmat0, 'max_iter', 100);
+                loglik = 0;
+                dataLength = size(data, 3);
+                for counter=1:dataLength
+                    page = data(:,:,counter);
+                    [ ll ] = forward(model, page);
+                    loglik = loglik + ll; 
+         %           mhmm_logprob(data, prior1, transmat1, mu1, Sigma1, mixmat1);   
+                end 
+                for counter=1:iter
+                    learn(data model);
+                    ll = 0;
+                    for counter=1:dataLength
+                        page = data(:,:,counter);
+                        [ l ] = forward(model, page);
+                        ll = ll + l; 
+             %           mhmm_logprob(data, prior1, transmat1, mu1, Sigma1, mixmat1);   
+                    end 
+                end
                 
                 eval(['transmat_0',num2str(i),'=transmat1;']);
                 eval(['mu_0',num2str(i),'=mu1;']);

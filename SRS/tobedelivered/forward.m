@@ -28,9 +28,3 @@ for t=0:totalTime-1
 	alphas(:,t+1) = alphas(:,t+1) ./ normalizer;
 	log_lik = log_lik+log(normalizer);
 end
-log_lik
-alphas
-
-    
-    
-    

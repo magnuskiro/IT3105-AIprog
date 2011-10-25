@@ -21,7 +21,7 @@ for i=1:length(models)
         [pData Fs] = wavread(fname);
         pData=reshape(pData,1,length(pData));
         % to get equally sized representations of sound files, we add some fluff at the end
-        y=10+zeros(1,10000-length(pData));
+        y=10+zeros(1,3000-length(pData));
         pData=[pData y];
         pData = prepareSignal(pData, Fs);
         data(:,:,j)=pData;
@@ -42,5 +42,6 @@ for i=1:length(models)
             ll = ll + l;
         end 
     end
+end
 %Writing the model to file.                 
 save('models.mat','models');            

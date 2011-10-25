@@ -14,17 +14,17 @@
 function [] = learn(model, data)
   
 N = model.noHidden;
-totalTime = size(data, 3);
+totalTime = size(data, 2);
 
 %%%%%%%%%%   
 % Part A %
 %%%%%%%%%%
 
 % forward passes
-[log_lik alphas B] = forward(model, data);
+[log_lik alphas] = forward(model, data);
 
 % backward passes
-[betas] = backward(model, B);
+[betas] = backward(model, data);
 
 %%%%%%%%%%
 % Part B %
@@ -37,6 +37,7 @@ size(betas)
 %betas
 for t=1:totalTime-1
     %alphas(:, t), betas(:,t)
+    xi(:,:,t) = model.dynModel
     % xi is a book, with every page containing A(ij) the NxN matrix with probabilities of going from state i to j
     %xi(:,:,t) = model.dynModel .* repmat(alphas(:,t), 1,N) .* repmat(betas(:,t+1)', N,1);
     %xi(:,:,t) = model.dynModel * (alphas(:,t) ./ sum(alphas(:,t))) * (betas(:,t+1) ./ sum(betas(:,t+1))');

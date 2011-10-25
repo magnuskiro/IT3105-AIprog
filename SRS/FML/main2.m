@@ -21,7 +21,7 @@
             iter = 5;
             thresh = 1e-3;
             M = 1; % no.mixtures
-            O = 3; % no coefficients pr vector
+            O = 5; % no coefficients pr vector
             T = 248; % no of vectors in a sequence      % MIGHT NEED TO BE ADJUSTED IF WE USE MFCC
             models = [hmm('go',5), hmm('stop', 4), hmm('left', 4), hmm('right',3)];
             noWords = textread('test.txt', '%d');

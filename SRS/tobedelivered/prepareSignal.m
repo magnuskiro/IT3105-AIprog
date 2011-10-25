@@ -30,21 +30,14 @@ frames = buffer(signal, fLength, round(fLength/2), 'nodelay');
 frames_dim = size(frames);
 
 % Fourier transform of the framed signl, each fram smoothed by a hamming window
-%FT = fft(frames .* repmat(hamming(frames_dim(1)),1,frames_dim(2)),NFFT);
-frames = frames .* repmat(hamming(frames_dim(1)),1,frames_dim(2));
-
-for i=1:frames_dim(2)
-    frames(:,i) = cceps(frames(:,i));
-end
+FT = fft(frames .* repmat(hamming(frames_dim(1)),1,frames_dim(2)),NFFT);
 
 NFFT = NFFT/2;
 
-FT = 2*abs(frames(1:NFFT,:)) ./(2*pi);
-%plot(FT);
+FT = 2*abs(FT(1:NFFT,:)) ./(2*pi);
+plot(FT);
 
-noFeatures = 5;
-
-% TODO: IF NOT ENOUGH PEAKS, ADD FLUFF INSTEAD
+noFeatures = 2;
 
 % go through all frames, find the peaks and sort them in descending order
 % the five largest peaks, and their locations, will be used to identify the sound
@@ -55,9 +48,7 @@ for i=1:frames_dim(2)-1
     % consider using peakdet for this
     [pks locs] = findpeaks(FT(:,i), 'sortstr', 'descend');
     if length(pks) < noFeatures
-        length(pks)
-        preparedData(:,i) = ones(noFeatures,1);
-        preparedData(1:length(pks),i) = pks;
+        preparedData(:,i) = pks(1,:);
         %preparedData(:,2,i) = (locs(1,:)-1) / (NFFT-1);    
     else
         preparedData(:,i) = pks(1:noFeatures);

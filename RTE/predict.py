@@ -11,6 +11,8 @@ def predict(step_size):
 	file = open("wordmatches.txt")
 	c = []
 	threshold = 0
+	best_match = 0
+	match_threshold = 0
 	if file:
 		for line in file:
 			c.append(float(line))
@@ -33,9 +35,12 @@ def predict(step_size):
 			file.close()
 		else:
 			print "Error opening file" 
-		s = eval_rte.evaluate("RTE2_dev.xml", "predictions.txt")
-		print "%.4f" %s
+		match = eval_rte.evaluate("RTE2_dev.xml", "predictions.txt")
+		if match > best_match:
+			best_match = match
+			match_threshold = threshold
 		
+	print "%.4f" %best_match, "%.4f" %match_threshold
 		
 #parser = argparse.ArgumentParser(description="increment by this value")
 #parser.add_argument("step_size", help="value that threshold shall be incremented with")

@@ -97,8 +97,8 @@ for i in range(len(text)):
 	h = h.split()
 	
 	# remove punctuations TODO: Extend the list of characters to be removed
-	t = map(lambda x : x.strip('.,"'), t)	# 
-	h = map(lambda x : x.strip('.,"'), h)
+	t = map(lambda x : x.strip('.,:;"'), t)	# 
+	h = map(lambda x : x.strip('.,:;"'), h)
 	t = sorted(set(t))
 	h = sorted(set(h))
 	
@@ -131,6 +131,6 @@ if file:
 else:
 	print "Error opening file"
  	
-step_size = 0.1 	
+step_size = 0.001 	
 predict.predict(step_size)
 

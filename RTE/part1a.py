@@ -52,7 +52,7 @@ class HypothesisHandler(ContentHandler):
 	
 	in_hypothesis = False
 	
-	def __init__(self, text):
+	def __init__(self, hypothesis):
 		ContentHandler.__init__(self)
 		self.hypothesis = hypothesis
 		self.data = []

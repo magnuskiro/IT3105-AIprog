@@ -52,7 +52,7 @@ class HypothesisHandler(ContentHandler):
 	
 	in_hypothesis = False
 	
-	def __init__(self, text):
+	def __init__(self, hypothesis):
 		ContentHandler.__init__(self)
 		self.hypothesis = hypothesis
 		self.data = []
@@ -79,6 +79,8 @@ text = []
 hypothesis = []
 parse("RTE2_dev.xml", TextHandler(text))
 parse("RTE2_dev.xml", HypothesisHandler(hypothesis))
+
+print len(text)
 
 # converts everything to lowercase
 text = map(lambda x : x.lower(), text)

@@ -80,6 +80,8 @@ hypothesis = []
 parse("RTE2_dev.xml", TextHandler(text))
 parse("RTE2_dev.xml", HypothesisHandler(hypothesis))
 
+print len(text)
+
 # converts everything to lowercase
 text = map(lambda x : x.lower(), text)
 hypothesis = map(lambda x : x.lower(), hypothesis)

@@ -44,7 +44,7 @@ class TextHandler(ContentHandler):
 
 
 #***********************************************************	
-# Extracts the text enclosed in <t></t> 		   
+# Extracts the text enclosed in <h></h> 		   
 # Returns a list of characters                             
 #***********************************************************		
 		

@@ -1,0 +1,1 @@
+1a: Best threshold found when incrementing 0.001 per iteration. Also tried with 0.0001, but no change in match. Optimal threshold value is 0.8240, which gives an accuracy of 0.5150

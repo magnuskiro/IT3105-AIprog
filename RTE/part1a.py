@@ -132,7 +132,9 @@ if file:
 	file.close()
 else:
 	print "Error opening file"
- 	
-step_size = 0.001 	
-predict.predict(step_size)
+ 
+# Call predict with step_size and wordmatches to find best threshold 	
+step_size = 0.001
+name = "wordmatches.txt" 	
+predict.predict(step_size, name)
 

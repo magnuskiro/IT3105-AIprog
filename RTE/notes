@@ -1,1 +1,4 @@
 1a: Best threshold found when incrementing 0.001 per iteration. Also tried with 0.0001, but no change in match. Optimal threshold value is 0.8240, which gives an accuracy of 0.5150
+
+1b: Best threshold for LEMMAS found when incrementing 0.001 per iteration, 0.0001 gave no improvement. Optimal threshold value is 0.91, which gives an accuracy of 0.5100
+	Best threshold for POS-TAG found when incrementing 0.001 per iteration, 0.00001 gave no improvement. Optimal threshold value is 0.9, which gives an accuracy of 0.5262

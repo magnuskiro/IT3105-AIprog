@@ -135,7 +135,7 @@ print len(hypothesis)
 #***********************************************************
 # Used for testing
 #***********************************************************
-# Get the first text and hypothesis, then their lemmas and pos-tags
+## Get the first text and hypothesis, then their lemmas and pos-tags
 #t = text[0]
 #h = hypothesis[0]
 #t_lemmas = t.lemmas[0]
@@ -158,7 +158,7 @@ print len(hypothesis)
 #t_pos = set(t_pos)
 #h_lemmas = set(h_lemmas)
 #h_pos = set(h_pos)
-
+#print "length of lemmas", len(h_lemmas)
 #no_lemmas = 0
 #no_pos = 0
 
@@ -171,12 +171,15 @@ print len(hypothesis)
 #        
 #print no_lemmas, no_pos
 
+
+lemmas = []
+pos = []
 no_lemmas = []
 no_pos = []
 for i in range(len(text)):
     # Get the first text and hypothesis, then their lemmas and pos-tags
-    t = text[0]
-    h = hypothesis[0]
+    t = text[i]
+    h = hypothesis[i]
     t_lemmas = t.lemmas[0]
     t_pos = t.pos[0]
     h_lemmas = h.lemmas[0]
@@ -197,6 +200,8 @@ for i in range(len(text)):
     t_pos = set(t_pos)
     h_lemmas = set(h_lemmas)
     h_pos = set(h_pos)
+    lemmas.append(h_lemmas)
+    pos.append(h_pos)
     
     # Counts lemmas that occur in both text and hypothesis
     x = 0
@@ -212,6 +217,36 @@ for i in range(len(text)):
     		x += 1
     no_pos.append(x)
 
-print len(no_lemmas), len(no_pos)
-print no_lemmas[0], no_pos[0]
+# Calculate normalized values for lemma and pos-tag matching
+lemma_match = []
+pos_match = []
+for i in range(len(lemmas)):
+	lemma_match.append((no_lemmas[i]*1.0) / len(lemmas[i]))
+	pos_match.append((no_pos[i]*1.0) / len(pos[i]))
+
+# Writes all the lemmas to file
+out = "lemma_matches.txt"
+file = open(out, 'wb')
+if file:
+	for i in lemma_match:
+		print >> file, i
+	file.close()
+else:
+	print "Error opening file"
+
+# Writes all the pos-tags to file
+out = "pos-tag_matches.txt"
+file = open(out, 'wb')
+if file:
+	for i in pos_match:
+		print >> file, i
+	file.close()
+else:
+	print "Error opening file"
+
+# Call predict with step_size and wordmatches to find best threshold
+lemma_name = "lemma_matches.txt"
+pos_name = "pos-tag_matches.txt"
+step_size = 0.00001
+predict.predict(step_size, pos_name)
     

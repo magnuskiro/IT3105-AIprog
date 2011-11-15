@@ -1,12 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# 2011 Jan Alexander Stormark Bremnes & Magnus Kirø
+
 #import os
 import argparse
 import eval_rte
 
 def predict(step_size, name):
 	step_size = float(step_size)
+	
 	# Reads the list of word matches, and prints to file a list of predictions in RTE output format                   
 	file = open(name)
 	c = []

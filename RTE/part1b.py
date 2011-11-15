@@ -1,3 +1,12 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# 2011 Jan Alexander Stormark Bremnes & Magnus Kirø
+
+# TODO: ATTENTION! This part is perhaps not complete! Need to
+# find out if matching should be done on lemma + pos-tag, or
+# just pos-tag. 
+
 from xml.sax.handler import ContentHandler
 from xml.sax import parse
 import predict
@@ -53,8 +62,8 @@ class TextHandler(ContentHandler):
 	def endElement(self, name):
 		if name == "text":
 			self.passthrough = False
-			l = ''.join(self.lemma)
-			p = ''.join(self.pos)
+			l = '\t'.join(self.lemma)
+			p = '\t'.join(self.pos)
 			self.lemma = []
 			self.pos = []
 			self.text[self.index].lemmas.append(l)
@@ -132,6 +141,11 @@ parse("RTE2_dev.preprocessed.xml", HypothesisHandler(hypothesis))
 print len(text)
 print len(hypothesis)
 
+t = text[0]
+print t.lemmas
+print t.pos
+
+
 #***********************************************************
 # Used for testing
 #***********************************************************
@@ -172,81 +186,81 @@ print len(hypothesis)
 #print no_lemmas, no_pos
 
 
-lemmas = []
-pos = []
-no_lemmas = []
-no_pos = []
-for i in range(len(text)):
-    # Get the first text and hypothesis, then their lemmas and pos-tags
-    t = text[i]
-    h = hypothesis[i]
-    t_lemmas = t.lemmas[0]
-    t_pos = t.pos[0]
-    h_lemmas = h.lemmas[0]
-    h_pos = h.pos[0]
+#lemmas = []
+#pos = []
+#no_lemmas = []
+#no_pos = []
+#for i in range(len(text)):
+#    # Get the first text and hypothesis, then their lemmas and pos-tags
+#    t = text[i]
+#    h = hypothesis[i]
+#    t_lemmas = t.lemmas[0]
+#    t_pos = t.pos[0]
+#    h_lemmas = h.lemmas[0]
+#    h_pos = h.pos[0]
 
-    # Remove tabs
-    t_lemmas = t_lemmas.split("\t")
-    t_pos = t_pos.split("\t")
-    h_lemmas = h_lemmas.split("\t")
-    h_pos = h_pos.split("\t")
+#    # Remove tabs
+#    t_lemmas = t_lemmas.split("\t")
+#    t_pos = t_pos.split("\t")
+#    h_lemmas = h_lemmas.split("\t")
+#    h_pos = h_pos.split("\t")
 
-    # Remove newlines, punctuations and duplicates TODO: Are duplicates wanted or unwanted?
-    t_lemmas = map(lambda x : x.strip('"\n".,:;"'), t_lemmas)
-    t_pos = map(lambda x : x.strip('"\n".,:;"'), t_pos)
-    h_lemmas = map(lambda x : x.strip('"\n".,:;"'), h_lemmas)
-    h_pos = map(lambda x : x.strip('"\n".,:;"'), h_pos)
-    t_lemmas = set(t_lemmas)
-    t_pos = set(t_pos)
-    h_lemmas = set(h_lemmas)
-    h_pos = set(h_pos)
-    lemmas.append(h_lemmas)
-    pos.append(h_pos)
-    
-    # Counts lemmas that occur in both text and hypothesis
-    x = 0
-    for l in t_lemmas:
-    	if l in h_lemmas:
-    		x += 1
-    no_lemmas.append(x)
+#    # Remove newlines, punctuations and duplicates TODO: Are duplicates wanted or unwanted?
+#    t_lemmas = map(lambda x : x.strip('"\n".,:;"'), t_lemmas)
+#    t_pos = map(lambda x : x.strip('"\n".,:;"'), t_pos)
+#    h_lemmas = map(lambda x : x.strip('"\n".,:;"'), h_lemmas)
+#    h_pos = map(lambda x : x.strip('"\n".,:;"'), h_pos)
+#    t_lemmas = set(t_lemmas)
+#    t_pos = set(t_pos)
+#    h_lemmas = set(h_lemmas)
+#    h_pos = set(h_pos)
+#    lemmas.append(h_lemmas)
+#    pos.append(h_pos)
+#    
+#    # Counts lemmas that occur in both text and hypothesis
+#    x = 0
+#    for l in t_lemmas:
+#    	if l in h_lemmas:
+#    		x += 1
+#    no_lemmas.append(x)
 
-	# Count pos-tags that occur in both text and hypothesis
-    x = 0
-    for p in t_pos:
-    	if p in h_pos:
-    		x += 1
-    no_pos.append(x)
+#	# Count pos-tags that occur in both text and hypothesis
+#    x = 0
+#    for p in t_pos:
+#    	if p in h_pos:
+#    		x += 1
+#    no_pos.append(x)
 
-# Calculate normalized values for lemma and pos-tag matching
-lemma_match = []
-pos_match = []
-for i in range(len(lemmas)):
-	lemma_match.append((no_lemmas[i]*1.0) / len(lemmas[i]))
-	pos_match.append((no_pos[i]*1.0) / len(pos[i]))
+## Calculate normalized values for lemma and pos-tag matching
+#lemma_match = []
+#pos_match = []
+#for i in range(len(lemmas)):
+#	lemma_match.append((no_lemmas[i]*1.0) / len(lemmas[i]))
+#	pos_match.append((no_pos[i]*1.0) / len(pos[i]))
 
-# Writes all the lemmas to file
-out = "lemma_matches.txt"
-file = open(out, 'wb')
-if file:
-	for i in lemma_match:
-		print >> file, i
-	file.close()
-else:
-	print "Error opening file"
+## Writes all the lemmas to file
+#out = "lemma_matches.txt"
+#file = open(out, 'wb')
+#if file:
+#	for i in lemma_match:
+#		print >> file, i
+#	file.close()
+#else:
+#	print "Error opening file"
 
-# Writes all the pos-tags to file
-out = "pos-tag_matches.txt"
-file = open(out, 'wb')
-if file:
-	for i in pos_match:
-		print >> file, i
-	file.close()
-else:
-	print "Error opening file"
+## Writes all the pos-tags to file
+#out = "pos-tag_matches.txt"
+#file = open(out, 'wb')
+#if file:
+#	for i in pos_match:
+#		print >> file, i
+#	file.close()
+#else:
+#	print "Error opening file"
 
-# Call predict with step_size and wordmatches to find best threshold
-lemma_name = "lemma_matches.txt"
-pos_name = "pos-tag_matches.txt"
-step_size = 0.00001
-predict.predict(step_size, pos_name)
+## Call predict with step_size and wordmatches to find best threshold
+#lemma_name = "lemma_matches.txt"
+#pos_name = "pos-tag_matches.txt"
+#step_size = 0.001
+#predict.predict(step_size, pos_name)
     

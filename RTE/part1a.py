@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# 2011 Jan Alexander Stormark Bremnes & Magnus Kirø
+
 from xml.sax.handler import ContentHandler
 from xml.sax import parse
 import re

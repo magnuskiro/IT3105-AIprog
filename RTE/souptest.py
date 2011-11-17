@@ -19,8 +19,8 @@ class Hypothesis():
 		self.lemmas = []
 		self.pos = []
 		
-#file_name = "testingdata.xml"
-file_name = "RTE2_dev.preprocessed.xml"		
+file_name = "testingdata.xml"
+#file_name = "RTE2_dev.preprocessed.xml"		
 file = open(file_name, "r")
 soup = BeautifulStoneSoup(file.read())
 
@@ -119,7 +119,7 @@ lemma_match = []
 for i in range(len(hypothesis)):
 	h = hypothesis[i]
 	lemma_match.append((no_lemmas[i] * 1.0) / len(h.lemmas))
-#print text_pos_word
+print text_pos_word
 
 pos_word_match = []
 for i in range(len(hpw)):

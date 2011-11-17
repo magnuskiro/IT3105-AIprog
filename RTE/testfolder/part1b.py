@@ -11,6 +11,8 @@ from xml.sax.handler import ContentHandler
 from xml.sax import parse
 import predict
 
+line_no = 567
+
 #***********************************************************	
 # Objects to hold the texts' and hypothesis' 
 # lemmas and pos-tags				   
@@ -74,7 +76,7 @@ class TextHandler(ContentHandler):
 			self.word = []
 			self.text[self.index].lemmas.append(l)
 			self.text[self.index].pos.append(p)
-			self.word[self.index].word.append(w)
+			self.text[self.index].words.append(w)
 			self.index += 1
 		if name == "lemma":
 			self.in_lemma = False
@@ -136,7 +138,7 @@ class HypothesisHandler(ContentHandler):
 			self.word = []
 			self.hypothesis[self.index].lemmas.append(l)
 			self.hypothesis[self.index].pos.append(p)
-			self.hypothesis[self.index].word.append(w)
+			self.hypothesis[self.index].words.append(w)
 			self.index += 1
 		if name == "lemma":
 			self.in_lemma = False
@@ -221,32 +223,47 @@ for i in range(len(text)):
     h = hypothesis[i]
     t_lemmas = t.lemmas[0]
     t_pos = t.pos[0]
+    t_words = t.words[0]
     h_lemmas = h.lemmas[0]
     h_pos = h.pos[0]
+    h_words = h.words[0]
 	
     # Remove tabs
     t_lemmas = t_lemmas.split()
     t_pos = t_pos.split()
+    t_words = t_words.split()
     h_lemmas = h_lemmas.split()
     h_pos = h_pos.split()
+    h_words = h_words.split()
     
     t_lemmas = map(lambda x : x.lower(), t_lemmas)
     t_pos = map(lambda x : x.lower(), t_pos)
+    t_words = map(lambda x : x.lower(), t_words)
     h_lemmas = map(lambda x : x.lower(), h_lemmas)
-    h_pos = map(lambda x : x.lower(), t_pos)            
+    h_pos = map(lambda x : x.lower(), h_pos)
+    h_words = map(lambda x : x.lower(), h_words)
+                
     
     # Remove newlines, punctuations and duplicates TODO: Are duplicates wanted or unwanted?
     t_lemmas = map(lambda x : x.strip('.,:;"~-'), t_lemmas)
     t_pos = map(lambda x : x.strip('.,:;"~-'), t_pos)
+    t_words = map(lambda x : x.strip(':;"~-'), t_words)
     h_lemmas = map(lambda x : x.strip('.,:;"~-'), h_lemmas)
     h_pos = map(lambda x : x.strip('.,:;"~-'), h_pos)
+    h_words = map(lambda x : x.strip(':;"~-'), h_words)
     
     t_lemmas = remove(t_lemmas)
     t_pos = remove(t_pos)
+    t_words = remove(t_words)
     h_lemmas = remove(h_lemmas)
     h_pos = remove(h_pos)
+    h_words = remove(h_words)
     lemmas.append(h_lemmas)
     pos.append(h_pos)
+    
+    if i == line_no:
+    	print t_words
+    	print h_words
     
     # Counts lemmas that occur in both text and hypothesis
     x = 0

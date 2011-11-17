@@ -58,5 +58,5 @@ for i in range(len(xml)):
 		in_hypo = False
 		
 print len(texts), len(hypos)
-print texts[5].lemmas, hypos[5].lemmas, hypos[5].pos
+print texts[5].words, hypos[5].words, hypos[5].pos
 		

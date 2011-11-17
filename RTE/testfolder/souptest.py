@@ -19,8 +19,8 @@ class Hypothesis():
 		self.lemmas = []
 		self.pos = []
 		
-#file_name = "testingdata.xml"
-file_name = "RTE2_dev.preprocessed.xml"		
+file_name = "testingdata.xml"
+#file_name = "RTE2_dev.preprocessed.xml"		
 file = open(file_name, "r")
 soup = BeautifulStoneSoup(file.read())
 
@@ -61,6 +61,12 @@ hpw = []
 for i in range(len(hypothesis)):
 	t = text[i]
 	h = hypothesis[i]
+	
+	if i == 0:
+		print t.lemmas[0]
+		t.lemmas = str(t.lemmas)
+		print t.lemmas[0].split()
+	
 	t.lemmas = [x.strip(' \t\n,.') for x in t.lemmas]
 	t.pos = [x.strip(' \t\n,.') for x in t.pos]
 	t.words = [x.strip(' \t\n,.') for x in t.words]
@@ -128,32 +134,32 @@ for i in range(len(hpw)):
 		
 
 
-# Writes all the lemmas to file
-out = "lemma_matches2.txt"
-file = open(out, 'wb')
-if file:
-	for i in lemma_match:
-		print >> file, i
-	file.close()
-else:
-	print "Error opening file"
-	
-# Writes all the pos-tags to file
-out = "pos_tag_matches2.txt"
-file = open(out, 'wb')
-if file:
-	for i in pos_word_match:
-		print >> file, i
-	file.close()
-else:
-	print "Error opening file"
+## Writes all the lemmas to file
+#out = "lemma_matches2.txt"
+#file = open(out, 'wb')
+#if file:
+#	for i in lemma_match:
+#		print >> file, i
+#	file.close()
+#else:
+#	print "Error opening file"
+#	
+## Writes all the pos-tags to file
+#out = "pos_tag_matches2.txt"
+#file = open(out, 'wb')
+#if file:
+#	for i in pos_word_match:
+#		print >> file, i
+#	file.close()
+#else:
+#	print "Error opening file"
 
-# Call predict with step_size and wordmatches to find best threshold
-lemma_name = "lemma_matches2.txt"
-pos_word_name = "pos_tag_matches2.txt"
-step_size = 0.001
-predict.predict(step_size, lemma_name)
-predict.predict(step_size, pos_word_name)
+## Call predict with step_size and wordmatches to find best threshold
+#lemma_name = "lemma_matches2.txt"
+#pos_word_name = "pos_tag_matches2.txt"
+#step_size = 0.001
+#predict.predict(step_size, lemma_name)
+#predict.predict(step_size, pos_word_name)
 
 
 

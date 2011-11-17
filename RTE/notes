@@ -1,15 +1,22 @@
 1a: Best threshold found when incrementing 0.001 per iteration. 
 	Also tried with 0.0001, but no change in match. 
-	Optimal threshold value is 0.8240, which gives an accuracy of 0.5150
+	Optimal threshold value is 0.8190, which gives an accuracy of 0.5138
+	Note that normalizing over the number of unique words in the hypothesis,
+	gives an accuracy of 0.5175
 
 1b: Best threshold for LEMMAS found when incrementing 0.001 per iteration,
 	0.0001 gave no improvement. Optimal threshold value is 0.91, which 
-	gives an accuracy of 0.5100. Why does this give lower accuracy than
+	gives an accuracy of 0.5125. Why does this give lower accuracy than
 	comparing words? Note that in the preprocessed data, words like "Italy's"
 	are considered to be two words! "Italy" being one lemma, and "'s" another.
 	Also, punctuation, like "." and "," are also treated as lemmas. Do we
 	need to take this into account?
 	
+	In text 2, "... the first one-on-one..." ALL the words are treated as
+	lemmas... one is a lemma, - is a lemma, on is a lemma, one-on-one is a
+	lemma, even first one-on-one is a lemma
+	
 	Best threshold for POS-TAG found when incrementing 0.001 per iteration,
 	0.00001 gave no improvement. Optimal threshold value is 0.9, which 
-	gives an accuracy of 0.5262
+	gives an accuracy of 0.5262. This is when we use a list of the pos-tags
+	containing no duplicates. If we match the word + pos-tags, we get only 0.5112!!

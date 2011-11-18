@@ -61,12 +61,14 @@ hpw = []
 for i in range(len(hypothesis)):
 	t = text[i]
 	h = hypothesis[i]
-	t.lemmas = [x.strip(' \t\n,.') for x in t.lemmas]
-	t.pos = [x.strip(' \t\n,.') for x in t.pos]
-	t.words = [x.strip(' \t\n,.') for x in t.words]
-	h.lemmas = [x.strip(' \t\n,.') for x in h.lemmas]
-	h.pos = [x.strip(' \t\n,.') for x in h.pos]
-	h.words = [x.strip(' \t\n,.') for x in h.words]
+#	t.lemmas = [x.strip(' \t\n,.') for x in t.lemmas]
+#	t.pos = [x.strip(' \t\n,.') for x in t.pos]
+#	t.words = [x.strip(' \t\n,.') for x in t.words]
+#	h.lemmas = [x.strip(' \t\n,.') for x in h.lemmas]
+#	h.pos = [x.strip(' \t\n,.') for x in h.pos]
+#	h.words = [x.strip(' \t\n,.') for x in h.words]
+
+	print len(t) 
 
 	text_word_lemma = []
 	for l in range(len(t.words)):
@@ -119,7 +121,7 @@ lemma_match = []
 for i in range(len(hypothesis)):
 	h = hypothesis[i]
 	lemma_match.append((no_lemmas[i] * 1.0) / len(h.lemmas))
-print text_pos_word
+#print text_pos_word
 
 pos_word_match = []
 for i in range(len(hpw)):

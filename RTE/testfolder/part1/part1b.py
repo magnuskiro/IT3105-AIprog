@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2011 Jan Alexander Stormark Bremnes & Magnus Kirø
+# 2011 Jan Alexander Stormark Bremnes & Magnus Kirø
 
 # TODO: ATTENTION! This part is perhaps not complete! Need to
 # find out if matching should be done on lemma + pos-tag, or

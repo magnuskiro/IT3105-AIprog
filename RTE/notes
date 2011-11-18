@@ -11,7 +11,7 @@
 	are considered to be two words! "Italy" being one lemma, and "'s" another.
 	Also, punctuation, like "." and "," are also treated as lemmas. Do we
 	need to take this into account? Removal of special characters does not 
-	affect accuracy
+	affect accuracy (these characters [:;.,-~"])
 	
 	In text 2, "... the first one-on-one..." ALL the words are treated as
 	lemmas... one is a lemma, - is a lemma, on is a lemma, one-on-one is a
@@ -21,3 +21,6 @@
 	0.00001 gave no improvement. Optimal threshold value is 0.9, which 
 	gives an accuracy of 0.5262. This is when we use a list of the pos-tags
 	containing no duplicates. If we match the word + pos-tags, we get only 0.5112!!
+	
+	UPDATE! Our own parser, gives an accuracy of 0.5250 @ 0.5790 with lemmas, which
+	is a slight improvement over words, but pos-tag/lemmas are still 0.5112

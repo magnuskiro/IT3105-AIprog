@@ -152,7 +152,7 @@ else:
 	print "Error opening file"
  
 # Call predict with step_size and wordmatches to find best threshold 	
-step_size = 0.001
+step_size = 0.0001
 name = "wordmatches.txt" 
 bleu = "bleuresults.txt"	
 #predict.predict(step_size, name)

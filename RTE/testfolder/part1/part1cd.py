@@ -30,19 +30,17 @@ from math import e
 # TODO: is this the correct way to do it?
 # Number of n-grams and the size of the largest n-gram.  
 # Largest n-gram is entire hypothesis, or text is hypo > text   
-number_of_ngrams = 0
+number_of_ngrams = 4
 threshold = 0
 
 def bleu(T, H):
-	global number_of_ngrams
 #	H = clean(H)
 #	T = clean(T)
-#	
-	# Find longest of text and hypothesis
-	if len(H) > len(T):
-		number_of_ngrams = len(T)
-	else:
+	global number_of_ngrams
+	if len(H) < number_of_ngrams:
 		number_of_ngrams = len(H)
+	else:
+		number_of_ngrams = 4
 		
 	result = evaluateTH(T, H)
 	return result

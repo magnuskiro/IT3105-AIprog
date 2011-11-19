@@ -8,6 +8,7 @@ from xml.sax import parse
 import re
 import predict
 import part1cd
+import part1d
 
 line_no = 0
 
@@ -109,10 +110,11 @@ for i in range(len(text)):
 	
 	
 	# remove punctuations TODO: Extend the list of characters to be removed
-	t = map(lambda x : x.strip('.,:;"'), t)	
-	h = map(lambda x : x.strip('.,:;"'), h)
+	t = map(lambda x : x.strip('.,:;()"'), t)	
+	h = map(lambda x : x.strip('.,:;()"'), h)
 	
-	if i == 9:
+	if i == 500:
+		print i
 		print t
 		print h
 	texts.append(t)
@@ -152,10 +154,11 @@ else:
 	print "Error opening file"
  
 # Call predict with step_size and wordmatches to find best threshold 	
-step_size = 0.001
+step_size = 0.01
 name = "wordmatches.txt" 
 bleu = "bleuresults.txt"	
 #predict.predict(step_size, name)
-part1cd.run(texts, hypos)
-predict.predict(step_size, bleu)
+#part1cd.run(texts, hypos)
+#predict.predict(step_size, bleu)
+part1d.predict(texts, hypos)
 

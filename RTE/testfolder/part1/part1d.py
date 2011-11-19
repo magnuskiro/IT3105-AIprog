@@ -69,18 +69,20 @@ def predict(texts, hypos):
 
 def createWordIDFs(texts, hypos):
     allwords=[]
+    texts_set = texts[:]
+    hypos_set = hypos[:]
     for n in range(len(texts)):
         allwords+=texts[n]
-        texts[n]=set(texts[n])
+        texts_set[n]=set(texts[n])
         allwords+=hypos[n]
-        hypos[n]=set(hypos[n])
+        hypos_set[n]=set(hypos[n])
     allwords=set(allwords)
 #    print len(allwords)
 #    print allwords
 #    print IDF("it", texts, hypos)
     IDFdict = {}
     for word in allwords:
-        IDFdict[word] = IDF(word, texts, hypos)
+        IDFdict[word] = IDF(word, texts_set, hypos_set)
 #        print IDFdict[word]
     return IDFdict
 

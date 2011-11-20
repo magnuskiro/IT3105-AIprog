@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+
+# 2011 Magnus Kirø & Jan Alexander Stormark Bremnes
+
 # calculate IDF for every word in the document collection: text and hypothesis. 
 # extend word matching strategy from the first system by wheighting each word according to its IDF value. 
 # iterate to find a threshold. 
@@ -31,9 +34,14 @@ def IDF(word, collection):
     return probValue
 """
 
-def IDFwordMatch(text, hypo, IDFdict):
-    collection = text + hypo
-    hypwords = hypo    
+def IDFwordMatch(text, hypo, IDFdict, n):
+#    collection = set(text).intersection(hypo)
+# 	all words that appear in H and T
+    collection = [i for i in hypo if i in text]
+    hypwords = hypo
+    if n == 12:
+    	print hypwords
+    	print collection    
     #IDF Word Match = ( sum IDF(w) where w in (T and H) )/( sum IDF(w) where w in H ) # total word match for H in T.
     sum1 = 0
     for w in collection:
@@ -63,27 +71,37 @@ def IDFwordMatch(text, hypo, IDFdict):
 
 def predict(texts, hypos):
     IDFdict = createWordIDFs(texts, hypos)
-    for n in range(len(texts)):
-        print IDFwordMatch(texts[n], hypos[n], IDFdict)
+    file = open("idfresults.txt", "wb")
+    if file:
+    	for n in range(len(texts)):
+    		print >> file, IDFwordMatch(texts[n], hypos[n], IDFdict, n)
+    else:
+    	print "Error opening file"
+    
     print "done"
 
 def createWordIDFs(texts, hypos):
-    allwords=[]
+    allwords = []
     texts_set = texts[:]
     hypos_set = hypos[:]
+    
     for n in range(len(texts)):
-        allwords+=texts[n]
-        texts_set[n]=set(texts[n])
-        allwords+=hypos[n]
-        hypos_set[n]=set(hypos[n])
-    allwords=set(allwords)
+        allwords += texts[n]
+        texts_set[n] = set(texts[n])
+        allwords += hypos[n]
+        hypos_set[n] = set(hypos[n])
+        
+    allwords = set(allwords)
 #    print len(allwords)
 #    print allwords
-#    print IDF("it", texts, hypos)
+#    print IDF("iran's", texts, hypos)
+
     IDFdict = {}
+    
     for word in allwords:
         IDFdict[word] = IDF(word, texts_set, hypos_set)
 #        print IDFdict[word]
+
     return IDFdict
 
 def IDF(word, texts, hypos):
@@ -93,6 +111,7 @@ def IDF(word, texts, hypos):
             count+=1 
         if word in texts[n]:
             count+=1
+            
 #    print count
     return (1*1.0)/count #recommended IDF
 #    return log( (len(texts)+len(hypos)) / count) #found IDF calculation from the wikipedia and others. 

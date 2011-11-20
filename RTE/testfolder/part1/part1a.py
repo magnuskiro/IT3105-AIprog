@@ -154,11 +154,13 @@ else:
 	print "Error opening file"
  
 # Call predict with step_size and wordmatches to find best threshold 	
-step_size = 0.01
+step_size = 0.001
 name = "wordmatches.txt" 
 bleu = "bleuresults.txt"	
+idf = "idfresults.txt"
 #predict.predict(step_size, name)
 #part1cd.run(texts, hypos)
 #predict.predict(step_size, bleu)
 part1d.predict(texts, hypos)
+predict.predict(step_size, idf)
 

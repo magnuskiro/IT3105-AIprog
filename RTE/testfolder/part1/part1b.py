@@ -226,12 +226,12 @@ for i in range(len(text)):
     h_p_ls.append(h_p_l)
     
     # Remove newlines, punctuations and duplicates TODO: Are duplicates wanted or unwanted?
-    t_lemmas = map(lambda x : x.strip('.,:;"~-'), t_lemmas)
-    t_pos = map(lambda x : x.strip('.,:;"~-'), t_pos)
-    t_words = map(lambda x : x.strip('.,:;"~-'), t_words)
-    h_lemmas = map(lambda x : x.strip('.,:;"~-'), h_lemmas)
-    h_pos = map(lambda x : x.strip('.,:;"~-'), h_pos)
-    h_words = map(lambda x : x.strip('.,:;"~-'), h_words)
+    t_lemmas = map(lambda x : x.strip('.,:;"~()-'), t_lemmas)
+    t_pos = map(lambda x : x.strip('.,:;"~()-'), t_pos)
+    t_words = map(lambda x : x.strip('.,:;"~()-'), t_words)
+    h_lemmas = map(lambda x : x.strip('.,:;"~-()'), h_lemmas)
+    h_pos = map(lambda x : x.strip('.,:;"~()-'), h_pos)
+    h_words = map(lambda x : x.strip('.,:;"~()-'), h_words)
     
     # Remove empty characters
     t_lemmas = remove(t_lemmas)

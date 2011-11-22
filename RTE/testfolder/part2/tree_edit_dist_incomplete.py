@@ -163,9 +163,10 @@ def leftmost_leaf_descendant_indices(node_list, tree):
     while len(temp) > 0:
     	node = temp.pop()
     	if not tree[node]:
-    		lldsi.append(node_list.index(node))
+    		lldsi.append(node_list.index(node)+1)
+    	else:
+    		temp.append(tree[node][0])
     
-    print lldsi
     return lldsi
         
         
@@ -178,13 +179,15 @@ def key_root_indices(lld_indices):
     # Cf. Zhang & Shasha:p.1251: "LR_keyroots(T) = {k| there exists no k'>k
     # such that l(k)=l(k')}
     
-    raise NotImplementedError()
-    #*************************************************************************
-    #
-    #    Your implementation goes here
-    #
-    #*************************************************************************
     
+    key_roots = {}
+    
+    i = 0
+    for lld in lld_indices:
+    	key_roots[lld] = i
+    	i += 1
+    	
+    return sorted(key_roots.values())
     
     
 def distance(t1, t2, costs=unit_costs):
@@ -231,9 +234,15 @@ def distance(t1, t2, costs=unit_costs):
     l1 = leftmost_leaf_descendant_indices(T1, t1)
     l2 = leftmost_leaf_descendant_indices(T2, t2)
     
+    print l1
+    print l2
+    
     # LR_keyroots1 and LR_keyroots2
     kr1 = key_root_indices(l1)
     kr2 = key_root_indices(l2)
+    
+    print kr1
+    print kr2
     
     # permanent treedist array
     TD = dict()

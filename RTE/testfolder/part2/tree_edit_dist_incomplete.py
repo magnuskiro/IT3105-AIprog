@@ -209,26 +209,34 @@ def distance(t1, t2, costs=unit_costs):
         FD = ForestDist()
         
         for n in range(l1[i], i+1):
-            FD[ (l1[i],n), None ] = ( FD[ (l1[i],n-1), None ] + 
-                                      costs(T1[n], None) )
+            FD[ (l1[i],n), None ] = ( FD[ (l1[i],n-1), None ] + costs(T1[n], None) )
             
         for m in range(l2[j], j+1):
-            FD[ None, (l2[j],m) ] = ( FD[ None, (l2[j],m-1) ] + 
-                                      costs(None, T2[m].label) )
+            FD[ None, (l2[j],m) ] = ( FD[ None, (l2[j],m-1) ] + costs(None, T2[m]) )
             
-        raise NotImplementedError()
-        #*************************************************************************
-        #
-        #    Your implementation of the final part of edit_dist goes here
-        #
-        #*************************************************************************
-                    
+        for n in range(l1[i], i+1):
+        	for m in range(l2[j], j+1):
+        		if l1[n] == l1[i] and l2[m] == l2[j]:
+        			FD[ (l1[i],n), (l2[j], m) ] = min( 
+        				FD[ (l1[i],n-1), (l2[j],m) ] + costs(T1[n], None),
+        				FD[ (l1[i],n), (l2[j], m-1) ] + costs(None, T2[m]),
+        				FD[ (l1[i],n-1), (l2[j], m-1) ] + costs(T1[n], T2[m])
+        			)
+        			TD[n,m] = FD[ (l1[i],n), (l2[j], m) ]
+        		else:
+        			FD[ (l1[i], n), (l2[j], m) ] = min(
+        				FD[ (l1[i], n-1), (l2[j], m) ] + costs(T1[n], None),
+        				FD[ (l1[i], n), (l2[j], m-1) ] + costs(None, T2[m]),
+        				FD[ (l1[i], n-1), (l2[j], m-1) ] + TD[n,m]
+        			)
         return TD[i,j]
     
     
     # Compute T1[] and T2[]
     T1 = postorder(t1)
     T2 = postorder(t2)
+    
+    print str(T1), T2
     
     # Compute l()
     l1 = leftmost_leaf_descendant_indices(T1, t1)

@@ -1,7 +1,7 @@
-file = open("longtext.xml")
+file = open("short.xml")
 
 out = open("longRTE2.txt", "wb")
-out2 = open("longformatted.xml", "wb")
+out2 = open("short2.xml", "wb")
 
 x = 0
 y = []

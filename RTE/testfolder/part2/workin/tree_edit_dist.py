@@ -141,7 +141,7 @@ def postorder(tree):
 			a.append(key)
 		return a
         
-    postorder_tree = recur_tree(tree["Root"], tree, "Root", [])
+    postorder_tree = recur_tree(tree["a"], tree, "a", [])
     
     return postorder_tree
     
@@ -282,13 +282,13 @@ def print_matrix(T1, T2, TD):
 
     
         
-def run(t1, t2):
+def main():
     # Cf. Zhang & Shasha: Fig. 4 and Fig. 8
     
-#	t1 = {"c":["b"],"d":["a","c"],"f":["d","e"], "b":[], "e":[], "a":[]} 
-#	t2 = {"c":["d"],"d":["a","b"],"f":["c","e"], "b":[], "e":[], "a":[]}
-#	t1 = {"a":["x","z"], "x":[], "z":["y","g"], "y":[], "g":["j","k"], "j":[], "k":[]}
-#	t2 = {"a":["z","x"], "x":[], "z":["y","g"], "y":[], "g":["j", "k"], "j":[], "k":[]}	
+	#t1 = {"c":["b"],"d":["a","c"],"f":["d","e"], "b":[], "e":[], "a":[]} 
+	#t2 = {"c":["d"],"d":["a","b"],"f":["c","e"], "b":[], "e":[], "a":[]}
+	t1 = {"a":["x","z"], "x":[], "z":["y","g"], "y":[], "g":["j","k"], "j":[], "k":[]}
+	t2 = {"a":["z","x"], "x":[], "z":["y","g"], "y":[], "g":["j", "k"], "j":[], "k":[]}	
 	
 	print "t1 =", t1
 	print "t2 =", t2
@@ -297,5 +297,6 @@ def run(t1, t2):
 	d = distance(t1, t2)
 	print "distance =", d
 	
+main()
 
 

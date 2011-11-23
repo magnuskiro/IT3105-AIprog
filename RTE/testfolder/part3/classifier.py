@@ -2,6 +2,7 @@ import orange, orngTest
 import random
 import features
 
+# validation performs cross validation on the 10 subsets of our data.
 def validation(data):
     k = 10
     data_list = list(data)
@@ -37,13 +38,14 @@ def clean_file(filename):
     file.write("")
     file.close()
 
-def run(cross=True, verbose=False, learning_data="learningdata.tab"):
+def run(cross=True, verbose=False, xml="../xml/RTE2_dev.xml", pre_processec_xml="../xml/RTE2_dev.preprocessed.xml"):
+    learning_data="learningdata.tab" # the data features. extracted from an earlier run of features.
     filename = "results_part3.txt"
     clean_file(filename)
+    if cross: features.run(xml, pre_processec_xml) # extracts the features
     data = orange.ExampleTable(learning_data)
     l = orange.BayesLearner(data)
     if cross:
-        features.run() # extracts the features
         if verbose:
             print "result: ", validation(data)
             for item in data:
@@ -68,5 +70,5 @@ def run(cross=True, verbose=False, learning_data="learningdata.tab"):
         file.close()
         print "finished writing to results_part3"
 
-#run() # runs the learning
+#run(True, False, "../xml/blind-test-data.xml") # runs the learning
 #run(False) # runs the writing to results file.

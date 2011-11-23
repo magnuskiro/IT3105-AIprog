@@ -6,12 +6,6 @@
 
 # acquires the features from part one and two.
 
-#requirements:
-#parse_xml
-#parse_preprocessed_xml
-#pair ->needs sentence
-#sentence -> needs node
-#node
 from data_processing import parse_xml, parse_preprocessed_xml
 from part1_algorithms import word_matching, lemma_matching, lemma_pos_matching, bigram_matching
 
@@ -24,11 +18,11 @@ def write(text):
         print "Error opening file"
     file.close()
 
-def feature_extraction(data,dev_data):
+def feature_extraction(pre_data,dev_data):
     write('id\tword\tlemma\tpos\tbigrams\tentailment\t\n')
     write('d\tc\tc\tc\tc\td\n')
     write('meta\t\t\t\t\tclass')
-    for pair in data:
+    for pair in pre_data:
         write("\n")
         write(pair.id)
         text = dev_data[pair.id][1]
@@ -63,4 +57,3 @@ def run(dev_data_file="../xml/RTE2_dev.xml", pre_data_file="../xml/RTE2_dev.prep
     print "Done"
 
 #run()
-

@@ -1,7 +1,8 @@
 from BeautifulSoup import BeautifulStoneSoup
 import tree_edit_dist
 
-file_name = "short2.xml"
+#file_name = "formattedRTEdata.xml"
+file_name = "formattederror.xml"
 file = open(file_name)
 soup = BeautifulStoneSoup(file.read())
 
@@ -13,6 +14,7 @@ def make_nodes(sentence):
 		parent = None
 		isWord = False		
 		temp_id = str(node.attrs[0][1])
+		id = None
 		if temp_id[0] == "E":
 			if node.lemma:
 				id = node.lemma.contents
@@ -89,28 +91,41 @@ def make_tree(sentence):
 
 
 
-text = []
+text_collection = []
 for node in soup.findAll("text"):
-	text.append(node.findAll("node"))
+	temp = []
+	for sentence in node.findAll("sentence"):
+		temp.append(sentence.findAll("node"))
+	text_collection.append(temp)
 	
-hypo = []
+hypo_collection = []
 for node in soup.findAll("hypothesis"):
-	hypo.append(node.findAll("node"))
+	temp = []
+	for sentence in node.findAll("sentence"):
+		temp.append(sentence.findAll("node"))
+	hypo_collection.append(temp)
 	
 sentence = soup.findAll("node")
-text = make_nodes(text[0])
-hypo = make_nodes(hypo[0])
+print len(text_collection[0]), len(hypo_collection[0])
 
-text = process_node(text)
-hypo = process_node(hypo)
+for i in range(len(text_collection)):
+#	print text_collection[i]
+	sentences = []
+	for sentence in text_collection[i]:
+		sentences.append(sentence)
+	text = make_nodes(text_collection[i])
+	hypo = make_nodes(hypo_collection[i])
 
-text_tree = make_tree(text)
-hypo_tree = make_tree(hypo)
+	text = process_node(text)
+	hypo = process_node(hypo)
 
-print hypo_tree
+	text_tree = make_tree(text)
+	hypo_tree = make_tree(hypo)
 
-res = tree_edit_dist.distance(text_tree, hypo_tree)
-print "distance =", res
+	print text_tree
+	print hypo_tree
+#	res = tree_edit_dist.distance(text_tree, hypo_tree)
+#	print "distance =", res
 
 ##t1 = {"c":["b"],"d":["a","c"],"f":["d","e"], "b":[], "e":[], "a":[]} 
 ##t2 = {"c":["d"],"d":["a","b"],"f":["c","e"], "b":[], "e":[], "a":[]}

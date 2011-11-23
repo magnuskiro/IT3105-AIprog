@@ -1,0 +1,351 @@
+2 1
+[<node id="1">
+<word>
+Sunday
+</word>
+<lemma>
+Sunday
+</lemma>
+<pos-tag>
+N
+</pos-tag>
+<relation parent="3">
+gen
+</relation>
+</node>, <node id="2">
+<word>
+'s
+</word>
+<lemma>
+'s
+</lemma>
+<pos-tag>
+U
+</pos-tag>
+<relation parent="1">
+poss
+</relation>
+</node>, <node id="3">
+<word>
+earthquake
+</word>
+<lemma>
+earthquake
+</lemma>
+<pos-tag>
+N
+</pos-tag>
+<relation parent="5">
+s
+</relation>
+</node>, <node id="4">
+<word>
+was
+</word>
+<lemma>
+be
+</lemma>
+<pos-tag>
+be
+</pos-tag>
+<relation parent="5">
+be
+</relation>
+</node>, <node id="5">
+<word>
+felt
+</word>
+<lemma>
+feel
+</lemma>
+<pos-tag>
+V
+</pos-tag>
+<relation parent="E0">
+i
+</relation>
+</node>, <node id="6">
+<word>
+in
+</word>
+<lemma>
+in
+</lemma>
+<pos-tag>
+Prep
+</pos-tag>
+<relation parent="5">
+mod
+</relation>
+</node>, <node id="7">
+<word>
+the
+</word>
+<lemma>
+the
+</lemma>
+<pos-tag>
+Det
+</pos-tag>
+<relation parent="10">
+det
+</relation>
+</node>, <node id="8">
+<word>
+southern
+</word>
+<lemma>
+southern
+</lemma>
+<pos-tag>
+A
+</pos-tag>
+<relation parent="10">
+mod
+</relation>
+</node>, <node id="9">
+<word>
+Indian
+</word>
+<lemma>
+Indian
+</lemma>
+<pos-tag>
+A
+</pos-tag>
+<relation parent="10">
+mod
+</relation>
+</node>, <node id="10">
+<word>
+city
+</word>
+<lemma>
+city
+</lemma>
+<pos-tag>
+N
+</pos-tag>
+<relation parent="6">
+pcomp-n
+</relation>
+</node>, <node id="11">
+<word>
+of
+</word>
+<lemma>
+of
+</lemma>
+<pos-tag>
+Prep
+</pos-tag>
+<relation parent="10">
+mod
+</relation>
+</node>, <node id="12">
+<word>
+Madras
+</word>
+<lemma>
+Madras
+</lemma>
+<pos-tag>
+N
+</pos-tag>
+<relation parent="11">
+pcomp-n
+</relation>
+</node>, <node id="13">
+<word>
+on
+</word>
+<lemma>
+on
+</lemma>
+<pos-tag>
+Prep
+</pos-tag>
+<relation parent="12">
+mod
+</relation>
+</node>, <node id="14">
+<word>
+the
+</word>
+<lemma>
+the
+</lemma>
+<pos-tag>
+Det
+</pos-tag>
+<relation parent="15">
+det
+</relation>
+</node>, <node id="15">
+<word>
+mainland
+</word>
+<lemma>
+mainland
+</lemma>
+<pos-tag>
+N
+</pos-tag>
+<relation parent="13">
+pcomp-n
+</relation>
+</node>, <node id="16">
+<word>
+,
+</word>
+<lemma>
+,
+</lemma>
+<pos-tag>
+U
+</pos-tag>
+<relation parent="15">
+punc
+</relation>
+</node>, <node id="17">
+<word>
+as
+</word>
+<lemma>
+as
+</lemma>
+<pos-tag>
+U
+</pos-tag>
+<relation parent="15">
+punc
+</relation>
+</node>, <node id="18">
+<word>
+well
+</word>
+<lemma>
+well
+</lemma>
+<pos-tag>
+U
+</pos-tag>
+<relation parent="15">
+punc
+</relation>
+</node>, <node id="19">
+<word>
+as
+</word>
+<lemma>
+as
+</lemma>
+<pos-tag>
+U
+</pos-tag>
+<relation parent="15">
+punc
+</relation>
+</node>, <node id="20">
+<word>
+other
+</word>
+<lemma>
+other
+</lemma>
+<pos-tag>
+A
+</pos-tag>
+<relation parent="21">
+mod
+</relation>
+</node>, <node id="21">
+<word>
+parts
+</word>
+<lemma>
+part
+</lemma>
+<pos-tag>
+N
+</pos-tag>
+<relation parent="15">
+conj
+</relation>
+</node>, <node id="22">
+<word>
+of
+</word>
+<lemma>
+of
+</lemma>
+<pos-tag>
+Prep
+</pos-tag>
+<relation parent="21">
+mod
+</relation>
+</node>, <node id="23">
+<word>
+south
+</word>
+<lemma>
+south
+</lemma>
+<pos-tag>
+A
+</pos-tag>
+<relation parent="24">
+mod
+</relation>
+</node>, <node id="24">
+<word>
+India
+</word>
+<lemma>
+India
+</lemma>
+<pos-tag>
+N
+</pos-tag>
+<relation parent="22">
+pcomp-n
+</relation>
+</node>, <node id="25">
+<word>
+.
+</word>
+<lemma>
+.
+</lemma>
+<pos-tag>
+U
+</pos-tag>
+<relation parent="E1">
+punc
+</relation>
+</node>, <node id="E0">
+<lemma>
+fin
+</lemma>
+<pos-tag>
+C
+</pos-tag>
+</node>, <node id="E1">
+<pos-tag>
+U
+</pos-tag>
+</node>, <node id="E2">
+<lemma>
+earthquake
+</lemma>
+<pos-tag>
+N
+</pos-tag>
+<relation parent="5">
+obj
+</relation>
+<antecedent>
+3
+</antecedent>
+</node>]

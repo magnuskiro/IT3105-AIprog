@@ -1,0 +1,66 @@
+\documentclass[titlepage]{article}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+\author{Jan Alexander Bremnes\\Magnus Kirø}
+\title{IT3105 - Ex 3\\Recognizing Textual Entailment - RTE}
+\date{November 2011}
+
+\begin{document}
+
+    \maketitle
+    \tableofcontents
+    \pagenumbering{arabic}
+    \graphicspath{{SRS/img/}}
+    \newpage
+
+\section{Introduction}
+
+\section{System Description}
+
+\subsection{Part1 - Lexical Matching}
+    \begin{itemize}
+        \item[Word Matching] 
+        \item[Matching Lemma and POS tag]
+        \item[BLEU algorithm]
+        \item[Wheighting]
+    \end{itemize}
+
+\subsection{Part2 - Syntactic matching}
+    \begin{itemize}
+        \item[Tree edit distance] 
+        \item[Entailment Judgement]
+        \item[IDF insertioncost]
+    \end{itemize}
+
+\subsection{Part3 - Machine Learning}
+It is part3.py that runs this part of the project. part3.py runs the clasifier that runs the feature extraction code. 
+    \begin{itemize}
+        \item[Feature Extraction] 
+When extracting features we used the same ideas and basics as in part one. Althought we did some opimization and rewrote the implementations. In this particular sub part there are some code files that are essential. Those are features.py, data\_processing.py and part1\_algorithms.py. data\_processing.py contains the code for reading the xml development data and the preprocessed data. The crunched data is returned as a set of pairs, the pairs contain sentences and the sentences contain nodes. The nodes represent words. This structure is widely used in the rest of part three. part1\_algorithms.py contains 5 functions; word\_matching, lemma\_matching, lemma\_pos\_matching, bigram\_matching and ngrams. Word\_matching finds out how many words that match in the text and hypothesis and return a score. Lema\_matching checks how many lemmas that are alike. lemma\_pos\_matching uses the lemma and the post tag of the word to calculate a score that is returned. Bigram\_matching calculates the likelihood of entailment based on the bigrams in the text and hypothesis. These four features is combined in a datafile: learningdata.tab. The files is in a standard format used by the Orange collection of machine learning algorithms.
+        \item[Classification]
+classifier.py is the file that clasifies the dataset and writes a file with "id YES/NO". classifier.py calls features.py to extract the features and then uses the created dataset to learn. We call classifier.py with two different inputs. One to write results to file, and one for learning. The learning part splits the dataset in to ten chunks and uses those to evaluate the accuracy of the learning process. The classifier is called with "classifier.run()" and "classifier.run(False)" all input arguments has standard, but the classifier can be called with four arguments, cross, verbose, xml and preprocessed\_xml.
+        \item[Improved evaluation]
+The improved evaluation happens in the classifier.py file. It is the validate function that computes this particular subtask. The output of this computation is an accuracy percentage. Currently we have 61\% entailment with part3. 
+    \end{itemize}
+
+\subsection{Part4 - Optimization}   
+    We dod not have the time to do much optimization on our RTE system. By some strange reason we always begin projects late in the project phase and ends up running out of time. 
+
+
+\subsection{Code Files and what they do}
+\begin{itemize}
+    \item
+    \item
+\end{itemize}
+
+\section{Conclusion}
+
+\subsection{Results}
+\begin{itemize}
+    \item
+    \item
+\end{itemize}
+
+\end{document}

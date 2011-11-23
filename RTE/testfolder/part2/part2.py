@@ -65,7 +65,7 @@ class ForestDist(dict):
     j1 = end index of source forest1,
     or None (i.e. empty forest)
 
-    Likewise forest2 is eitehr a tuple (i2,j2) where
+    Likewise forest2 is either a tuple (i2,j2) where
     i2 = start index of target forest2 and
     j2 = end index of target forest2,
     or None (i.e. empty forest).

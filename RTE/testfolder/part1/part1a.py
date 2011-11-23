@@ -5,9 +5,8 @@
 
 from xml.sax.handler import ContentHandler
 from xml.sax import parse
-import re
 import predict
-import part1cd
+import part1c
 import part1d
 
 line_no = 0
@@ -107,8 +106,7 @@ for i in range(len(text)):
 	# create lists of words from the lists of characters
 	t = t.split()				
 	h = h.split()
-	
-	
+
 	# remove punctuations TODO: Extend the list of characters to be removed
 	t = map(lambda x : x.strip('.,:;()"'), t)	
 	h = map(lambda x : x.strip('.,:;()"'), h)
@@ -159,7 +157,7 @@ name = "wordmatches.txt"
 bleu = "bleuresults.txt"	
 idf = "idfresults.txt"
 #predict.predict(step_size, name)
-#part1cd.run(texts, hypos)
+#part1c.run(texts, hypos)
 #predict.predict(step_size, bleu)
 part1d.predict(texts, hypos)
 predict.predict(step_size, idf)

@@ -39,9 +39,9 @@ def IDFwordMatch(text, hypo, IDFdict, n):
 # 	all words that appear in H and T
     collection = [i for i in hypo if i in text]
     hypwords = hypo
-#    if n == 12:
-#    	print hypwords
-#    	print collection    
+    if n == 12:
+    	print hypwords
+    	print collection    
     #IDF Word Match = ( sum IDF(w) where w in (T and H) )/( sum IDF(w) where w in H ) # total word match for H in T.
     sum1 = 0
     for w in collection:
@@ -78,7 +78,7 @@ def predict(texts, hypos):
     else:
     	print "Error opening file"
     
-#    print "done"
+    print "done"
 
 def createWordIDFs(texts, hypos):
     allwords = []

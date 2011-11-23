@@ -158,7 +158,7 @@ bleu = "bleuresults.txt"
 idf = "idfresults.txt"
 #predict.predict(step_size, name)
 #part1c.run(texts, hypos)
-predict.predict(step_size, bleu)
+#predict.predict(step_size, bleu)
 part1d.predict(texts, hypos)
 predict.predict(step_size, idf)
 

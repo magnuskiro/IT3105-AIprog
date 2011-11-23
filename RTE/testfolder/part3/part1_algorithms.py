@@ -3,8 +3,6 @@
 
 # 2011 Jan Alexander Stormark Bremnes & Magnus Kirø
 
-# inspiration and simplification from part 1 and 2 found on the internet.
-
 def clean(text):
     return text.strip(',. :;"')
 

@@ -1,27 +1,10 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-# 2011 Jan Alexander Stormark Bremnes & Magnus Kirø
-
+import part1d
+import part1c
+import predict
 from xml.sax.handler import ContentHandler
 from xml.sax import parse
-import re
-import predict
-import part1cd
 
-line_no = 0
-
-def run():
-	#***********************************************************
-	# Example class - prints all the tags in the xml/html file 
-	#***********************************************************	
-
-	#class TestHandler(ContentHandler):
-	#	def startElement(self, name, attrs):
-	#		print name, attrs.keys()
-	#parse('RTE2_dev.xml', TestHandler())
-
-
+def run(dev, processed):
 	#***********************************************************	
 	# Extracts the text enclosed in <t></t> 		   
 	# Returns a list of characters				   
@@ -82,13 +65,11 @@ def run():
 				self.data.append(string)
 		
 
-
 	# Uses the content handlers to extract texts and hypothesis from the xml-file				   
 	text = []
 	hypothesis = []
-	parse("RTE2_dev.xml", TextHandler(text))
-	parse("RTE2_dev.xml", HypothesisHandler(hypothesis))
-
+	parse(dev, TextHandler(text))
+	parse(dev, HypothesisHandler(hypothesis))
 
 	# converts everything to lowercase
 	text = map(lambda x : x.lower(), text)
@@ -106,55 +87,20 @@ def run():
 		# create lists of words from the lists of characters
 		t = t.split()				
 		h = h.split()
-	
-	
+
 		# remove punctuations TODO: Extend the list of characters to be removed
-		t = map(lambda x : x.strip('.,:;"'), t)	
-		h = map(lambda x : x.strip('.,:;"'), h)
+		t = map(lambda x : x.strip('.,:;()"'), t)	
+		h = map(lambda x : x.strip('.,:;()"'), h)
 
 		texts.append(t)
 		hypos.append(h)
 	
-		t = sorted(t)
-		h = sorted(h)
-
+	bleu = "bleuresults.txt"
+	idf = "idfresults.txt"
+	step_size = 0.001
+	part1d.predict(texts, hypos)
+	part1c.run(text, hypos)
+	predict.predict(step_size, bleu)
+	predict.predict(step_size, idf)
 	
-		# extracts words with regex, 
-		# t = re.findall(r"[a-zA-Z']+", t)
-	
-		# counts the number of words that occur in both text and corresponding hypothesis 	
-		x = 0
-		for j in h:
-			if j in t:
-				x += 1
-		no_words.append(x)
-
-	# Calculates a normalized value for the number of words occuring in both text and hypothesis
-	word_match = []
-	for i in range(len(no_words)):
-		h = hypothesis[i]
-		h = h.split()
-		h = map(lambda x : x.strip('.,:;"'), h)
-		h = sorted(h)
-		word_match.append((no_words[i]*1.0) / len(h))
-
-	# Prints the list of word matches to file
-	out = "wordmatches.txt"
-	file = open(out, 'wb')
-	if file:
-		for i in word_match:
-			print >> file, i
-		file.close()
-	else:
-		print "Error opening file"
-	
-	return [texts, hypos]
-	 
-#	# Call predict with step_size and wordmatches to find best threshold 	
-#	step_size = 0.001
-#	name = "wordmatches.txt" 
-#	bleu = "bleuresults.txt"	
-#	#predict.predict(step_size, name)
-#	part1cd.run(texts, hypos)
-#	predict.predict(step_size, bleu)
 

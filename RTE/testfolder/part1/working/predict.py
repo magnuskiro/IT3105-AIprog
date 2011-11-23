@@ -7,7 +7,8 @@
 import argparse
 import eval_rte
 
-def predict(name):
+def predict(step_size, name):
+	step_size = float(step_size)
 	
 	# Reads the list of word matches, and prints to file a list of predictions in RTE output format                   
 	file = open(name)

@@ -7,7 +7,8 @@
 import argparse
 import eval_rte
 
-def predict(name):
+def predict(step_size, name):
+	step_size = float(step_size)
 	
 	# Reads the list of word matches, and prints to file a list of predictions in RTE output format                   
 	file = open(name)
@@ -42,7 +43,7 @@ def predict(name):
 			best_match = match
 			match_threshold = threshold
 		
-	print "%.4f" %best_match, "%.4f" %match_threshold
+	print "Best match : %.4f" %best_match, "match threshold : %.4f" %match_threshold
 		
 #parser = argparse.ArgumentParser(description="increment by this value")
 #parser.add_argument("step_size", help="value that threshold shall be incremented with")

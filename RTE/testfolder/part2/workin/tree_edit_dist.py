@@ -114,14 +114,13 @@ def unit_costs(node1, node2):
         return 1
     
     # substitution cost
-    print "nodes", node1, node2
-    if node1 != node2:
+    if node1.label != node2.label:
         return 1
     else:
         return 0
 
     
-def postorder(tree):
+def postorder(root):
     """
     Return a list of nodes resulting from a left-to-right postorder traversal
     of the tree rooted in root_node
@@ -130,23 +129,18 @@ def postorder(tree):
     # "Let T[I] be the ith node in the tree according to the left-to-right
     # postordering"
     
-    def recur_tree(value, d, key, a):
-		if len(value) > 0:
-			for i in value:
-				if i in d:
-					recur_tree(d[i], d, i, a)
-			else:
-				a.append(key)
-		else:
-			a.append(key)
-		return a
-        
-    postorder_tree = recur_tree(tree["Root"], tree, "Root", [])
-    
+    tree = []
+    tree.append(root)
+    postorder_tree = []
+    while len(tree) > 0:
+    	node = tree.pop()
+    	for child in node:
+    		tree.append(child)
+    	postorder_tree.insert(0,node)
+    	
     return postorder_tree
     
-    
-def leftmost_leaf_descendant_indices(node_list, tree):
+def leftmost_leaf_descendant_indices(node_list):
     """
     Return a list of the *indices* of the leftmost leaf descendants according
     to a list of post-ordered nodes
@@ -163,12 +157,19 @@ def leftmost_leaf_descendant_indices(node_list, tree):
     
     while len(temp) > 0:
     	node = temp.pop()
-    	if not tree[node]:
-    		lldsi.append(node_list.index(node)+1)
+    	if node.is_leaf():
+    		lldsi.append(list_index(node_list, node))
     	else:
-    		temp.append(tree[node][0])
+    		temp.append(node.left_child())
     
     return lldsi
+    
+def list_index(lst, element):
+	i = 0
+	for e in lst:
+		if e is element:
+			return i
+		i+=1
         
         
         
@@ -179,7 +180,6 @@ def key_root_indices(lld_indices):
     """
     # Cf. Zhang & Shasha:p.1251: "LR_keyroots(T) = {k| there exists no k'>k
     # such that l(k)=l(k')}
-    
     
     key_roots = {}
     
@@ -233,26 +233,17 @@ def distance(t1, t2, costs=unit_costs):
         #print TD
         return TD[i,j]
     
-    
     # Compute T1[] and T2[]
     T1 = postorder(t1)
     T2 = postorder(t2)
     
-    print str(T1), T2
-    
     # Compute l()
-    l1 = leftmost_leaf_descendant_indices(T1, t1)
-    l2 = leftmost_leaf_descendant_indices(T2, t2)
-    
-    print l1
-    print l2
+    l1 = leftmost_leaf_descendant_indices(T1)
+    l2 = leftmost_leaf_descendant_indices(T2)
     
     # LR_keyroots1 and LR_keyroots2
     kr1 = key_root_indices(l1)
     kr2 = key_root_indices(l2)
-    
-    print kr1
-    print kr2
     
     # permanent treedist array
     TD = dict()
@@ -265,16 +256,16 @@ def distance(t1, t2, costs=unit_costs):
         for j in kr2:
             edit_dist(i, j)
             
-    #print_matrix(T1, T2, TD)
+#    print_matrix(T1, T2, TD)
             
     return TD[i,j]
             
     
         
 def print_matrix(T1, T2, TD):
-    print "   " + "".join([("%-3s" % n.label) for n in T2])
+    print "   " + "".join([("%-3s" % n) for n in T2])
     for i in range(len(T1)):
-        print "%-2s" % T1[i].label,
+        print "%-2s" % T1[i]
         for j in range(len(T2)):
             print "%-2s" % TD[i,j],
         print
@@ -290,12 +281,12 @@ def run(t1, t2):
 #	t1 = {"a":["x","z"], "x":[], "z":["y","g"], "y":[], "g":["j","k"], "j":[], "k":[]}
 #	t2 = {"a":["z","x"], "x":[], "z":["y","g"], "y":[], "g":["j", "k"], "j":[], "k":[]}	
 	
-	print "t1 =", t1
-	print "t2 =", t2
-	print
+#	print "t1 =", t1
+#	print "t2 =", t2
+#	print
 	
 	d = distance(t1, t2)
-	print "distance =", d
+	return "distance =", d
 	
 
 

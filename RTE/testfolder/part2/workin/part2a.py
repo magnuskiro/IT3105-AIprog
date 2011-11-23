@@ -1,5 +1,7 @@
 from BeautifulSoup import BeautifulStoneSoup
-from part2adist import *
+from tree_edit_dist import *
+import part2b
+import copy
 
 # Object representing a sentence, containing the sentence number, and a list 
 # of the nodes it consists of
@@ -126,20 +128,23 @@ def make_tree(sentence):
 	root = tree["root"]
 	return root
 	
-
-file_name = "formattedRTEdata.xml"
-#file_name = "formattederror.xml"
-data_set = prepare_data(file_name)
-data2 = data_set[:]
-print len(data_set)
-taskA = open("Part IIa", "wb")
-if taskA:
-	for pair in data_set:
-		d = find_distance(pair)
-		print >> taskA, d
-		print d
-	taskA.close()
-else:
-	print "Error opening file"
+def run(file_name):
+	print "Parsing xml-file ...",
+	data_set = prepare_data(file_name)
+	data2 = copy.deepcopy(data_set)
+	print "done"
+	print "Calculating part IIa ...",
+	taskA = open("result_part2a.txt", "wb")
+	if taskA:
+		for pair in data_set:
+			d = find_distance(pair)
+			print >> taskA, d
+		taskA.close()
+		print "done"
+		print "Results from part IIa, saved as 'result_part2a.txt'"
+	else:
+		print "Error opening file in part2a.py"
+	name = part2b.run(data2)
+	return name
 	
 

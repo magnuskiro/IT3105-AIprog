@@ -111,7 +111,7 @@ def unit_costs(node1, node2):
     
     # deletion cost
     if node2 is None:
-        return 0
+        return 1
     
     # substitution cost
     if node1.label != node2.label:

@@ -1,4 +1,5 @@
 def run(file_name):
+	print "Rewriting xml-file ...",
 	in_file = file_name
 #	in_file = "RTE2_dev.preprocessed.xml"
 	#in_file = "error.xml"
@@ -22,6 +23,7 @@ def run(file_name):
 	else:
 		print "Error reading from file"
 	
+	print "done"
 	return out_file
 	
 	

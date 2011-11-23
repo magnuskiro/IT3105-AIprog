@@ -1,39 +1,5 @@
-from BeautifulSoup import BeautifulStoneSoup
-from part2adist import *
+from tree_edit_dist import *
 
-# Object representing a sentence, containing the sentence number, and a list 
-# of the nodes it consists of
-class Sentence(object):
-	def __init__(self, sentence):
-		self.serial = str(sentence.attrs[0][1])
-		self.nodes = [SentenceNode(n) for n in sentence.findAll("node")]
-
-# Represents a node in the sentence
-# If a node has no relation, it is a root node
-class SentenceNode(object):
-	def __init__(self, node):
-		self.id = str(node.attrs[0][1])
-		self.parent = None
-		self.word = False
-		if node.relation != None:
-			self.parent = str(node.relation.attrs[0][1])
-		if self.id[0] == "E": 	# "artificial" node, not a word
-			self.lemma = node.lemma
-			if self.lemma:
-				self.lemma = map(lambda x : x.strip("\n\t"), self.lemma.contents)
-				self.lemma = (str(self.lemma)).lower()
-		else:
-			self.word = True
-			self.lemma = map(lambda x : x.strip("\n\t"), node.lemma.contents)
-			self.lemma = (str(self.lemma)).lower()
-			self.pos_tag = map(lambda x : x.strip("\n\t"), node.find("pos-tag").contents)
-			self.pos_tag = (str(self.pos_tag)).lower()
-			self.relation = node.relation
-			if self.relation:
-				self.relation = map(lambda x : x.strip("\n\t"), self.relation.contents)
-				self.relation = (str(self.relation)).lower()
-			
-				
 def prepare_data(file_name):
 
 	file = open(file_name)
@@ -101,6 +67,13 @@ def unit_costs_mod(node1, node2):
         return 1
     else:
         return 0
+ 
+# Calculate the cost of inserting the whole hypothesis tree        
+def insert_tree_cost(pair):
+	no_nodes = 0
+	for sentence in pair[1]:
+		no_nodes += len(sentence.nodes)
+	return no_nodes
         
         		
 def make_tree(sentence):
@@ -126,20 +99,15 @@ def make_tree(sentence):
 	root = tree["root"]
 	return root
 	
-
-file_name = "formattedRTEdata.xml"
-#file_name = "formattederror.xml"
-data_set = prepare_data(file_name)
-data2 = data_set[:]
-print len(data_set)
-taskA = open("Part IIb", "wb")
-if taskA:
-	for pair in data_set:
-		d = find_distance(pair, unit_costs_mod)
-		print >> taskA, d
-		print d
-	taskA.close()
-else:
-	print "Error opening file"
-	
-
+def run(data_set):
+	taskB = open("result_part2b.txt", "wb")
+	if taskB:
+		for pair in data_set:
+			d = find_distance(pair, unit_costs_mod)
+			insert_cost = insert_tree_cost(pair)
+			d = ((d*1.0) / insert_cost)
+			print >> taskB, d
+		taskB.close()
+		print "Results from part IIb saved as 'result_part2b.txt'
+	else:
+		print "Error opening file"
